@@ -23,11 +23,19 @@ window.addEventListener('keydown', function (key) {
             showPopup('⏩ 早送り 10s')
             clickSelector("button[class^='___forward-button___']")
             break
-        case 'f':
+        case 'h':
+            showPopup('⏮ 先頭')
+            clickSelector("button[class^='___head-button___']")
+            break
+        case ';':
+            showPopup('⏭ ライブ再生')
+            clickSelector("button[class^='___live-button___']")
+            break
+        case 'F':
             showPopup('📺️ フルスクリーン')
             clickSelector("button[class^='___fullscreen-button___']")
             break
-        case 'r':
+        case 'R':
             showPopup('🔁 更新')
             clickSelector("button[class^='___reload-button___']")
             break
@@ -35,71 +43,59 @@ window.addEventListener('keydown', function (key) {
             showPopup('⚙️ 設定')
             clickSelector("button[class*='___setting-button___']")
             break
-        case '0':
-            showPopup('⏮ 先頭')
-            clickSelector("button[class^='___head-button___']")
-            break
-        case ')':
-            showPopup('⏭ ライブ再生')
-            clickSelector("button[class^='___live-button___']")
-            break
         case 'm':
             showPopup('🔈 ミュート On/Off')
             clickSelector("button[class^='___mute-button___']")
             break
         case 'u':
-            showPopup('🔈 ボリューム小')
             dispatchKeyEventToPlayer("ArrowDown", 40)
+            showPopup(`🔈 ボリューム小 (${volumeDataValue()})`)
             break
         case 'i':
-            showPopup('🔈 ボリューム大')
             dispatchKeyEventToPlayer("ArrowUp", 38)
+            showPopup(`🔈 ボリューム大 (${volumeDataValue()})`)
             break
-        case '1':
+        case 'd':
             showPopup('🐇 再生速度 x1.0')
             changePlaybackRate(5)
             break
-        case '2':
+        case 'r':
             showPopup('🐇 再生速度 x1.25')
             changePlaybackRate(4)
             break
-        case '3':
+        case 'f':
             showPopup('🐇 再生速度 x1.5')
             changePlaybackRate(3)
             break
-        case '4':
-            showPopup('🐇 再生速度  x1.75')
+        case 't':
+            showPopup('🚀 再生速度  x1.75')
             changePlaybackRate(2)
             break
-        case '5':
-            showPopup('🐇 再生速度 x2.0')
+        case 'g':
+            showPopup('🚀 再生速度 x2.0')
             changePlaybackRate(1)
             break
-        case '!':
-            showPopup('🐢 再生速度 x1.0')
-            changePlaybackRate(5)
-            break
-        case '@':
+        case 's':
             showPopup('🐢 再生速度 x0.75')
             changePlaybackRate(6)
             break
-        case '#':
+        case 'w':
             showPopup('🐢 再生速度 x0.5')
             changePlaybackRate(7)
             break
-        case '$':
+        case 'a':
             showPopup('🐢 再生速度 x0.25')
             changePlaybackRate(8)
             break
-        case 'q':
+        case 'z':
             showPopup('💬 コメント透過: なし')
             changeCommentTransparency(1)
             break
-        case 'a':
+        case 'x':
             showPopup('💬 コメント透過: 弱')
             changeCommentTransparency(2)
             break
-        case 'z':
+        case 'v':
             showPopup('💬 コメント透過: 強')
             changeCommentTransparency(3)
             break
@@ -107,7 +103,7 @@ window.addEventListener('keydown', function (key) {
             showPopup('📣 広告')
             toggleAd()
             break
-        case 'g':
+        case 'G':
             showPopup('🎁 ギフト Open/Close')
             toggleGift()
             break
@@ -187,6 +183,12 @@ const dispatchKeyEventToPlayer = (key, keyCode) => {
     }))
 }
 
+const volumeDataValue = () => {
+    const div = document.querySelector("div[class^='___volume-size-control___']")
+    const span = div.querySelector("span[class^='___slider___']")
+    return span.getAttribute("data-value")
+}
+
 const toggleAd = () => {
     toggleMenu('___nicoad-count-item___')
 }
@@ -252,27 +254,27 @@ const showHelp = () => {
             '<tr style="background: #fff;"><td>k</td><td style="text-align: left;">⏯ 再生 / 停止</td></tr>\n' +
             '<tr style="background: #ddd;"><td>j</td><td style="text-align: left;">⏪ 巻き戻し 10s</td></tr>\n' +
             '<tr style="background: #fff;"><td>l</td><td style="text-align: left;">⏩ 早送り 10s</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>f</td><td style="text-align: left;">📺️ フルスクリーン</td></tr>\n' +
-            '<tr style="background: #fff;"><td>r</td><td style="text-align: left;">🔁 更新</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>h</td><td style="text-align: left;">⏮ 先頭</td></tr>\n' +
+            '<tr style="background: #fff;"><td>;</td><td style="text-align: left;">⏭ ライブ再生</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>F</td><td style="text-align: left;">📺️ フルスクリーン</td></tr>\n' +
+            '<tr style="background: #fff;"><td>R</td><td style="text-align: left;">🔁 更新</td></tr>\n' +
             '<tr style="background: #ddd;"><td>,</td><td style="text-align: left;">⚙️ 設定</td></tr>\n' +
-            '<tr style="background: #fff;"><td>0</td><td style="text-align: left;">⏮ 先頭</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>)</td><td style="text-align: left;">⏭ ライブ再生</td></tr>\n' +
             '<tr style="background: #fff;"><td>m</td><td style="text-align: left;">🔈 ミュート On/Off</td></tr>\n' +
             '<tr style="background: #ddd;"><td>u</td><td style="text-align: left;">🔈 ボリューム小</td></tr>\n' +
             '<tr style="background: #fff;"><td>i</td><td style="text-align: left;">🔈 ボリューム大</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>1</td><td style="text-align: left;">🐇 再生速度 x1.0</td></tr>\n' +
-            '<tr style="background: #fff;"><td>2</td><td style="text-align: left;">🐇 再生速度 x1.25</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>3</td><td style="text-align: left;">🐇 再生速度 x1.5</td></tr>\n' +
-            '<tr style="background: #fff;"><td>4</td><td style="text-align: left;">🐇 再生速度  x1.75</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>5</td><td style="text-align: left;">🐇 再生速度 x2.0</td></tr>\n' +
-            '<tr style="background: #fff;"><td>@</td><td style="text-align: left;">🐢 再生速度 x0.75</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>#</td><td style="text-align: left;">🐢 再生速度 x0.5</td></tr>\n' +
-            '<tr style="background: #fff;"><td>$</td><td style="text-align: left;">🐢 再生速度 x0.25</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>q</td><td style="text-align: left;">💬 コメント透過: なし</td></tr>\n' +
-            '<tr style="background: #fff;"><td>a</td><td style="text-align: left;">💬 コメント透過: 弱</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>z</td><td style="text-align: left;">💬 コメント透過: 強</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>d</td><td style="text-align: left;">🐇 再生速度 x1.0</td></tr>\n' +
+            '<tr style="background: #fff;"><td>r</td><td style="text-align: left;">🐇 再生速度 x1.25</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>f</td><td style="text-align: left;">🐇 再生速度 x1.5</td></tr>\n' +
+            '<tr style="background: #fff;"><td>t</td><td style="text-align: left;">🚀 再生速度  x1.75</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>g</td><td style="text-align: left;">🚀 再生速度 x2.0</td></tr>\n' +
+            '<tr style="background: #fff;"><td>s</td><td style="text-align: left;">🐢 再生速度 x0.75</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>w</td><td style="text-align: left;">🐢 再生速度 x0.5</td></tr>\n' +
+            '<tr style="background: #fff;"><td>a</td><td style="text-align: left;">🐢 再生速度 x0.25</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>z</td><td style="text-align: left;">💬 コメント透過: なし</td></tr>\n' +
+            '<tr style="background: #fff;"><td>x</td><td style="text-align: left;">💬 コメント透過: 弱</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>v</td><td style="text-align: left;">💬 コメント透過: 強</td></tr>\n' +
             '<tr style="background: #fff;"><td>A</td><td style="text-align: left;">📣 広告</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>g</td><td style="text-align: left;">🎁 ギフト Open/Close</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>G</td><td style="text-align: left;">🎁 ギフト Open/Close</td></tr>\n' +
             '<tr style="background: #fff;"><td>U</td><td style="text-align: left;">🙆‍♂️ ユーザーを開く</td></tr>\n' +
             '<tr style="background: #ddd;"><td>C</td><td style="text-align: left;">🏠 コミュニティを開く</td></tr>\n' +
             '<tr style="background: #fff;"><td>?</td><td style="text-align: left;">❓ ヘルプ (この画面)</td></tr>\n' +
