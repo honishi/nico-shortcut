@@ -13,7 +13,11 @@
   "content_scripts": [
     {
       "js": [
-        "./content.js"
+        "./content.js",
+        "./notiflix/notiflix-3.2.5.min.js"
+      ],
+      "css": [
+        "./notiflix/notiflix-3.2.5.min.css"
       ],
       "matches": [
         "https://live.nicovideo.jp/watch/*"

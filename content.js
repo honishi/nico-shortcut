@@ -1,90 +1,128 @@
 // https://stackoverflow.com/a/71567874/13220031
-window.addEventListener('keypress', function (key) {
+window.addEventListener('keydown', function (key) {
+    // console.log(key)
     console.log(key.key)
+    // console.log(isBodyActive())
+    if (!isBodyActive()) {
+        return
+    }
     switch (key.key) {
         case 'o':
+            popup('💬 Comment On / Off')
             clickSelector("button[class^='___comment-button___']")
             break
         case 'p':
+            popup('Play / Stop')
             clickSelector("button[class^='___play-button___']")
             break
         case 'h':
+            popup('Back')
             clickSelector("button[class^='___back-button___']")
             break
         case 'l':
+            popup('Forward')
             clickSelector("button[class^='___forward-button___']")
             break
         case 'f':
+            popup('Fullscreen')
             clickSelector("button[class^='___fullscreen-button___']")
             break
         case 'r':
+            popup('Reload')
             clickSelector("button[class^='___reload-button___']")
             break
         case ',':
+            popup('Setting')
             clickSelector("button[class*='___setting-button___']")
             break
         case 'H':
+            popup('Head')
             clickSelector("button[class^='___head-button___']")
             break
+        case 'L':
+            popup('Live')
+            clickSelector("button[class^='___live-button___']")
+            break
         case 'm':
+            popup('Toggle Mute')
             clickSelector("button[class^='___mute-button___']")
             break
         case 'j':
-            inputKey("ArrowDown")
+            popup('Volume Down')
+            dispatchKeyEventToPlayer("ArrowDown", 40)
             break
         case 'k':
-            inputKey("ArrowUp")
+            popup('Volume Up')
+            dispatchKeyEventToPlayer("ArrowUp", 38)
             break
         case '1':
+            popup('Playback Rate x 1.0')
             changePlaybackRate(5)
             break
         case '2':
+            popup('Playback Rate x 1.25')
             changePlaybackRate(4)
             break
         case '3':
+            popup('Playback Rate x 1.5')
             changePlaybackRate(3)
             break
         case '4':
+            popup('Playback Rate x 1.75')
             changePlaybackRate(2)
             break
         case '5':
+            popup('Playback Rate x 2.0')
             changePlaybackRate(1)
             break
         case '!':
+            popup('Playback Rate x 1.0')
             changePlaybackRate(5)
             break
         case '@':
+            popup('Playback Rate x 0.75')
             changePlaybackRate(6)
             break
         case '#':
+            popup('Playback Rate x 0.5')
             changePlaybackRate(7)
             break
         case '$':
+            popup('Playback Rate x 0.25')
             changePlaybackRate(8)
             break
         case 'z':
+            popup('コメント透過: なし')
             changeCommentTransparency(1)
             break
         case 'x':
+            popup('コメント透過: 弱')
             changeCommentTransparency(2)
             break
         case 'c':
+            popup('コメント透過: 強')
             changeCommentTransparency(3)
             break
         case 'a':
+            popup('広告')
             toggleAd()
             break
         case 'g':
+            popup('ギフト')
             toggleGift()
             break
         default:
             break
     }
 
-    chrome.runtime.sendMessage(null, key.key, (response) => {
-        console.log("Sent key value: " + response)
-    })
+    // chrome.runtime.sendMessage(null, key.key, (response) => {
+    //     console.log("Sent key value: " + response)
+    // })
 })
+
+const isBodyActive = () => {
+    return document.activeElement.tagName === "BODY"
+}
 
 const clickSelector = (selector) => {
     document.querySelector(selector).click()
@@ -124,33 +162,17 @@ const clickMenuButton = (divClass, sectionClass, buttonIndex) => {
     }, timeout)
 }
 
-const inputKey = (key) => {
-    document.dispatchEvent(new KeyboardEvent("keydown", {
-        key: key,
-        keyCode: 40, // example values.
-        code: "ArrowDown", // put everything you need in this object.
-        which: 40,
-        shiftKey: false, // you don't need to include values
-        ctrlKey: false,  // if you aren't going to use them.
-        metaKey: false   // these are here for example's sake.
-    }))
+const dispatchKeyEventToPlayer = (key, keyCode) => {
+    const div = document.querySelector("div[class^='___player-controller___']")
+    div.click()
 
-    // var keyboardEvent = document.createEvent('KeyboardEvent')
-    // var initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? 'initKeyboardEvent' : 'initKeyEvent'
-    //
-    // keyboardEvent[initMethod](
-    //     'keydown', // event type: keydown, keyup, keypress
-    //     true, // bubbles
-    //     true, // cancelable
-    //     window, // view: should be window
-    //     false, // ctrlKey
-    //     false, // altKey
-    //     false, // shiftKey
-    //     false, // metaKey
-    //     code, // keyCode: unsigned long - the virtual key code, else 0
-    //     0, // charCode: unsigned long - the Unicode character associated with the depressed key, else 0
-    // )
-    // document.dispatchEvent(keyboardEvent)
+    // https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode
+    window.dispatchEvent(new KeyboardEvent("keydown", {
+        key: key,
+        keyCode: keyCode,
+        code: key,
+        which: keyCode,
+    }))
 }
 
 const toggleAd = () => {
@@ -171,4 +193,45 @@ const toggleMenu = (name) => {
         const button = li.querySelector("button")
         button.click()
     }
+}
+
+const popup = (text) => {
+    // https://github.com/notiflix/Notiflix
+    Notiflix.Notify.info(
+        text,
+        {
+            width: '380px',
+            position: 'center-center',
+            zindex: 100000,
+            distance: '50px',
+            fontSize: '30px',
+            // messageMaxLength: 300,
+            showOnlyTheLastOne: true,
+        },
+    )
+    // // https://github.com/molloeduardo/creativa-popup
+    // CreativaPopup.closeAll()
+    // CreativaPopup.create(
+    //     null,
+    //     text,
+    //     null,
+    //     {
+    //         timer: 1,
+    //         closeButton: false,
+    //         background: false,
+    //         animationDuration: 300,
+    //     })
+}
+
+const showHelp = () => {
+    CreativaPopup.create(
+        null,
+        text,
+        null,
+        {
+            timer: 1,
+            closeButton: false,
+            background: false,
+            animationDuration: 300,
+        })
 }
