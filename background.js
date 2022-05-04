@@ -1,12 +1,28 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log(message)
     console.log(sender)
-    if (message === 'q') {
-        moveToTab()
-    } else {
-        sendResponse("Received message in background!!")
+
+    let command, param
+    [command, param] = message.split(',')
+    switch (command) {
+        case 'open_url':
+            openUserPage(param)
+            break
+        case 'xxx':
+            // moveToTab()
+            break
+        default:
+            break
     }
+    sendResponse("response from background.")
 })
+
+const openUserPage = (url) => {
+    chrome.tabs.create({
+        url: url,
+    }, () => {
+    })
+}
 
 const moveToTab = () => {
     chrome.system.display.getInfo((results) => {
@@ -26,7 +42,8 @@ const moveToTab = () => {
                 type: 'normal',
                 width: width / 3, height: height / 2,
                 focused: true
-            }, () => {})
+            }, () => {
+            })
         })
     })
 }

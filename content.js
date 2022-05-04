@@ -16,11 +16,11 @@ window.addEventListener('keydown', function (key) {
             clickSelector("button[class^='___play-button___']")
             break
         case 'j':
-            showPopup('⏩ 巻き戻し 10s')
+            showPopup('⏪ 巻き戻し 10s')
             clickSelector("button[class^='___back-button___']")
             break
         case 'l':
-            showPopup('⏪ 早送り 10s')
+            showPopup('⏩ 早送り 10s')
             clickSelector("button[class^='___forward-button___']")
             break
         case 'f':
@@ -111,16 +111,20 @@ window.addEventListener('keydown', function (key) {
             showPopup('🎁 ギフト Open/Close')
             toggleGift()
             break
+        case 'U':
+            showPopup('🙆‍♂️ ユーザーを開く')
+            openUserPage()
+            break
+        case 'C':
+            showPopup('🏠 コミュニティを開く')
+            openCommunity()
+            break
         case '?':
             showHelp()
             break
         default:
             break
     }
-
-    // chrome.runtime.sendMessage(null, key.key, (response) => {
-    //     console.log("Sent key value: " + response)
-    // })
 })
 
 const isInputActive = () => {
@@ -152,7 +156,7 @@ const changePlaybackRate = (buttonIndex) => {
 }
 
 const clickMenuButton = (divClass, sectionClass, buttonIndex) => {
-    const timeout = 500
+    const timeout = 300
     document.querySelector("button[class*='___setting-button___']").click()
     setTimeout(() => {
         const div = document.querySelector(`div[class^=${divClass}]`)
@@ -211,24 +215,43 @@ const showPopup = (text) => {
             width: '380px',
             position: 'center-center',
             zindex: 100000,
+            timeout: 500,
             useIcon: false,
             distance: '50px',
-            fontSize: '30px',
-            // messageMaxLength: 300,
+            fontSize: '36px',
             showOnlyTheLastOne: true,
+            className: 'notiflix-nico-shortcut',
+            info: {
+                background: '#fff',
+                textColor: '#333',
+            }
         },
     )
 }
 
+const openUserPage = () => {
+    const url = document.querySelector("a[class^='___user-name___']").getAttribute("href")
+    chrome.runtime.sendMessage(null, 'open_url,' + url, (response) => {
+        console.log("Sent key value: " + response)
+    })
+}
+
+const openCommunity = () => {
+    const url = document.querySelector("a[class^='___name-label___']").getAttribute("href")
+    chrome.runtime.sendMessage(null, 'open_url,' + url, (response) => {
+        console.log("Sent key value: " + response)
+    })
+}
+
 const showHelp = () => {
     Swal.fire({
-        title: 'Nico shortcut',
+        title: 'Nico Shortcut',
         html: '<table style="margin-left:auto; margin-right:auto; border-collapse: collapse; border-spacing: 0;">\n' +
-            '<tr><th style="padding: 0 50px;">キー</th><th style="padding: 0 100px;">機能</th></tr>\n' +
+            '<tr><th style="padding: 0 50px;">キー</th><th style="padding: 0 130px;">機能</th></tr>\n' +
             '<tr style="background: #ddd;"><td>c</td><td style="text-align: left;">💬 コメント On/Off</td></tr>\n' +
             '<tr style="background: #fff;"><td>k</td><td style="text-align: left;">⏯ 再生 / 停止</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>j</td><td style="text-align: left;">⏩ 巻き戻し 10s</td></tr>\n' +
-            '<tr style="background: #fff;"><td>l</td><td style="text-align: left;">⏪ 早送り 10s</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>j</td><td style="text-align: left;">⏪ 巻き戻し 10s</td></tr>\n' +
+            '<tr style="background: #fff;"><td>l</td><td style="text-align: left;">⏩ 早送り 10s</td></tr>\n' +
             '<tr style="background: #ddd;"><td>f</td><td style="text-align: left;">📺️ フルスクリーン</td></tr>\n' +
             '<tr style="background: #fff;"><td>r</td><td style="text-align: left;">🔁 更新</td></tr>\n' +
             '<tr style="background: #ddd;"><td>,</td><td style="text-align: left;">⚙️ 設定</td></tr>\n' +
@@ -250,6 +273,8 @@ const showHelp = () => {
             '<tr style="background: #ddd;"><td>z</td><td style="text-align: left;">💬 コメント透過: 強</td></tr>\n' +
             '<tr style="background: #fff;"><td>A</td><td style="text-align: left;">📣 広告</td></tr>\n' +
             '<tr style="background: #ddd;"><td>g</td><td style="text-align: left;">🎁 ギフト Open/Close</td></tr>\n' +
+            '<tr style="background: #fff;"><td>U</td><td style="text-align: left;">🙆‍♂️ ユーザーを開く</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>C</td><td style="text-align: left;">🏠 コミュニティを開く</td></tr>\n' +
             '<tr style="background: #fff;"><td>?</td><td style="text-align: left;">❓ ヘルプ (この画面)</td></tr>\n' +
             '</table>',
         confirmButtonText: '閉じる'
