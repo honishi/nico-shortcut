@@ -8,108 +8,111 @@ window.addEventListener('keydown', function (key) {
     }
     switch (key.key) {
         case 'c':
-            popup('💬 Comment On / Off')
+            showPopup('💬 コメント On/Off')
             clickSelector("button[class^='___comment-button___']")
             break
         case 'k':
-            popup('Play / Stop')
+            showPopup('⏯ 再生 / 停止')
             clickSelector("button[class^='___play-button___']")
             break
         case 'j':
-            popup('Back')
+            showPopup('⏩ 巻き戻し 10s')
             clickSelector("button[class^='___back-button___']")
             break
         case 'l':
-            popup('Forward')
+            showPopup('⏪ 早送り 10s')
             clickSelector("button[class^='___forward-button___']")
             break
         case 'f':
-            popup('Fullscreen')
+            showPopup('📺️ フルスクリーン')
             clickSelector("button[class^='___fullscreen-button___']")
             break
         case 'r':
-            popup('Reload')
+            showPopup('🔁 更新')
             clickSelector("button[class^='___reload-button___']")
             break
         case ',':
-            popup('Setting')
+            showPopup('⚙️ 設定')
             clickSelector("button[class*='___setting-button___']")
             break
         case '0':
-            popup('Head')
+            showPopup('⏮ 先頭')
             clickSelector("button[class^='___head-button___']")
             break
         case ')':
-            popup('Live')
+            showPopup('⏭ ライブ再生')
             clickSelector("button[class^='___live-button___']")
             break
         case 'm':
-            popup('Toggle Mute')
+            showPopup('🔈 ミュート On/Off')
             clickSelector("button[class^='___mute-button___']")
             break
         case 'u':
-            popup('Volume Down')
+            showPopup('🔈 ボリューム小')
             dispatchKeyEventToPlayer("ArrowDown", 40)
             break
         case 'i':
-            popup('Volume Up')
+            showPopup('🔈 ボリューム大')
             dispatchKeyEventToPlayer("ArrowUp", 38)
             break
         case '1':
-            popup('Playback Rate x 1.0')
+            showPopup('🐇 再生速度 x1.0')
             changePlaybackRate(5)
             break
         case '2':
-            popup('Playback Rate x 1.25')
+            showPopup('🐇 再生速度 x1.25')
             changePlaybackRate(4)
             break
         case '3':
-            popup('Playback Rate x 1.5')
+            showPopup('🐇 再生速度 x1.5')
             changePlaybackRate(3)
             break
         case '4':
-            popup('Playback Rate x 1.75')
+            showPopup('🐇 再生速度  x1.75')
             changePlaybackRate(2)
             break
         case '5':
-            popup('Playback Rate x 2.0')
+            showPopup('🐇 再生速度 x2.0')
             changePlaybackRate(1)
             break
         case '!':
-            popup('Playback Rate x 1.0')
+            showPopup('🐢 再生速度 x1.0')
             changePlaybackRate(5)
             break
         case '@':
-            popup('Playback Rate x 0.75')
+            showPopup('🐢 再生速度 x0.75')
             changePlaybackRate(6)
             break
         case '#':
-            popup('Playback Rate x 0.5')
+            showPopup('🐢 再生速度 x0.5')
             changePlaybackRate(7)
             break
         case '$':
-            popup('Playback Rate x 0.25')
+            showPopup('🐢 再生速度 x0.25')
             changePlaybackRate(8)
             break
         case 'q':
-            popup('コメント透過: なし')
+            showPopup('💬 コメント透過: なし')
             changeCommentTransparency(1)
             break
         case 'a':
-            popup('コメント透過: 弱')
+            showPopup('💬 コメント透過: 弱')
             changeCommentTransparency(2)
             break
         case 'z':
-            popup('コメント透過: 強')
+            showPopup('💬 コメント透過: 強')
             changeCommentTransparency(3)
             break
         case 'A':
-            popup('広告')
+            showPopup('📣 広告')
             toggleAd()
             break
         case 'g':
-            popup('ギフト')
+            showPopup('🎁 ギフト Open/Close')
             toggleGift()
+            break
+        case '?':
+            showHelp()
             break
         default:
             break
@@ -200,7 +203,7 @@ const toggleMenu = (name) => {
     }
 }
 
-const popup = (text) => {
+const showPopup = (text) => {
     // https://github.com/notiflix/Notiflix
     Notiflix.Notify.info(
         text,
@@ -208,35 +211,47 @@ const popup = (text) => {
             width: '380px',
             position: 'center-center',
             zindex: 100000,
+            useIcon: false,
             distance: '50px',
             fontSize: '30px',
             // messageMaxLength: 300,
             showOnlyTheLastOne: true,
         },
     )
-    // // https://github.com/molloeduardo/creativa-popup
-    // CreativaPopup.closeAll()
-    // CreativaPopup.create(
-    //     null,
-    //     text,
-    //     null,
-    //     {
-    //         timer: 1,
-    //         closeButton: false,
-    //         background: false,
-    //         animationDuration: 300,
-    //     })
 }
 
 const showHelp = () => {
-    CreativaPopup.create(
-        null,
-        text,
-        null,
-        {
-            timer: 1,
-            closeButton: false,
-            background: false,
-            animationDuration: 300,
-        })
+    Swal.fire({
+        title: 'Nico shortcut',
+        html: '<table style="margin-left:auto; margin-right:auto; border-collapse: collapse; border-spacing: 0;">\n' +
+            '<tr><th style="padding: 0 50px;">キー</th><th style="padding: 0 100px;">機能</th></tr>\n' +
+            '<tr style="background: #ddd;"><td>c</td><td style="text-align: left;">💬 コメント On/Off</td></tr>\n' +
+            '<tr style="background: #fff;"><td>k</td><td style="text-align: left;">⏯ 再生 / 停止</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>j</td><td style="text-align: left;">⏩ 巻き戻し 10s</td></tr>\n' +
+            '<tr style="background: #fff;"><td>l</td><td style="text-align: left;">⏪ 早送り 10s</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>f</td><td style="text-align: left;">📺️ フルスクリーン</td></tr>\n' +
+            '<tr style="background: #fff;"><td>r</td><td style="text-align: left;">🔁 更新</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>,</td><td style="text-align: left;">⚙️ 設定</td></tr>\n' +
+            '<tr style="background: #fff;"><td>0</td><td style="text-align: left;">⏮ 先頭</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>)</td><td style="text-align: left;">⏭ ライブ再生</td></tr>\n' +
+            '<tr style="background: #fff;"><td>m</td><td style="text-align: left;">🔈 ミュート On/Off</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>u</td><td style="text-align: left;">🔈 ボリューム小</td></tr>\n' +
+            '<tr style="background: #fff;"><td>i</td><td style="text-align: left;">🔈 ボリューム大</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>1</td><td style="text-align: left;">🐇 再生速度 x1.0</td></tr>\n' +
+            '<tr style="background: #fff;"><td>2</td><td style="text-align: left;">🐇 再生速度 x1.25</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>3</td><td style="text-align: left;">🐇 再生速度 x1.5</td></tr>\n' +
+            '<tr style="background: #fff;"><td>4</td><td style="text-align: left;">🐇 再生速度  x1.75</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>5</td><td style="text-align: left;">🐇 再生速度 x2.0</td></tr>\n' +
+            '<tr style="background: #fff;"><td>@</td><td style="text-align: left;">🐢 再生速度 x0.75</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>#</td><td style="text-align: left;">🐢 再生速度 x0.5</td></tr>\n' +
+            '<tr style="background: #fff;"><td>$</td><td style="text-align: left;">🐢 再生速度 x0.25</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>q</td><td style="text-align: left;">💬 コメント透過: なし</td></tr>\n' +
+            '<tr style="background: #fff;"><td>a</td><td style="text-align: left;">💬 コメント透過: 弱</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>z</td><td style="text-align: left;">💬 コメント透過: 強</td></tr>\n' +
+            '<tr style="background: #fff;"><td>A</td><td style="text-align: left;">📣 広告</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>g</td><td style="text-align: left;">🎁 ギフト Open/Close</td></tr>\n' +
+            '<tr style="background: #fff;"><td>?</td><td style="text-align: left;">❓ ヘルプ (この画面)</td></tr>\n' +
+            '</table>',
+        confirmButtonText: '閉じる'
+    })
 }
