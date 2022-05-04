@@ -262,11 +262,11 @@ const showHelp = () => {
             '<tr style="background: #fff;"><td>m</td><td style="text-align: left;">🔈 ミュート On/Off</td></tr>\n' +
             '<tr style="background: #ddd;"><td>u</td><td style="text-align: left;">🔈 ボリューム小</td></tr>\n' +
             '<tr style="background: #fff;"><td>i</td><td style="text-align: left;">🔈 ボリューム大</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>d</td><td style="text-align: left;">🐇 再生速度 x1.0</td></tr>\n' +
-            '<tr style="background: #fff;"><td>r</td><td style="text-align: left;">🐇 再生速度 x1.25</td></tr>\n' +
-            '<tr style="background: #ddd;"><td>f</td><td style="text-align: left;">🐇 再生速度 x1.5</td></tr>\n' +
-            '<tr style="background: #fff;"><td>t</td><td style="text-align: left;">🚀 再生速度  x1.75</td></tr>\n' +
             '<tr style="background: #ddd;"><td>g</td><td style="text-align: left;">🚀 再生速度 x2.0</td></tr>\n' +
+            '<tr style="background: #fff;"><td>t</td><td style="text-align: left;">🚀 再生速度 x1.75</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>f</td><td style="text-align: left;">🐇 再生速度 x1.5</td></tr>\n' +
+            '<tr style="background: #fff;"><td>r</td><td style="text-align: left;">🐇 再生速度 x1.25</td></tr>\n' +
+            '<tr style="background: #ddd;"><td>d</td><td style="text-align: left;">🐇 再生速度 x1.0</td></tr>\n' +
             '<tr style="background: #fff;"><td>s</td><td style="text-align: left;">🐢 再生速度 x0.75</td></tr>\n' +
             '<tr style="background: #ddd;"><td>w</td><td style="text-align: left;">🐢 再生速度 x0.5</td></tr>\n' +
             '<tr style="background: #fff;"><td>a</td><td style="text-align: left;">🐢 再生速度 x0.25</td></tr>\n' +
