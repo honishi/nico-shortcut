@@ -3,19 +3,19 @@ window.addEventListener('keydown', function (key) {
     // console.log(key)
     console.log(key.key)
     // console.log(isBodyActive())
-    if (!isBodyActive()) {
+    if (isInputActive()) {
         return
     }
     switch (key.key) {
-        case 'o':
+        case 'c':
             popup('💬 Comment On / Off')
             clickSelector("button[class^='___comment-button___']")
             break
-        case 'p':
+        case 'k':
             popup('Play / Stop')
             clickSelector("button[class^='___play-button___']")
             break
-        case 'h':
+        case 'j':
             popup('Back')
             clickSelector("button[class^='___back-button___']")
             break
@@ -35,11 +35,11 @@ window.addEventListener('keydown', function (key) {
             popup('Setting')
             clickSelector("button[class*='___setting-button___']")
             break
-        case 'H':
+        case '0':
             popup('Head')
             clickSelector("button[class^='___head-button___']")
             break
-        case 'L':
+        case ')':
             popup('Live')
             clickSelector("button[class^='___live-button___']")
             break
@@ -47,11 +47,11 @@ window.addEventListener('keydown', function (key) {
             popup('Toggle Mute')
             clickSelector("button[class^='___mute-button___']")
             break
-        case 'j':
+        case 'u':
             popup('Volume Down')
             dispatchKeyEventToPlayer("ArrowDown", 40)
             break
-        case 'k':
+        case 'i':
             popup('Volume Up')
             dispatchKeyEventToPlayer("ArrowUp", 38)
             break
@@ -91,19 +91,19 @@ window.addEventListener('keydown', function (key) {
             popup('Playback Rate x 0.25')
             changePlaybackRate(8)
             break
-        case 'z':
+        case 'q':
             popup('コメント透過: なし')
             changeCommentTransparency(1)
             break
-        case 'x':
+        case 'a':
             popup('コメント透過: 弱')
             changeCommentTransparency(2)
             break
-        case 'c':
+        case 'z':
             popup('コメント透過: 強')
             changeCommentTransparency(3)
             break
-        case 'a':
+        case 'A':
             popup('広告')
             toggleAd()
             break
@@ -120,8 +120,14 @@ window.addEventListener('keydown', function (key) {
     // })
 })
 
-const isBodyActive = () => {
-    return document.activeElement.tagName === "BODY"
+const isInputActive = () => {
+    // console.log(document.activeElement)
+    return document.activeElement.tagName === "INPUT"
+}
+
+const clickBody = () => {
+    const div = document.querySelector("div[class^='___player-controller___']")
+    div.click()
 }
 
 const clickSelector = (selector) => {
@@ -163,8 +169,7 @@ const clickMenuButton = (divClass, sectionClass, buttonIndex) => {
 }
 
 const dispatchKeyEventToPlayer = (key, keyCode) => {
-    const div = document.querySelector("div[class^='___player-controller___']")
-    div.click()
+    clickBody()
 
     // https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode
     window.dispatchEvent(new KeyboardEvent("keydown", {
