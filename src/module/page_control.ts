@@ -3,6 +3,10 @@ import {showNotification} from "./notification_utility";
 
 export const checkPageControlKey = (key: string) => {
     switch (key) {
+        case 'p':
+            clickPrograms()
+            showNotification('👨‍👩‍👦 フォロー中の番組')
+            break
         case 'A':
             toggleAd()
             showNotification('📣 広告')
@@ -22,6 +26,12 @@ export const checkPageControlKey = (key: string) => {
         default:
             break
     }
+}
+
+const clickPrograms = () => {
+    const div = document.querySelector("div[class^='___popup-control___']")
+    const button = div?.querySelector("button")
+    clickElement(button)
 }
 
 const toggleAd = () => {
