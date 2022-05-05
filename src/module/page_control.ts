@@ -1,5 +1,5 @@
-import {showNotification} from "./notification_utility";
 import {clickElement} from "./common_utility";
+import {showNotification} from "./notification_utility";
 
 export const checkPageControlKey = (key: string) => {
     switch (key) {

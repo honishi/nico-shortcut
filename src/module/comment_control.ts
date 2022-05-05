@@ -1,5 +1,5 @@
-import {showNotification} from "./notification_utility";
 import {clickMenuButton, clickSelector} from "./common_utility";
+import {showNotification} from "./notification_utility";
 
 export const checkCommentControlKey = (key: string) => {
     switch (key) {

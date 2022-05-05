@@ -1,5 +1,5 @@
-import {showNotification} from "./notification_utility";
 import {clickElement, clickSelector} from "./common_utility";
+import {showNotification} from "./notification_utility";
 
 export const checkVolumeControlKey = (key: string) => {
     switch (key) {
