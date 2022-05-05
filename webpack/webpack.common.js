@@ -7,7 +7,8 @@ const srcDir = path.join(rootDir, "src");
 module.exports = {
     entry: {
         content: path.join(srcDir, 'content.ts'),
-        background: path.join(srcDir, 'background.ts')
+        background: path.join(srcDir, 'background.ts'),
+        option: path.join(srcDir, 'option.ts')
     },
     output: {
         clean: true,
@@ -31,6 +32,7 @@ module.exports = {
             patterns: [
                 {from: path.join(rootDir, "public"), to: path.join(rootDir, "dist")},
                 {from: path.join(srcDir, "css"), to: path.join(rootDir, "dist", "css")},
+                {from: path.join(srcDir, "html"), to: path.join(rootDir, "dist", "html")},
             ]
         }),
     ],
