@@ -19,13 +19,13 @@
     {
       "js": [
         "./content.js",
-        "./notiflix/notiflix-3.2.5.min.js",
-        "./sweetalert2/sweetalert2.all.min.js"
+        "./library/notiflix/notiflix-3.2.5.min.js",
+        "./library/sweetalert2/sweetalert2.all.min.js"
       ],
       "css": [
         "./css/main.css",
-        "./notiflix/notiflix-3.2.5.min.css",
-        "./sweetalert2/minimal.css"
+        "./library/notiflix/notiflix-3.2.5.min.css",
+        "./library/sweetalert2/minimal.css"
       ],
       "matches": [
         "https://live.nicovideo.jp/watch/*"
