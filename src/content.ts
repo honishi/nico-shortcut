@@ -1,3 +1,6 @@
+import Swal from 'sweetalert2'
+import Notiflix from "notiflix";
+
 // https://stackoverflow.com/a/71567874/13220031
 window.addEventListener('keydown', function (key) {
     // console.log(key)
@@ -125,53 +128,63 @@ window.addEventListener('keydown', function (key) {
 
 const isInputActive = () => {
     // console.log(document.activeElement)
-    return document.activeElement.tagName === "INPUT"
+    return document.activeElement?.tagName === "INPUT"
 }
 
 const clickBody = () => {
     const div = document.querySelector("div[class^='___player-controller___']")
-    div.click()
+    clickElement(div)
 }
 
-const clickSelector = (selector) => {
+const clickSelector = (selector: any) => {
     document.querySelector(selector).click()
 }
 
-const changeCommentTransparency = (buttonIndex) => {
+const changeCommentTransparency = (buttonIndex: number) => {
     clickMenuButton(
         '___comment-transparency-menu-button-field___',
         '___comment-transparency-select-menu___',
         buttonIndex)
 }
 
-const changePlaybackRate = (buttonIndex) => {
+const changePlaybackRate = (buttonIndex: number) => {
     clickMenuButton(
         '___video-playback-rate-menu-button-field___',
         '___video-playback-rate-select-menu___',
         buttonIndex)
 }
 
-const clickMenuButton = (divClass, sectionClass, buttonIndex) => {
+const clickElement = (element: Element | null | undefined) => {
+    if (!(element instanceof HTMLElement)) {
+        return
+    }
+    element.click()
+}
+
+const clickMenuButton = (divClass: string, sectionClass: string, buttonIndex: number) => {
     const timeout = 300
-    document.querySelector("button[class*='___setting-button___']").click()
+    const button = document.querySelector("button[class*='___setting-button___']")
+    clickElement(button)
     setTimeout(() => {
         const div = document.querySelector(`div[class^=${divClass}]`)
-        const button = div.querySelector('button')
-        button.click()
+        const button = div?.querySelector('button')
+        clickElement(button)
 
         setTimeout(() => {
             const section = document.querySelector(`section[class^=${sectionClass}]`)
-            const buttons = section.querySelectorAll('button')
-            buttons[buttonIndex].click()
+            const buttons = section?.querySelectorAll('button')
+            if (buttons == null) return
+            clickElement(buttons[buttonIndex])
 
             setTimeout(() => {
-                document.querySelector("button[class*='___setting-button___']").click()
+                const button = document.querySelector("button[class*='___setting-button___']")
+                clickElement(button)
             }, timeout)
         }, timeout)
     }, timeout)
 }
 
-const dispatchKeyEventToPlayer = (key, keyCode) => {
+const dispatchKeyEventToPlayer = (key: string, keyCode: number) => {
     clickBody()
 
     // https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode
@@ -185,8 +198,8 @@ const dispatchKeyEventToPlayer = (key, keyCode) => {
 
 const volumeDataValue = () => {
     const div = document.querySelector("div[class^='___volume-size-control___']")
-    const span = div.querySelector("span[class^='___slider___']")
-    return span.getAttribute("data-value")
+    const span = div?.querySelector("span[class^='___slider___']")
+    return span?.getAttribute("data-value") ?? ""
 }
 
 const toggleAd = () => {
@@ -197,19 +210,19 @@ const toggleGift = () => {
     toggleMenu('___gift-count-item___')
 }
 
-const toggleMenu = (name) => {
+const toggleMenu = (name: string) => {
     console.log(`li[class^='${name}']`)
     const li = document.querySelector(`li[class^='${name}']`)
     if (li == null) {
         const button = document.querySelector("button[class^='___close-button___']")
-        button.click()
+        clickElement(button)
     } else {
         const button = li.querySelector("button")
-        button.click()
+        clickElement(button)
     }
 }
 
-const showPopup = (text) => {
+const showPopup = (text: string) => {
     // https://github.com/notiflix/Notiflix
     Notiflix.Notify.info(
         text,
@@ -232,17 +245,27 @@ const showPopup = (text) => {
 }
 
 const openUserPage = () => {
-    const url = document.querySelector("a[class^='___user-name___']").getAttribute("href")
-    chrome.runtime.sendMessage(null, 'open_url,' + url, (response) => {
-        console.log("Sent key value: " + response)
-    })
+    const url = document
+        .querySelector("a[class^='___user-name___']")
+        ?.getAttribute("href")
+    if (url == null) return
+    chrome.runtime.sendMessage(
+        'open_url,' + url,
+        (response) => {
+            console.log("Sent key value: " + response)
+        })
 }
 
 const openCommunity = () => {
-    const url = document.querySelector("a[class^='___name-label___']").getAttribute("href")
-    chrome.runtime.sendMessage(null, 'open_url,' + url, (response) => {
-        console.log("Sent key value: " + response)
-    })
+    const url = document
+        .querySelector("a[class^='___name-label___']")
+        ?.getAttribute("href")
+    if (url == null) return
+    chrome.runtime.sendMessage(
+        'open_url,' + url,
+        (response) => {
+            console.log("Sent key value: " + response)
+        })
 }
 
 const showHelp = () => {

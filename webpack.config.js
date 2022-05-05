@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
     context: path.join(__dirname, "src"),
     entry: {
-        content: `./content.js`,
+        content: `./content.ts`,
         background: "./background.js"
     },
     output: {
@@ -12,13 +12,22 @@ module.exports = {
         path: path.join(__dirname, "dist"),
         filename: "[name].js"
     },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                use: "ts-loader",
+                exclude: /node_modules/,
+            },
+        ],
+    },
     devtool: "hidden-source-map",
     mode: "development",
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
                 {from: path.join(__dirname, "/manifest.json"), to: path.join(__dirname, "/dist")},
-                {from: path.join(__dirname, "/src/library"), to: path.join(__dirname, "/dist/library")},
+                // {from: path.join(__dirname, "/src/library"), to: path.join(__dirname, "/dist/library")},
                 {from: path.join(__dirname, "/src/css"), to: path.join(__dirname, "/dist/css")},
                 {from: path.join(__dirname, "/src/icons"), to: path.join(__dirname, "/dist/icons")},
             ]

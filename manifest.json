@@ -18,14 +18,10 @@
   "content_scripts": [
     {
       "js": [
-        "./content.js",
-        "./library/notiflix/notiflix-3.2.5.min.js",
-        "./library/sweetalert2/sweetalert2.all.min.js"
+        "./content.js"
       ],
       "css": [
-        "./css/main.css",
-        "./library/notiflix/notiflix-3.2.5.min.css",
-        "./library/sweetalert2/minimal.css"
+        "./css/main.css"
       ],
       "matches": [
         "https://live.nicovideo.jp/watch/*"
