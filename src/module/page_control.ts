@@ -35,8 +35,10 @@ const toggleGift = () => {
 const toggleMenu = (name: string) => {
     console.log(`li[class^='${name}']`)
     const li = document.querySelector(`li[class^='${name}']`)
-    const selector = li == null ? "button[class^='___close-button___']" : "button"
-    const button = document.querySelector(selector)
+    const button = ((): Element | null => li == null ?
+            document.querySelector("button[class^='___close-button___']") :
+            li.querySelector("button")
+    )()
     clickElement(button)
 }
 
