@@ -17,11 +17,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     sendResponse("response from background.")
 })
 
-const openUserPage = (url) => {
-    chrome.tabs.create({
-        url: url,
-    }, () => {
-    })
+const openUserPage = (url: string) => {
+    chrome.tabs.create(
+        {url: url},
+        () => null)
 }
 
 const moveToTab = () => {
@@ -35,7 +34,9 @@ const moveToTab = () => {
             // 現タブを閉じて、
             console.log(tab)
             console.log(tab[0].id)
-            chrome.tabs.remove(tab[0].id)
+            const tabId = tab[0].id
+            if (tabId == null) return
+            chrome.tabs.remove(tabId).then(r => null)
             // 新たにポップアップウィンドウでURLを開く
             chrome.windows.create({
                 url: tab[0].url,

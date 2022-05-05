@@ -2,24 +2,19 @@
   "name": "nico-shortcut",
   "version": "1.0.0",
   "description": "",
-  "main": "src/background.js",
+  "main": "index.js",
   "scripts": {
     "build": "webpack --mode development",
     "prod": "webpack --mode production",
     "create": "rm -rf dist && npx webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/honishi/nico-shortcut.git"
-  },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/honishi/nico-shortcut/issues"
+  "license": "MIT",
+  "dependencies": {
+    "notiflix": "^3.2.5",
+    "sweetalert2": "^11.4.10"
   },
-  "homepage": "https://github.com/honishi/nico-shortcut#readme",
   "devDependencies": {
     "@types/chrome": "^0.0.184",
     "copy-webpack-plugin": "^10.2.4",
@@ -27,9 +22,5 @@
     "typescript": "^4.6.4",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"
-  },
-  "dependencies": {
-    "notiflix": "^3.2.5",
-    "sweetalert2": "^11.4.10"
   }
 }
