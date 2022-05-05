@@ -1,32 +1,32 @@
-import {showPopup} from "./notification_utility";
-import {clickElement, clickSelector} from "./element_utility";
+import {showNotification} from "./notification_utility";
+import {clickElement, clickSelector} from "./common_utility";
 
 export const checkVolumeControlKey = (key: string) => {
     switch (key) {
         case 'm':
-            showPopup('🔈 ミュート On/Off')
             clickSelector("button[class^='___mute-button___']")
+            showNotification('🔈 ミュート On/Off')
             break
         case 'u':
             dispatchKeyEventToPlayer("ArrowDown", 40)
-            showPopup(`🔈 ボリューム小 (${volumeDataValue()})`)
+            showNotification(`🔈 ボリューム小 (${volumeDataValue()})`)
             break
         case 'i':
             dispatchKeyEventToPlayer("ArrowUp", 38)
-            showPopup(`🔈 ボリューム大 (${volumeDataValue()})`)
+            showNotification(`🔈 ボリューム大 (${volumeDataValue()})`)
             break
         default:
             break
     }
 }
 
-const clickBody = () => {
+const clickPlayer = () => {
     const div = document.querySelector("div[class^='___player-controller___']")
     clickElement(div)
 }
 
 const dispatchKeyEventToPlayer = (key: string, keyCode: number) => {
-    clickBody()
+    clickPlayer()
 
     // https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode
     window.dispatchEvent(new KeyboardEvent("keydown", {

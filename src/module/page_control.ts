@@ -1,23 +1,23 @@
-import {showPopup} from "./notification_utility";
-import {clickElement} from "./element_utility";
+import {showNotification} from "./notification_utility";
+import {clickElement} from "./common_utility";
 
 export const checkPageControlKey = (key: string) => {
     switch (key) {
         case 'A':
-            showPopup('📣 広告')
             toggleAd()
+            showNotification('📣 広告')
             break
         case 'G':
-            showPopup('🎁 ギフト Open/Close')
             toggleGift()
+            showNotification('🎁 ギフト Open/Close')
             break
         case 'U':
-            showPopup('🙆‍♂️ ユーザーを開く')
             openUserPage()
+            showNotification('🙆‍♂️ ユーザーを開く')
             break
         case 'C':
-            showPopup('🏠 コミュニティを開く')
             openCommunity()
+            showNotification('🏠 コミュニティを開く')
             break
         default:
             break
@@ -35,35 +35,29 @@ const toggleGift = () => {
 const toggleMenu = (name: string) => {
     console.log(`li[class^='${name}']`)
     const li = document.querySelector(`li[class^='${name}']`)
-    if (li == null) {
-        const button = document.querySelector("button[class^='___close-button___']")
-        clickElement(button)
-    } else {
-        const button = li.querySelector("button")
-        clickElement(button)
-    }
+    const selector = li == null ? "button[class^='___close-button___']" : "button"
+    const button = document.querySelector(selector)
+    clickElement(button)
 }
 
 const openUserPage = () => {
     const url = document
         .querySelector("a[class^='___user-name___']")
         ?.getAttribute("href")
-    if (url == null) return
-    chrome.runtime.sendMessage(
-        'open_url,' + url,
-        (response) => {
-            console.log("Sent key value: " + response)
-        })
+    sendOpenUrlMessage(url)
 }
 
 const openCommunity = () => {
     const url = document
         .querySelector("a[class^='___name-label___']")
         ?.getAttribute("href")
+    sendOpenUrlMessage(url)
+}
+
+const sendOpenUrlMessage = (url: string | null | undefined) => {
     if (url == null) return
     chrome.runtime.sendMessage(
-        'open_url,' + url,
-        (response) => {
-            console.log("Sent key value: " + response)
-        })
+        ['open_url', url].join(','),
+        (response) => console.log(response)
+    )
 }

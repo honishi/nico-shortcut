@@ -1,6 +1,6 @@
 import Notiflix from "notiflix";
 
-export const showPopup = (text: string) => {
+export const showNotification = (text: string) => {
     // https://github.com/notiflix/Notiflix
     Notiflix.Notify.info(
         text,

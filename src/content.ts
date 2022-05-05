@@ -1,4 +1,4 @@
-import {isInputActive} from "./module/element_utility";
+import {isInputActive} from "./module/common_utility";
 import {checkPlaybackControlKey} from "./module/playback_control";
 import {checkCommentControlKey} from "./module/comment_control";
 import {checkVolumeControlKey} from "./module/volume_control";

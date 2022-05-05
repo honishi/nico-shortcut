@@ -1,59 +1,59 @@
-import {clickMenuButton, clickSelector} from "./element_utility";
-import {showPopup} from "./notification_utility";
+import {clickMenuButton, clickSelector} from "./common_utility";
+import {showNotification} from "./notification_utility";
 
 export const checkPlaybackControlKey = (key: string) => {
     switch (key) {
         case 'k':
-            showPopup('⏯ 再生 / 停止')
             clickSelector("button[class^='___play-button___']")
+            showNotification('⏯ 再生 / 停止')
             break
         case 'j':
-            showPopup('⏪ 巻き戻し 10s')
             clickSelector("button[class^='___back-button___']")
+            showNotification('⏪ 巻き戻し 10s')
             break
         case 'l':
-            showPopup('⏩ 早送り 10s')
             clickSelector("button[class^='___forward-button___']")
+            showNotification('⏩ 早送り 10s')
             break
         case 'h':
-            showPopup('⏮ 先頭')
             clickSelector("button[class^='___head-button___']")
+            showNotification('⏮ 先頭')
             break
         case ';':
-            showPopup('⏭ ライブ再生')
             clickSelector("button[class^='___live-button___']")
+            showNotification('⏭ ライブ再生')
             break
         case 'd':
-            showPopup('🐇 再生速度 x1.0')
             changePlaybackRate(5)
+            showNotification('🐇 再生速度 x1.0')
             break
         case 'r':
-            showPopup('🐇 再生速度 x1.25')
             changePlaybackRate(4)
+            showNotification('🐇 再生速度 x1.25')
             break
         case 'f':
-            showPopup('🐇 再生速度 x1.5')
             changePlaybackRate(3)
+            showNotification('🐇 再生速度 x1.5')
             break
         case 't':
-            showPopup('🚀 再生速度  x1.75')
             changePlaybackRate(2)
+            showNotification('🚀 再生速度  x1.75')
             break
         case 'g':
-            showPopup('🚀 再生速度 x2.0')
             changePlaybackRate(1)
+            showNotification('🚀 再生速度 x2.0')
             break
         case 's':
-            showPopup('🐢 再生速度 x0.75')
             changePlaybackRate(6)
+            showNotification('🐢 再生速度 x0.75')
             break
         case 'w':
-            showPopup('🐢 再生速度 x0.5')
             changePlaybackRate(7)
+            showNotification('🐢 再生速度 x0.5')
             break
         case 'a':
-            showPopup('🐢 再生速度 x0.25')
             changePlaybackRate(8)
+            showNotification('🐢 再生速度 x0.25')
             break
         default:
             break

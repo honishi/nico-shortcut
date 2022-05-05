@@ -1,23 +1,23 @@
-import {showPopup} from "./notification_utility";
-import {clickMenuButton, clickSelector} from "./element_utility";
+import {showNotification} from "./notification_utility";
+import {clickMenuButton, clickSelector} from "./common_utility";
 
 export const checkCommentControlKey = (key: string) => {
     switch (key) {
         case 'c':
-            showPopup('💬 コメント On/Off')
             clickSelector("button[class^='___comment-button___']")
+            showNotification('💬 コメント On/Off')
             break
         case 'z':
-            showPopup('💬 コメント透過: なし')
             changeCommentTransparency(1)
+            showNotification('💬 コメント透過: なし')
             break
         case 'x':
-            showPopup('💬 コメント透過: 弱')
             changeCommentTransparency(2)
+            showNotification('💬 コメント透過: 弱')
             break
         case 'v':
-            showPopup('💬 コメント透過: 強')
             changeCommentTransparency(3)
+            showNotification('💬 コメント透過: 強')
             break
         default:
             break
