@@ -6,7 +6,7 @@ import {checkPageControlKey} from "./module/page_control";
 import {checkPlaybackControlKey} from "./module/playback_control";
 import {checkVolumeControlKey} from "./module/volume_control";
 
-const handleKeyEvent = (event: KeyboardEvent) => {
+const listenKeyEvent = (event: KeyboardEvent) => {
     const key = event.key
     console.log(key)
     if (isInputActive()) return
@@ -19,4 +19,4 @@ const handleKeyEvent = (event: KeyboardEvent) => {
 }
 
 // https://stackoverflow.com/a/71567874/13220031
-window.addEventListener('keydown', handleKeyEvent)
+window.addEventListener('keydown', listenKeyEvent)

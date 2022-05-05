@@ -1,7 +1,9 @@
 import {handleMessage} from "./module/handle_message";
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+const listenMessage = (message: any, sender: any, sendResponse: any) => {
     console.log(message)
     handleMessage(message)
     sendResponse("response from background.")
-})
+}
+
+chrome.runtime.onMessage.addListener(listenMessage)
