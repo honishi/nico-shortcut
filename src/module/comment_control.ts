@@ -8,20 +8,26 @@ import {
     isKeyMatched,
     KeyMap
 } from "./option_management";
+import {
+    commentTitle,
+    commentTransparencyNoneTitle,
+    commentTransparencyStrongTitle,
+    commentTransparencyWeakTitle
+} from "./shortcut_title";
 
 export const checkCommentControlKey = (key: string, keyMap: KeyMap) => {
     if (isKeyMatched(key, commentKeys, keyMap)) {
         clickSelector("button[class^='___comment-button___']")
-        showNotification('💬 コメント On/Off')
+        showNotification(commentTitle)
     } else if (isKeyMatched(key, commentTransparencyNoneKeys, keyMap)) {
         changeCommentTransparency(1)
-        showNotification('💬 コメント透過: なし')
+        showNotification(commentTransparencyNoneTitle)
     } else if (isKeyMatched(key, commentTransparencyWeakKeys, keyMap)) {
         changeCommentTransparency(2)
-        showNotification('💬 コメント透過: 弱')
+        showNotification(commentTransparencyWeakTitle)
     } else if (isKeyMatched(key, commentTransparencyStrongKeys, keyMap)) {
         changeCommentTransparency(3)
-        showNotification('💬 コメント透過: 強')
+        showNotification(commentTransparencyStrongTitle)
     }
 }
 

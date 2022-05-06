@@ -9,23 +9,24 @@ import {
     openUserKeys,
     programsKeys
 } from "./option_management";
+import {advertiseTitle, giftTitle, openCommunityTitle, openUserTitle, programsTitle} from "./shortcut_title";
 
 export const checkPageControlKey = (key: string, keyMap: KeyMap) => {
     if (isKeyMatched(key, programsKeys, keyMap)) {
         clickPrograms()
-        showNotification('👨‍👩‍👦 フォロー中の番組')
+        showNotification(programsTitle)
     } else if (isKeyMatched(key, advertiseKeys, keyMap)) {
         toggleAd()
-        showNotification('📣 広告')
+        showNotification(advertiseTitle)
     } else if (isKeyMatched(key, giftKeys, keyMap)) {
         toggleGift()
-        showNotification('🎁 ギフト Open/Close')
+        showNotification(giftTitle)
     } else if (isKeyMatched(key, openUserKeys, keyMap)) {
         openUserPage()
-        showNotification('🙆‍♂️ ユーザーを開く')
+        showNotification(openUserTitle)
     } else if (isKeyMatched(key, openCommunityKeys, keyMap)) {
         openCommunity()
-        showNotification('🏠 コミュニティを開く')
+        showNotification(openCommunityTitle)
     }
 }
 

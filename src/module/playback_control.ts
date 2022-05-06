@@ -17,47 +17,62 @@ import {
     playStopKeys,
     rewindKeys
 } from "./option_management";
+import {
+    fastForwardTitle,
+    playHeadTitle,
+    playLiveTitle,
+    playRate025Title,
+    playRate050Title,
+    playRate075Title,
+    playRate100Title,
+    playRate125Title,
+    playRate150Title,
+    playRate175Title,
+    playRate200Title,
+    playStopTitle,
+    rewindTitle
+} from "./shortcut_title";
 
 export const checkPlaybackControlKey = (key: string, keyMap: KeyMap) => {
     if (isKeyMatched(key, playStopKeys, keyMap)) {
         clickSelector("button[class^='___play-button___']")
-        showNotification('⏯ 再生 / 停止')
+        showNotification(playStopTitle)
     } else if (isKeyMatched(key, rewindKeys, keyMap)) {
         clickSelector("button[class^='___back-button___']")
-        showNotification('⏪ 巻き戻し 10s')
+        showNotification(rewindTitle)
     } else if (isKeyMatched(key, fastForwardKeys, keyMap)) {
         clickSelector("button[class^='___forward-button___']")
-        showNotification('⏩ 早送り 10s')
+        showNotification(fastForwardTitle)
     } else if (isKeyMatched(key, playHeadKeys, keyMap)) {
         clickSelector("button[class^='___head-button___']")
-        showNotification('⏮ 先頭')
+        showNotification(playHeadTitle)
     } else if (isKeyMatched(key, playLiveKeys, keyMap)) {
         clickSelector("button[class^='___live-button___']")
-        showNotification('⏭ ライブ再生')
+        showNotification(playLiveTitle)
     } else if (isKeyMatched(key, playRate200Keys, keyMap)) {
         changePlaybackRate(1)
-        showNotification('🚀 再生速度 x2.0')
+        showNotification(playRate200Title)
     } else if (isKeyMatched(key, playRate175Keys, keyMap)) {
         changePlaybackRate(2)
-        showNotification('🚀 再生速度  x1.75')
+        showNotification(playRate175Title)
     } else if (isKeyMatched(key, playRate150Keys, keyMap)) {
         changePlaybackRate(3)
-        showNotification('🐇 再生速度 x1.5')
+        showNotification(playRate150Title)
     } else if (isKeyMatched(key, playRate125Keys, keyMap)) {
         changePlaybackRate(4)
-        showNotification('🐇 再生速度 x1.25')
+        showNotification(playRate125Title)
     } else if (isKeyMatched(key, playRate100Keys, keyMap)) {
         changePlaybackRate(5)
-        showNotification('🐇 再生速度 x1.0')
+        showNotification(playRate100Title)
     } else if (isKeyMatched(key, playRate075Keys, keyMap)) {
         changePlaybackRate(6)
-        showNotification('🐢 再生速度 x0.75')
+        showNotification(playRate075Title)
     } else if (isKeyMatched(key, playRate050Keys, keyMap)) {
         changePlaybackRate(7)
-        showNotification('🐢 再生速度 x0.5')
+        showNotification(playRate050Title)
     } else if (isKeyMatched(key, playRate025Keys, keyMap)) {
         changePlaybackRate(8)
-        showNotification('🐢 再生速度 x0.25')
+        showNotification(playRate025Title)
     }
 }
 
