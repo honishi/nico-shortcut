@@ -101,8 +101,8 @@ export const loadKeyMap = (callback: (keyMap: KeyMap) => void) => {
         });
 }
 
-export const saveKeyMap = (keyMap: KeyMap) => {
-    chrome.storage.local.set(keyMap, () => null)
+export const saveKeyMap = (keyMap: KeyMap, callback: () => void) => {
+    chrome.storage.local.set(keyMap, callback)
 }
 
 export const clearKeyMap = (callback: () => void) => {

@@ -66,7 +66,7 @@ const inputHelpKeysId = "input_help_keys"
 const restoreDefaultButtonId = "button_restore_default"
 const saveButtonId = "button_save"
 
-const save = () => {
+const saveOptions = () => {
     const keyMap = {
         playStopKeys: getInputValue(inputPlayStopKeysId),
         rewindKeys: getInputValue(inputRewindKeysId),
@@ -98,10 +98,10 @@ const save = () => {
         openCommunityKeys: getInputValue(inputOpenCommunityKeysId),
         helpKeys: getInputValue(inputHelpKeysId),
     }
-    saveKeyMap(keyMap)
+    saveKeyMap(keyMap, () => window.close())
 }
 
-const load = () => {
+const loadOptions = () => {
     loadKeyMap((keyMap) => {
         setInputValue(inputPlayStopKeysId, keyMap[playStopKeys])
         setInputValue(inputRewindKeysId, keyMap[rewindKeys])
@@ -136,7 +136,7 @@ const load = () => {
 }
 
 const clear = () => {
-    clearKeyMap(() => load())
+    clearKeyMap(() => loadOptions())
 }
 
 const setInputValue = (elementId: string, value: string) => {
@@ -151,9 +151,9 @@ const getInputValue = (elementId: string): string => {
 
 const addEventListeners = () => {
     document.addEventListener('DOMContentLoaded', () => {
-        load()
+        loadOptions()
         document.getElementById(restoreDefaultButtonId)?.addEventListener('click', clear)
-        document.getElementById(saveButtonId)?.addEventListener('click', save)
+        document.getElementById(saveButtonId)?.addEventListener('click', saveOptions)
     })
 }
 
