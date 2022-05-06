@@ -1,22 +1,17 @@
 import {clickElement, clickSelector} from "./common_utility";
 import {showNotification} from "./notification_utility";
+import {isKeyMatched, KeyMap, muteKeys, volumeDownKeys, volumeUpKeys} from "./option_management";
 
-export const checkVolumeControlKey = (key: string) => {
-    switch (key) {
-        case 'm':
-            clickSelector("button[class^='___mute-button___']")
-            showNotification('🔈 ミュート On/Off')
-            break
-        case 'u':
-            dispatchKeyEventToPlayer("ArrowDown", 40)
-            showNotification(`🔈 ボリューム小 (${volumeDataValue()})`)
-            break
-        case 'i':
-            dispatchKeyEventToPlayer("ArrowUp", 38)
-            showNotification(`🔈 ボリューム大 (${volumeDataValue()})`)
-            break
-        default:
-            break
+export const checkVolumeControlKey = (key: string, keyMap: KeyMap) => {
+    if (isKeyMatched(key, muteKeys, keyMap)) {
+        clickSelector("button[class^='___mute-button___']")
+        showNotification('🔈 ミュート On/Off')
+    } else if (isKeyMatched(key, volumeDownKeys, keyMap)) {
+        dispatchKeyEventToPlayer("ArrowDown", 40)
+        showNotification(`🔈 ボリューム小 (${volumeDataValue()})`)
+    } else if (isKeyMatched(key, volumeUpKeys, keyMap)) {
+        dispatchKeyEventToPlayer("ArrowUp", 38)
+        showNotification(`🔈 ボリューム大 (${volumeDataValue()})`)
     }
 }
 

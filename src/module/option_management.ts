@@ -21,6 +21,7 @@ export const commentTransparencyStrongKeys = "commentTransparencyStrongKeys"
 export const fullscreenKeys = "fullscreenKeys"
 export const reloadKeys = "reloadKeys"
 export const settingKeys = "settingKeys"
+export const programsKeys = "programsKeys"
 export const advertiseKeys = "advertiseKeys"
 export const giftKeys = "giftKeys"
 export const openUserKeys = "openUserKeys"
@@ -51,6 +52,7 @@ const allKeys = [
     fullscreenKeys,
     reloadKeys,
     settingKeys,
+    programsKeys,
     advertiseKeys,
     giftKeys,
     openUserKeys,
@@ -88,6 +90,7 @@ export const loadKeyMap = (callback: (keyMap: KeyMap) => void) => {
                 fullscreenKeys: items[fullscreenKeys] ?? 'F',
                 reloadKeys: items[reloadKeys] ?? 'R',
                 settingKeys: items[settingKeys] ?? ',',
+                programsKeys: items[programsKeys] ?? 'p',
                 advertiseKeys: items[advertiseKeys] ?? 'A',
                 giftKeys: items[giftKeys] ?? 'G',
                 openUserKeys: items[openUserKeys] ?? 'U',

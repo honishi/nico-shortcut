@@ -1,26 +1,27 @@
 import {clickMenuButton, clickSelector} from "./common_utility";
 import {showNotification} from "./notification_utility";
+import {
+    commentKeys,
+    commentTransparencyNoneKeys,
+    commentTransparencyStrongKeys,
+    commentTransparencyWeakKeys,
+    isKeyMatched,
+    KeyMap
+} from "./option_management";
 
-export const checkCommentControlKey = (key: string) => {
-    switch (key) {
-        case 'c':
-            clickSelector("button[class^='___comment-button___']")
-            showNotification('💬 コメント On/Off')
-            break
-        case 'z':
-            changeCommentTransparency(1)
-            showNotification('💬 コメント透過: なし')
-            break
-        case 'x':
-            changeCommentTransparency(2)
-            showNotification('💬 コメント透過: 弱')
-            break
-        case 'v':
-            changeCommentTransparency(3)
-            showNotification('💬 コメント透過: 強')
-            break
-        default:
-            break
+export const checkCommentControlKey = (key: string, keyMap: KeyMap) => {
+    if (isKeyMatched(key, commentKeys, keyMap)) {
+        clickSelector("button[class^='___comment-button___']")
+        showNotification('💬 コメント On/Off')
+    } else if (isKeyMatched(key, commentTransparencyNoneKeys, keyMap)) {
+        changeCommentTransparency(1)
+        showNotification('💬 コメント透過: なし')
+    } else if (isKeyMatched(key, commentTransparencyWeakKeys, keyMap)) {
+        changeCommentTransparency(2)
+        showNotification('💬 コメント透過: 弱')
+    } else if (isKeyMatched(key, commentTransparencyStrongKeys, keyMap)) {
+        changeCommentTransparency(3)
+        showNotification('💬 コメント透過: 強')
     }
 }
 

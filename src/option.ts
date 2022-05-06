@@ -24,6 +24,7 @@ import {
     playRate175Keys,
     playRate200Keys,
     playStopKeys,
+    programsKeys,
     reloadKeys,
     rewindKeys,
     saveKeyMap,
@@ -55,6 +56,7 @@ const inputCommentTransparencyStrongKeysId = "input_comment_transparency_strong_
 const inputFullscreenKeysId = "input_fullscreen_keys"
 const inputReloadKeysId = "input_reload_keys"
 const inputSettingKeysId = "input_setting_keys"
+const inputProgramsKeysId = "input_programs_keys"
 const inputAdvertiseKeysId = "input_advertise_keys"
 const inputGiftKeysId = "input_gift_keys"
 const inputOpenUserKeysId = "input_open_user_keys"
@@ -89,6 +91,7 @@ const save = () => {
         fullscreenKeys: getInputValue(inputFullscreenKeysId),
         reloadKeys: getInputValue(inputReloadKeysId),
         settingKeys: getInputValue(inputSettingKeysId),
+        programsKeys: getInputValue(inputProgramsKeysId),
         advertiseKeys: getInputValue(inputAdvertiseKeysId),
         giftKeys: getInputValue(inputGiftKeysId),
         openUserKeys: getInputValue(inputOpenUserKeysId),
@@ -123,6 +126,7 @@ const load = () => {
         setInputValue(inputFullscreenKeysId, keyMap[fullscreenKeys])
         setInputValue(inputReloadKeysId, keyMap[reloadKeys])
         setInputValue(inputSettingKeysId, keyMap[settingKeys])
+        setInputValue(inputProgramsKeysId, keyMap[programsKeys])
         setInputValue(inputAdvertiseKeysId, keyMap[advertiseKeys])
         setInputValue(inputGiftKeysId, keyMap[giftKeys])
         setInputValue(inputOpenUserKeysId, keyMap[openUserKeys])

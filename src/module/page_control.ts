@@ -1,30 +1,31 @@
 import {clickElement} from "./common_utility";
 import {showNotification} from "./notification_utility";
+import {
+    advertiseKeys,
+    giftKeys,
+    isKeyMatched,
+    KeyMap,
+    openCommunityKeys,
+    openUserKeys,
+    programsKeys
+} from "./option_management";
 
-export const checkPageControlKey = (key: string) => {
-    switch (key) {
-        case 'p':
-            clickPrograms()
-            showNotification('👨‍👩‍👦 フォロー中の番組')
-            break
-        case 'A':
-            toggleAd()
-            showNotification('📣 広告')
-            break
-        case 'G':
-            toggleGift()
-            showNotification('🎁 ギフト Open/Close')
-            break
-        case 'U':
-            openUserPage()
-            showNotification('🙆‍♂️ ユーザーを開く')
-            break
-        case 'C':
-            openCommunity()
-            showNotification('🏠 コミュニティを開く')
-            break
-        default:
-            break
+export const checkPageControlKey = (key: string, keyMap: KeyMap) => {
+    if (isKeyMatched(key, programsKeys, keyMap)) {
+        clickPrograms()
+        showNotification('👨‍👩‍👦 フォロー中の番組')
+    } else if (isKeyMatched(key, advertiseKeys, keyMap)) {
+        toggleAd()
+        showNotification('📣 広告')
+    } else if (isKeyMatched(key, giftKeys, keyMap)) {
+        toggleGift()
+        showNotification('🎁 ギフト Open/Close')
+    } else if (isKeyMatched(key, openUserKeys, keyMap)) {
+        openUserPage()
+        showNotification('🙆‍♂️ ユーザーを開く')
+    } else if (isKeyMatched(key, openCommunityKeys, keyMap)) {
+        openCommunity()
+        showNotification('🏠 コミュニティを開く')
     }
 }
 

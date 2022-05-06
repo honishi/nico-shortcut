@@ -12,12 +12,12 @@ const listenKeyEvent = (event: KeyboardEvent) => {
     console.log(key)
     if (isInputActive()) return
     loadKeyMap((keyMap) => {
-        checkPlaybackControlKey(key)
-        checkCommentControlKey(key)
-        checkVolumeControlKey(key)
-        checkMiscControlKey(keyMap, key)
-        checkPageControlKey(key)
-        checkHelpControlKey(key)
+        checkPlaybackControlKey(key, keyMap)
+        checkCommentControlKey(key, keyMap)
+        checkVolumeControlKey(key, keyMap)
+        checkMiscControlKey(key, keyMap)
+        checkPageControlKey(key, keyMap)
+        checkHelpControlKey(key, keyMap)
     })
 }
 
