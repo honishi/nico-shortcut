@@ -8,7 +8,8 @@ module.exports = {
     entry: {
         content: path.join(srcDir, 'content.ts'),
         background: path.join(srcDir, 'background.ts'),
-        option: path.join(srcDir, 'option.ts')
+        option: path.join(srcDir, 'option.ts'),
+        popup: path.join(srcDir, 'popup.ts')
     },
     output: {
         clean: true,

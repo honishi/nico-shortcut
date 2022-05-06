@@ -33,5 +33,8 @@
   },
   "options_ui": {
     "page": "./html/option.html"
+  },
+  "action":{
+    "default_popup":"./html/popup.html"
   }
 }
