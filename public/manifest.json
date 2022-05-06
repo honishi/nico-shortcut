@@ -1,10 +1,9 @@
 {
-  "name": "nico-shortcut",
+  "name": "ニコ生ショートカット",
   "version": "0.0.1",
   "manifest_version": 3,
-  "description": "nico-shortcut",
+  "description": "ニコ生の放送視聴ページでキーボードショートカットを使う非公式 Extension です。",
   "icons": {
-    "16": "./icons/icon16.png",
     "48": "./icons/icon48.png",
     "128": "./icons/icon128.png"
   },
