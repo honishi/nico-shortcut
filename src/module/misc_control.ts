@@ -1,9 +1,9 @@
 import {clickSelector} from "./common_utility";
 import {showNotification} from "./notification_utility";
-import {defaultFullscreenKey, fullscreenKeys} from "./option_management";
+import {fullscreenKeys, isKeyMatched, KeyMap} from "./option_management";
 
-export const checkMiscControlKey = (keyMap: { [key: string]: string }, key: string) => {
-    if (checkKey(keyMap, fullscreenKeys, defaultFullscreenKey, key)) {
+export const checkMiscControlKey = (keyMap: KeyMap, key: string) => {
+    if (isKeyMatched(key, fullscreenKeys, keyMap)) {
         clickSelector("button[class^='___fullscreen-button___']")
         showNotification('📺️ フルスクリーン')
     }
@@ -20,10 +20,3 @@ export const checkMiscControlKey = (keyMap: { [key: string]: string }, key: stri
             break
     }
 }
-
-const checkKey = (
-    keyMap: { [key: string]: string },
-    mapKey: string,
-    defaultKey: string,
-    key: string
-): boolean => [...(keyMap[mapKey] ?? defaultKey)].includes(key)
