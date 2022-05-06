@@ -9,6 +9,7 @@ import {
     fullscreenKeys,
     giftKeys,
     helpKeys,
+    KeyMap,
     loadKeyMap,
     muteKeys,
     openCommunityKeys,
@@ -65,6 +66,7 @@ const inputHelpKeysId = "input_help_keys"
 
 const restoreDefaultButtonId = "button_restore_default"
 const saveButtonId = "button_save"
+const optionMessageAreaId = "option_message_area"
 
 const saveOptions = () => {
     const keyMap = {
@@ -98,7 +100,21 @@ const saveOptions = () => {
         openCommunityKeys: getInputValue(inputOpenCommunityKeysId),
         helpKeys: getInputValue(inputHelpKeysId),
     }
+    if (hasDuplicate(keyMap)) {
+        showMessage("キーが重複しています...😰")
+        return
+    }
     saveKeyMap(keyMap, () => window.close())
+}
+
+// https://dev.to/shane/typescript-check-if-an-array-contains-only-unique-values-3b3e
+const hasDuplicate = (keyMap: KeyMap): boolean => {
+    const shortcutKeys = Object.values(keyMap)
+        .map((value) => [...value])
+        .reduce((previous, current) => previous.concat(current), [])
+    const uniqueSet = new Set(shortcutKeys)
+    const uniqueValues = Array.from(uniqueSet)
+    return shortcutKeys.length != uniqueValues.length
 }
 
 const loadOptions = () => {
@@ -135,8 +151,13 @@ const loadOptions = () => {
     })
 }
 
-const clear = () => {
+const clearOptions = () => {
     clearKeyMap(() => loadOptions())
+}
+
+const showMessage = (text: string) => {
+    const messageArea = document.getElementById(optionMessageAreaId) as HTMLSpanElement
+    messageArea.textContent = text
 }
 
 const setInputValue = (elementId: string, value: string) => {
@@ -152,7 +173,7 @@ const getInputValue = (elementId: string): string => {
 const addEventListeners = () => {
     document.addEventListener('DOMContentLoaded', () => {
         loadOptions()
-        document.getElementById(restoreDefaultButtonId)?.addEventListener('click', clear)
+        document.getElementById(restoreDefaultButtonId)?.addEventListener('click', clearOptions)
         document.getElementById(saveButtonId)?.addEventListener('click', saveOptions)
     })
 }
