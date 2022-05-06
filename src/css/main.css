@@ -1,4 +1,23 @@
 .notiflix-nico-shortcut {
-   display: flex;
-   justify-content: center;
+    display: flex;
+    justify-content: center;
+}
+
+.nico-shortcut-help table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.nico-shortcut-help .left-column {
+    padding: 0 50px;
+}
+
+.nico-shortcut-help .right-column {
+    padding: 0 100px;
+}
+
+.nico-shortcut-help tr:nth-child(even) {
+    background: #ddd;
 }
