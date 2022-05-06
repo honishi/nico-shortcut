@@ -13,10 +13,11 @@ export const clickElement = (element: Element | null | undefined) => {
 }
 
 export const clickMenuButton = (divClass: string, sectionClass: string, buttonIndex: number) => {
+    const settingButtonSelector = "button[class*='___setting-button___']"
     const timeout = 300
 
     // 1. Click setting button.
-    const button = document.querySelector("button[class*='___setting-button___']")
+    const button = document.querySelector(settingButtonSelector)
     clickElement(button)
 
     setTimeout(() => {
@@ -24,6 +25,13 @@ export const clickMenuButton = (divClass: string, sectionClass: string, buttonIn
         const div = document.querySelector(`div[class^=${divClass}]`)
         const button = div?.querySelector('button')
         clickElement(button)
+
+        // Close setting if menu button not found.
+        if (button == null) {
+            const button = document.querySelector(settingButtonSelector)
+            clickElement(button)
+            return
+        }
 
         setTimeout(() => {
             // 3. Click item button.
@@ -34,7 +42,7 @@ export const clickMenuButton = (divClass: string, sectionClass: string, buttonIn
 
             setTimeout(() => {
                 // 4. Click setting button to close.
-                const button = document.querySelector("button[class*='___setting-button___']")
+                const button = document.querySelector(settingButtonSelector)
                 clickElement(button)
             }, timeout)
         }, timeout)
