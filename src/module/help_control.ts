@@ -105,7 +105,7 @@ const showHelp = (keyMap: KeyMap) => {
                 [keyMap[giftKeys], giftTitle],
                 [keyMap[openUserKeys], openUserTitle],
                 [keyMap[openCommunityKeys], openCommunityTitle],
-                [keyMap[helpKeys], helpTitle],
+                [keyMap[helpKeys], `${helpTitle} (この画面)`],
             ], false) +
             '</div>',
         width: 900,

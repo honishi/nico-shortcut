@@ -33,6 +33,22 @@ import {
     volumeDownKeys,
     volumeUpKeys
 } from "./module/option_management";
+import {
+    advertiseTitle,
+    commentTitle, commentTransparencyNoneTitle, commentTransparencyStrongTitle, commentTransparencyWeakTitle,
+    fastForwardTitle, fullscreenTitle, giftTitle, helpTitle, muteTitle, openCommunityTitle, openUserTitle,
+    playHeadTitle,
+    playLiveTitle, playRate025Title,
+    playRate050Title,
+    playRate075Title,
+    playRate100Title,
+    playRate125Title,
+    playRate150Title,
+    playRate175Title,
+    playRate200Title,
+    playStopTitle, programsTitle, reloadTitle,
+    rewindTitle, settingTitle, volumeDownTitle, volumeUpTitle
+} from "./module/shortcut_title";
 
 const inputPlayStopKeysId = "input_play_stop_keys"
 const inputRewindKeysId = "input_rewind_keys"
@@ -67,6 +83,38 @@ const inputHelpKeysId = "input_help_keys"
 const restoreDefaultButtonId = "button_restore_default"
 const saveButtonId = "button_save"
 const optionMessageAreaId = "option_message_area"
+
+const configureLabels = () => {
+    setLabelValue(inputPlayStopKeysId, playStopTitle)
+    setLabelValue(inputRewindKeysId, rewindTitle)
+    setLabelValue(inputFastForwardKeysId, fastForwardTitle)
+    setLabelValue(inputPlayHeadKeysId, playHeadTitle)
+    setLabelValue(inputPlayLiveKeysId, playLiveTitle)
+    setLabelValue(inputPlayRate200KeysId, playRate200Title)
+    setLabelValue(inputPlayRate175KeysId, playRate175Title)
+    setLabelValue(inputPlayRate150KeysId, playRate150Title)
+    setLabelValue(inputPlayRate125KeysId, playRate125Title)
+    setLabelValue(inputPlayRate100KeysId, playRate100Title)
+    setLabelValue(inputPlayRate075KeysId, playRate075Title)
+    setLabelValue(inputPlayRate050KeysId, playRate050Title)
+    setLabelValue(inputPlayRate025KeysId, playRate025Title)
+    setLabelValue(inputMuteKeysId, muteTitle)
+    setLabelValue(inputVolumeDownKeysId, volumeDownTitle)
+    setLabelValue(inputVolumeUpKeysId, volumeUpTitle)
+    setLabelValue(inputCommentKeysId, commentTitle)
+    setLabelValue(inputCommentTransparencyNoneKeysId, commentTransparencyNoneTitle)
+    setLabelValue(inputCommentTransparencyWeakKeysId, commentTransparencyWeakTitle)
+    setLabelValue(inputCommentTransparencyStrongKeysId, commentTransparencyStrongTitle)
+    setLabelValue(inputFullscreenKeysId, fullscreenTitle)
+    setLabelValue(inputReloadKeysId, reloadTitle)
+    setLabelValue(inputSettingKeysId, settingTitle)
+    setLabelValue(inputProgramsKeysId, programsTitle)
+    setLabelValue(inputAdvertiseKeysId, advertiseTitle)
+    setLabelValue(inputGiftKeysId, giftTitle)
+    setLabelValue(inputOpenUserKeysId, openUserTitle)
+    setLabelValue(inputOpenCommunityKeysId, openCommunityTitle)
+    setLabelValue(inputHelpKeysId, helpTitle)
+}
 
 const saveOptions = () => {
     const keyMap = {
@@ -160,6 +208,11 @@ const showMessage = (text: string) => {
     messageArea.textContent = text
 }
 
+const setLabelValue = (forValue: string, value: string) => {
+    const label = document.querySelector(`label[for='${forValue}']`) as HTMLLabelElement
+    label.textContent = `${value}:`
+}
+
 const setInputValue = (elementId: string, value: string) => {
     const input = document.getElementById(elementId) as HTMLInputElement
     input.value = value
@@ -172,6 +225,7 @@ const getInputValue = (elementId: string): string => {
 
 const addEventListeners = () => {
     document.addEventListener('DOMContentLoaded', () => {
+        configureLabels()
         loadOptions()
         document.getElementById(restoreDefaultButtonId)?.addEventListener('click', clearOptions)
         document.getElementById(saveButtonId)?.addEventListener('click', saveOptions)
