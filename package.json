@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "rimraf dist && webpack --config webpack/webpack.dev.js --watch",
-    "build_dev": "rimraf dist && webpack --config webpack/webpack.dev.js",
-    "build": "rimraf dist && webpack --config webpack/webpack.prod.js",
+    "build-dev": "rimraf dist && webpack --config webpack/webpack.dev.js --watch",
+    "build-prod": "rimraf dist && webpack --config webpack/webpack.prod.js",
     "clean": "rimraf dist"
   },
   "author": "",
