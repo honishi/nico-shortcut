@@ -1,8 +1,8 @@
 {
   "name": "ニコ生ショートカット",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "manifest_version": 3,
-  "description": "ニコ生の放送視聴ページでキーボードショートカットを使う非公式 Extension です。",
+  "description": "ニコニコ生放送の PC 用放送視聴ページで、キーボードショートカットが利用可能になります。",
   "icons": {
     "48": "./icons/icon48.png",
     "128": "./icons/icon128.png"

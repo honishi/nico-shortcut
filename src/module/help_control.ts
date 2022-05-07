@@ -71,8 +71,9 @@ export const checkHelpControlKey = (key: string, keyMap: KeyMap) => {
 }
 
 const showHelp = (keyMap: KeyMap) => {
+    const manifest = chrome.runtime.getManifest();
     Swal.fire({
-        title: 'Nico Shortcut',
+        title: `ニコ生ショートカット (v${manifest.version})`,
         html: '<div class="nico-shortcut-help">\n' +
             makeTable([
                 [keyMap[playStopKeys], playStopTitle],
