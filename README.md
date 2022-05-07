@@ -2,7 +2,7 @@
 
 <img src="./doc/readme-icon.png">
 
-Interim Niconama keyboard shortcut implementation until it will be officially provided.
+An interim keyboard shortcut implementation for Niconama until it's officially provided.
 
 ## Installation
 
