@@ -68,7 +68,7 @@ export const loadOptions = (callback: (options: Options) => void) => {
     chrome.storage.local.get(
         allOptionKeys,
         (items) => {
-            const options = {
+            const optionsWithDefaultValue = {
                 playStopKeys: items[playStopKeys] ?? 'k',
                 rewindKeys: items[rewindKeys] ?? 'j',
                 fastForwardKeys: items[fastForwardKeys] ?? 'l',
@@ -100,7 +100,7 @@ export const loadOptions = (callback: (options: Options) => void) => {
                 helpKeys: items[helpKeys] ?? '?',
                 showVolumeWhenPageLoaded: items[showVolumeWhenPageLoaded] ?? false,
             }
-            callback(options)
+            callback(optionsWithDefaultValue)
         });
 }
 
