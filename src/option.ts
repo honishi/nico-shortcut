@@ -1,6 +1,6 @@
 import {
     advertiseKeys,
-    clearKeyMap,
+    clearOptions,
     commentKeys,
     commentTransparencyNoneKeys,
     commentTransparencyStrongKeys,
@@ -9,11 +9,11 @@ import {
     fullscreenKeys,
     giftKeys,
     helpKeys,
-    KeyMap,
-    loadKeyMap,
+    loadOptions,
     muteKeys,
     openCommunityKeys,
     openUserKeys,
+    Options,
     playHeadKeys,
     playLiveKeys,
     playRate025Keys,
@@ -28,17 +28,27 @@ import {
     programsKeys,
     reloadKeys,
     rewindKeys,
-    saveKeyMap,
-    settingKeys,
+    saveOptions,
+    settingKeys, showVolumeWhenPageLoaded,
     volumeDownKeys,
     volumeUpKeys
 } from "./module/option_management";
 import {
     advertiseTitle,
-    commentTitle, commentTransparencyNoneTitle, commentTransparencyStrongTitle, commentTransparencyWeakTitle,
-    fastForwardTitle, fullscreenTitle, giftTitle, helpTitle, muteTitle, openCommunityTitle, openUserTitle,
+    commentTitle,
+    commentTransparencyNoneTitle,
+    commentTransparencyStrongTitle,
+    commentTransparencyWeakTitle,
+    fastForwardTitle,
+    fullscreenTitle,
+    giftTitle,
+    helpTitle,
+    muteTitle,
+    openCommunityTitle,
+    openUserTitle,
     playHeadTitle,
-    playLiveTitle, playRate025Title,
+    playLiveTitle,
+    playRate025Title,
     playRate050Title,
     playRate075Title,
     playRate100Title,
@@ -46,8 +56,13 @@ import {
     playRate150Title,
     playRate175Title,
     playRate200Title,
-    playStopTitle, programsTitle, reloadTitle,
-    rewindTitle, settingTitle, volumeDownTitle, volumeUpTitle
+    playStopTitle,
+    programsTitle,
+    reloadTitle,
+    rewindTitle,
+    settingTitle,
+    volumeDownTitle,
+    volumeUpTitle
 } from "./module/shortcut_title";
 
 const inputPlayStopKeysId = "input_play_stop_keys"
@@ -79,6 +94,7 @@ const inputGiftKeysId = "input_gift_keys"
 const inputOpenUserKeysId = "input_open_user_keys"
 const inputOpenCommunityKeysId = "input_open_community_keys"
 const inputHelpKeysId = "input_help_keys"
+const inputShowVolumeWhenPageLoadId = "input_show_volume_when_page_load"
 
 const restoreDefaultButtonId = "button_restore_default"
 const saveButtonId = "button_save"
@@ -114,10 +130,11 @@ const configureLabels = () => {
     setLabelValue(inputOpenUserKeysId, openUserTitle)
     setLabelValue(inputOpenCommunityKeysId, openCommunityTitle)
     setLabelValue(inputHelpKeysId, helpTitle)
+    setLabelValue(inputShowVolumeWhenPageLoadId, 'ページ表示時にボリュームを表示')
 }
 
-const saveOptions = () => {
-    const keyMap = {
+const _saveOptions = () => {
+    const keyMapOptions = {
         playStopKeys: getInputValue(inputPlayStopKeysId),
         rewindKeys: getInputValue(inputRewindKeysId),
         fastForwardKeys: getInputValue(inputFastForwardKeysId),
@@ -148,16 +165,21 @@ const saveOptions = () => {
         openCommunityKeys: getInputValue(inputOpenCommunityKeysId),
         helpKeys: getInputValue(inputHelpKeysId),
     }
-    if (hasDuplicate(keyMap)) {
+    if (hasDuplicateKeyMap(keyMapOptions)) {
         showMessage("キーが重複しています...😰")
         return
     }
-    saveKeyMap(keyMap, () => window.close())
+    const allOptions = {
+        ...keyMapOptions,
+        showVolumeWhenPageLoaded: getInputChecked(inputShowVolumeWhenPageLoadId),
+    }
+    console.log(allOptions)
+    saveOptions(allOptions, () => window.close())
 }
 
 // https://dev.to/shane/typescript-check-if-an-array-contains-only-unique-values-3b3e
-const hasDuplicate = (keyMap: KeyMap): boolean => {
-    const shortcutKeys = Object.values(keyMap)
+const hasDuplicateKeyMap = (keyMapOptions: Options): boolean => {
+    const shortcutKeys = Object.values(keyMapOptions)
         .map((value) => [...value])
         .reduce((previous, current) => previous.concat(current), [])
     const uniqueSet = new Set(shortcutKeys)
@@ -165,42 +187,43 @@ const hasDuplicate = (keyMap: KeyMap): boolean => {
     return shortcutKeys.length != uniqueValues.length
 }
 
-const loadOptions = () => {
-    loadKeyMap((keyMap) => {
-        setInputValue(inputPlayStopKeysId, keyMap[playStopKeys])
-        setInputValue(inputRewindKeysId, keyMap[rewindKeys])
-        setInputValue(inputFastForwardKeysId, keyMap[fastForwardKeys])
-        setInputValue(inputPlayHeadKeysId, keyMap[playHeadKeys])
-        setInputValue(inputPlayLiveKeysId, keyMap[playLiveKeys])
-        setInputValue(inputPlayRate200KeysId, keyMap[playRate200Keys])
-        setInputValue(inputPlayRate175KeysId, keyMap[playRate175Keys])
-        setInputValue(inputPlayRate150KeysId, keyMap[playRate150Keys])
-        setInputValue(inputPlayRate125KeysId, keyMap[playRate125Keys])
-        setInputValue(inputPlayRate100KeysId, keyMap[playRate100Keys])
-        setInputValue(inputPlayRate075KeysId, keyMap[playRate075Keys])
-        setInputValue(inputPlayRate050KeysId, keyMap[playRate050Keys])
-        setInputValue(inputPlayRate025KeysId, keyMap[playRate025Keys])
-        setInputValue(inputMuteKeysId, keyMap[muteKeys])
-        setInputValue(inputVolumeDownKeysId, keyMap[volumeDownKeys])
-        setInputValue(inputVolumeUpKeysId, keyMap[volumeUpKeys])
-        setInputValue(inputCommentKeysId, keyMap[commentKeys])
-        setInputValue(inputCommentTransparencyNoneKeysId, keyMap[commentTransparencyNoneKeys])
-        setInputValue(inputCommentTransparencyWeakKeysId, keyMap[commentTransparencyWeakKeys])
-        setInputValue(inputCommentTransparencyStrongKeysId, keyMap[commentTransparencyStrongKeys])
-        setInputValue(inputFullscreenKeysId, keyMap[fullscreenKeys])
-        setInputValue(inputReloadKeysId, keyMap[reloadKeys])
-        setInputValue(inputSettingKeysId, keyMap[settingKeys])
-        setInputValue(inputProgramsKeysId, keyMap[programsKeys])
-        setInputValue(inputAdvertiseKeysId, keyMap[advertiseKeys])
-        setInputValue(inputGiftKeysId, keyMap[giftKeys])
-        setInputValue(inputOpenUserKeysId, keyMap[openUserKeys])
-        setInputValue(inputOpenCommunityKeysId, keyMap[openCommunityKeys])
-        setInputValue(inputHelpKeysId, keyMap[helpKeys])
+const _loadOptions = () => {
+    loadOptions((options) => {
+        setInputValue(inputPlayStopKeysId, options[playStopKeys])
+        setInputValue(inputRewindKeysId, options[rewindKeys])
+        setInputValue(inputFastForwardKeysId, options[fastForwardKeys])
+        setInputValue(inputPlayHeadKeysId, options[playHeadKeys])
+        setInputValue(inputPlayLiveKeysId, options[playLiveKeys])
+        setInputValue(inputPlayRate200KeysId, options[playRate200Keys])
+        setInputValue(inputPlayRate175KeysId, options[playRate175Keys])
+        setInputValue(inputPlayRate150KeysId, options[playRate150Keys])
+        setInputValue(inputPlayRate125KeysId, options[playRate125Keys])
+        setInputValue(inputPlayRate100KeysId, options[playRate100Keys])
+        setInputValue(inputPlayRate075KeysId, options[playRate075Keys])
+        setInputValue(inputPlayRate050KeysId, options[playRate050Keys])
+        setInputValue(inputPlayRate025KeysId, options[playRate025Keys])
+        setInputValue(inputMuteKeysId, options[muteKeys])
+        setInputValue(inputVolumeDownKeysId, options[volumeDownKeys])
+        setInputValue(inputVolumeUpKeysId, options[volumeUpKeys])
+        setInputValue(inputCommentKeysId, options[commentKeys])
+        setInputValue(inputCommentTransparencyNoneKeysId, options[commentTransparencyNoneKeys])
+        setInputValue(inputCommentTransparencyWeakKeysId, options[commentTransparencyWeakKeys])
+        setInputValue(inputCommentTransparencyStrongKeysId, options[commentTransparencyStrongKeys])
+        setInputValue(inputFullscreenKeysId, options[fullscreenKeys])
+        setInputValue(inputReloadKeysId, options[reloadKeys])
+        setInputValue(inputSettingKeysId, options[settingKeys])
+        setInputValue(inputProgramsKeysId, options[programsKeys])
+        setInputValue(inputAdvertiseKeysId, options[advertiseKeys])
+        setInputValue(inputGiftKeysId, options[giftKeys])
+        setInputValue(inputOpenUserKeysId, options[openUserKeys])
+        setInputValue(inputOpenCommunityKeysId, options[openCommunityKeys])
+        setInputValue(inputHelpKeysId, options[helpKeys])
+        setInputChecked(inputShowVolumeWhenPageLoadId, options[showVolumeWhenPageLoaded])
     })
 }
 
-const clearOptions = () => {
-    clearKeyMap(() => loadOptions())
+const _clearOptions = () => {
+    clearOptions(() => _loadOptions())
 }
 
 const showMessage = (text: string) => {
@@ -218,17 +241,27 @@ const setInputValue = (elementId: string, value: string) => {
     input.value = value
 }
 
+const setInputChecked = (elementId: string, value: boolean) => {
+    const input = document.getElementById(elementId) as HTMLInputElement
+    input.checked = value
+}
+
 const getInputValue = (elementId: string): string => {
     const input = document.getElementById(elementId) as HTMLInputElement
     return input.value
 }
 
+const getInputChecked = (elementId: string): boolean => {
+    const input = document.getElementById(elementId) as HTMLInputElement
+    return input.checked
+}
+
 const addEventListeners = () => {
     document.addEventListener('DOMContentLoaded', () => {
         configureLabels()
-        loadOptions()
-        document.getElementById(restoreDefaultButtonId)?.addEventListener('click', clearOptions)
-        document.getElementById(saveButtonId)?.addEventListener('click', saveOptions)
+        _loadOptions()
+        document.getElementById(restoreDefaultButtonId)?.addEventListener('click', _clearOptions)
+        document.getElementById(saveButtonId)?.addEventListener('click', _saveOptions)
     })
 }
 

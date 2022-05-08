@@ -10,7 +10,7 @@ import {
     giftKeys,
     helpKeys,
     isKeyMatched,
-    KeyMap,
+    Options,
     muteKeys,
     openCommunityKeys,
     openUserKeys,
@@ -64,49 +64,49 @@ import {
     volumeUpTitle
 } from "./shortcut_title";
 
-export const checkHelpControlKey = (key: string, keyMap: KeyMap) => {
-    if (isKeyMatched(key, helpKeys, keyMap)) {
-        showHelp(keyMap)
+export const checkHelpControlKey = (key: string, options: Options) => {
+    if (isKeyMatched(key, helpKeys, options)) {
+        showHelp(options)
     }
 }
 
-const showHelp = (keyMap: KeyMap) => {
+const showHelp = (options: Options) => {
     const manifest = chrome.runtime.getManifest();
     Swal.fire({
         title: `ニコ生ショートカット (v${manifest.version})`,
         html: '<div class="nico-shortcut-help">\n' +
             makeTable([
-                [keyMap[playStopKeys], playStopTitle],
-                [keyMap[rewindKeys], rewindTitle],
-                [keyMap[fastForwardKeys], fastForwardTitle],
-                [keyMap[playHeadKeys], playHeadTitle],
-                [keyMap[playLiveKeys], playLiveTitle],
-                [keyMap[playRate200Keys], playRate200Title],
-                [keyMap[playRate175Keys], playRate175Title],
-                [keyMap[playRate150Keys], playRate150Title],
-                [keyMap[playRate125Keys], playRate125Title],
-                [keyMap[playRate100Keys], playRate100Title],
-                [keyMap[playRate075Keys], playRate075Title],
-                [keyMap[playRate050Keys], playRate050Title],
-                [keyMap[playRate025Keys], playRate025Title],
-                [keyMap[muteKeys], muteTitle],
-                [keyMap[volumeDownKeys], volumeDownTitle],
-                [keyMap[volumeUpKeys], volumeUpTitle],
+                [options[playStopKeys], playStopTitle],
+                [options[rewindKeys], rewindTitle],
+                [options[fastForwardKeys], fastForwardTitle],
+                [options[playHeadKeys], playHeadTitle],
+                [options[playLiveKeys], playLiveTitle],
+                [options[playRate200Keys], playRate200Title],
+                [options[playRate175Keys], playRate175Title],
+                [options[playRate150Keys], playRate150Title],
+                [options[playRate125Keys], playRate125Title],
+                [options[playRate100Keys], playRate100Title],
+                [options[playRate075Keys], playRate075Title],
+                [options[playRate050Keys], playRate050Title],
+                [options[playRate025Keys], playRate025Title],
+                [options[muteKeys], muteTitle],
+                [options[volumeDownKeys], volumeDownTitle],
+                [options[volumeUpKeys], volumeUpTitle],
             ], true) +
             makeTable([
-                [keyMap[commentKeys], commentTitle],
-                [keyMap[commentTransparencyNoneKeys], commentTransparencyNoneTitle],
-                [keyMap[commentTransparencyWeakKeys], commentTransparencyWeakTitle],
-                [keyMap[commentTransparencyStrongKeys], commentTransparencyStrongTitle],
-                [keyMap[fullscreenKeys], fullscreenTitle],
-                [keyMap[reloadKeys], reloadTitle],
-                [keyMap[settingKeys], settingTitle],
-                [keyMap[programsKeys], programsTitle],
-                [keyMap[advertiseKeys], advertiseTitle],
-                [keyMap[giftKeys], giftTitle],
-                [keyMap[openUserKeys], openUserTitle],
-                [keyMap[openCommunityKeys], openCommunityTitle],
-                [keyMap[helpKeys], `${helpTitle} (この画面)`],
+                [options[commentKeys], commentTitle],
+                [options[commentTransparencyNoneKeys], commentTransparencyNoneTitle],
+                [options[commentTransparencyWeakKeys], commentTransparencyWeakTitle],
+                [options[commentTransparencyStrongKeys], commentTransparencyStrongTitle],
+                [options[fullscreenKeys], fullscreenTitle],
+                [options[reloadKeys], reloadTitle],
+                [options[settingKeys], settingTitle],
+                [options[programsKeys], programsTitle],
+                [options[advertiseKeys], advertiseTitle],
+                [options[giftKeys], giftTitle],
+                [options[openUserKeys], openUserTitle],
+                [options[openCommunityKeys], openCommunityTitle],
+                [options[helpKeys], `${helpTitle} (この画面)`],
             ], false) +
             '</div>',
         width: 900,

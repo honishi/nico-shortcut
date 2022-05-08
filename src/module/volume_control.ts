@@ -1,22 +1,30 @@
 import {clickElement, clickSelector} from "./common_utility";
 import {showNotification} from "./notification_utility";
-import {isKeyMatched, KeyMap, muteKeys, volumeDownKeys, volumeUpKeys} from "./option_management";
+import {
+    isKeyMatched,
+    Options,
+    muteKeys,
+    volumeDownKeys,
+    volumeUpKeys,
+    showVolumeWhenPageLoaded
+} from "./option_management";
 import {muteTitle, volumeDownTitle, volumeUpTitle} from "./shortcut_title";
 
-export const checkVolumeControlKey = (key: string, keyMap: KeyMap) => {
-    if (isKeyMatched(key, muteKeys, keyMap)) {
+export const checkVolumeControlKey = (key: string, options: Options) => {
+    if (isKeyMatched(key, muteKeys, options)) {
         clickSelector("button[class^='___mute-button___']")
         showNotification(muteTitle)
-    } else if (isKeyMatched(key, volumeDownKeys, keyMap)) {
+    } else if (isKeyMatched(key, volumeDownKeys, options)) {
         dispatchKeyEventToPlayer("ArrowDown", 40)
         showNotification(`${volumeDownTitle}: ${volumeDataValue()}`)
-    } else if (isKeyMatched(key, volumeUpKeys, keyMap)) {
+    } else if (isKeyMatched(key, volumeUpKeys, options)) {
         dispatchKeyEventToPlayer("ArrowUp", 38)
         showNotification(`${volumeUpTitle}: ${volumeDataValue()}`)
     }
 }
 
-export const showVolume = () => {
+export const showVolume = (options: Options) => {
+    if (!(options[showVolumeWhenPageLoaded] == true)) return
     showNotification(
         `${muteDataValue() ? "🔇 ミュート," : "🔈"} ボリューム: ${volumeDataValue()}`,
         500,

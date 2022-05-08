@@ -4,27 +4,27 @@ import {
     advertiseKeys,
     giftKeys,
     isKeyMatched,
-    KeyMap,
+    Options,
     openCommunityKeys,
     openUserKeys,
     programsKeys
 } from "./option_management";
 import {advertiseTitle, giftTitle, openCommunityTitle, openUserTitle, programsTitle} from "./shortcut_title";
 
-export const checkPageControlKey = (key: string, keyMap: KeyMap) => {
-    if (isKeyMatched(key, programsKeys, keyMap)) {
+export const checkPageControlKey = (key: string, options: Options) => {
+    if (isKeyMatched(key, programsKeys, options)) {
         clickPrograms()
         showNotification(programsTitle)
-    } else if (isKeyMatched(key, advertiseKeys, keyMap)) {
+    } else if (isKeyMatched(key, advertiseKeys, options)) {
         toggleAd()
         showNotification(advertiseTitle)
-    } else if (isKeyMatched(key, giftKeys, keyMap)) {
+    } else if (isKeyMatched(key, giftKeys, options)) {
         toggleGift()
         showNotification(giftTitle)
-    } else if (isKeyMatched(key, openUserKeys, keyMap)) {
+    } else if (isKeyMatched(key, openUserKeys, options)) {
         openUserPage()
         showNotification(openUserTitle)
-    } else if (isKeyMatched(key, openCommunityKeys, keyMap)) {
+    } else if (isKeyMatched(key, openCommunityKeys, options)) {
         openCommunity()
         showNotification(openCommunityTitle)
     }

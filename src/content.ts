@@ -2,26 +2,31 @@ import {checkCommentControlKey} from "./module/comment_control";
 import {isInputActive} from "./module/common_utility";
 import {checkHelpControlKey} from "./module/help_control";
 import {checkMiscControlKey} from "./module/misc_control";
-import {loadKeyMap} from "./module/option_management";
+import {loadOptions} from "./module/option_management";
 import {checkPageControlKey} from "./module/page_control";
 import {checkPlaybackControlKey} from "./module/playback_control";
 import {checkVolumeControlKey, showVolume} from "./module/volume_control";
+
+const listenLoadEvent = (event: Event) => {
+    loadOptions((options) => {
+        showVolume(options)
+    })
+}
 
 const listenKeyEvent = (event: KeyboardEvent) => {
     const key = event.key
     console.log(key)
     if (isInputActive()) return
-    loadKeyMap((keyMap) => {
-        checkPlaybackControlKey(key, keyMap)
-        checkCommentControlKey(key, keyMap)
-        checkVolumeControlKey(key, keyMap)
-        checkMiscControlKey(key, keyMap)
-        checkPageControlKey(key, keyMap)
-        checkHelpControlKey(key, keyMap)
+    loadOptions((options) => {
+        checkPlaybackControlKey(key, options)
+        checkCommentControlKey(key, options)
+        checkVolumeControlKey(key, options)
+        checkMiscControlKey(key, options)
+        checkPageControlKey(key, options)
+        checkHelpControlKey(key, options)
     })
 }
 
-window.addEventListener('load', () => showVolume())
-
+window.addEventListener('load', listenLoadEvent)
 // https://stackoverflow.com/a/71567874/13220031
 window.addEventListener('keydown', listenKeyEvent)

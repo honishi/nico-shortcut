@@ -3,7 +3,7 @@ import {showNotification} from "./notification_utility";
 import {
     fastForwardKeys,
     isKeyMatched,
-    KeyMap,
+    Options,
     playHeadKeys,
     playLiveKeys,
     playRate025Keys,
@@ -33,44 +33,44 @@ import {
     rewindTitle
 } from "./shortcut_title";
 
-export const checkPlaybackControlKey = (key: string, keyMap: KeyMap) => {
-    if (isKeyMatched(key, playStopKeys, keyMap)) {
+export const checkPlaybackControlKey = (key: string, options: Options) => {
+    if (isKeyMatched(key, playStopKeys, options)) {
         clickSelector("button[class^='___play-button___']")
         showNotification(playStopTitle)
-    } else if (isKeyMatched(key, rewindKeys, keyMap)) {
+    } else if (isKeyMatched(key, rewindKeys, options)) {
         clickSelector("button[class^='___back-button___']")
         showNotification(rewindTitle)
-    } else if (isKeyMatched(key, fastForwardKeys, keyMap)) {
+    } else if (isKeyMatched(key, fastForwardKeys, options)) {
         clickSelector("button[class^='___forward-button___']")
         showNotification(fastForwardTitle)
-    } else if (isKeyMatched(key, playHeadKeys, keyMap)) {
+    } else if (isKeyMatched(key, playHeadKeys, options)) {
         clickSelector("button[class^='___head-button___']")
         showNotification(playHeadTitle)
-    } else if (isKeyMatched(key, playLiveKeys, keyMap)) {
+    } else if (isKeyMatched(key, playLiveKeys, options)) {
         clickSelector("button[class^='___live-button___']")
         showNotification(playLiveTitle)
-    } else if (isKeyMatched(key, playRate200Keys, keyMap)) {
+    } else if (isKeyMatched(key, playRate200Keys, options)) {
         changePlaybackRate(1)
         showNotification(playRate200Title)
-    } else if (isKeyMatched(key, playRate175Keys, keyMap)) {
+    } else if (isKeyMatched(key, playRate175Keys, options)) {
         changePlaybackRate(2)
         showNotification(playRate175Title)
-    } else if (isKeyMatched(key, playRate150Keys, keyMap)) {
+    } else if (isKeyMatched(key, playRate150Keys, options)) {
         changePlaybackRate(3)
         showNotification(playRate150Title)
-    } else if (isKeyMatched(key, playRate125Keys, keyMap)) {
+    } else if (isKeyMatched(key, playRate125Keys, options)) {
         changePlaybackRate(4)
         showNotification(playRate125Title)
-    } else if (isKeyMatched(key, playRate100Keys, keyMap)) {
+    } else if (isKeyMatched(key, playRate100Keys, options)) {
         changePlaybackRate(5)
         showNotification(playRate100Title)
-    } else if (isKeyMatched(key, playRate075Keys, keyMap)) {
+    } else if (isKeyMatched(key, playRate075Keys, options)) {
         changePlaybackRate(6)
         showNotification(playRate075Title)
-    } else if (isKeyMatched(key, playRate050Keys, keyMap)) {
+    } else if (isKeyMatched(key, playRate050Keys, options)) {
         changePlaybackRate(7)
         showNotification(playRate050Title)
-    } else if (isKeyMatched(key, playRate025Keys, keyMap)) {
+    } else if (isKeyMatched(key, playRate025Keys, options)) {
         changePlaybackRate(8)
         showNotification(playRate025Title)
     }

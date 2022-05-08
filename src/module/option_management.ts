@@ -27,8 +27,9 @@ export const giftKeys = "giftKeys"
 export const openUserKeys = "openUserKeys"
 export const openCommunityKeys = "openCommunityKeys"
 export const helpKeys = "helpKeys"
+export const showVolumeWhenPageLoaded = "showVolumeWhenPageLoaded"
 
-const allKeys = [
+const allOptionKeys = [
     playStopKeys,
     rewindKeys,
     fastForwardKeys,
@@ -57,16 +58,17 @@ const allKeys = [
     giftKeys,
     openUserKeys,
     openCommunityKeys,
-    helpKeys
+    helpKeys,
+    showVolumeWhenPageLoaded
 ]
 
-export type KeyMap = { [key: string]: string }
+export type Options = { [key: string]: any }
 
-export const loadKeyMap = (callback: (keyMap: KeyMap) => void) => {
+export const loadOptions = (callback: (options: Options) => void) => {
     chrome.storage.local.get(
-        allKeys,
+        allOptionKeys,
         (items) => {
-            const keyMap = {
+            const options = {
                 playStopKeys: items[playStopKeys] ?? 'k',
                 rewindKeys: items[rewindKeys] ?? 'j',
                 fastForwardKeys: items[fastForwardKeys] ?? 'l',
@@ -96,21 +98,22 @@ export const loadKeyMap = (callback: (keyMap: KeyMap) => void) => {
                 openUserKeys: items[openUserKeys] ?? 'U',
                 openCommunityKeys: items[openCommunityKeys] ?? 'C',
                 helpKeys: items[helpKeys] ?? '?',
+                showVolumeWhenPageLoaded: items[showVolumeWhenPageLoaded] ?? false,
             }
-            callback(keyMap)
+            callback(options)
         });
 }
 
-export const saveKeyMap = (keyMap: KeyMap, callback: () => void) => {
-    chrome.storage.local.set(keyMap, callback)
+export const saveOptions = (options: Options, callback: () => void) => {
+    chrome.storage.local.set(options, callback)
 }
 
-export const clearKeyMap = (callback: () => void) => {
+export const clearOptions = (callback: () => void) => {
     chrome.storage.local.clear(callback)
 }
 
 export const isKeyMatched = (
     inputKey: string,
     mapKey: string,
-    keyMap: KeyMap,
-): boolean => [...keyMap[mapKey]].includes(inputKey)
+    options: Options,
+): boolean => [...options[mapKey]].includes(inputKey)
