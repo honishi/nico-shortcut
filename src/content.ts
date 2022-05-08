@@ -5,7 +5,7 @@ import {checkMiscControlKey} from "./module/misc_control";
 import {loadKeyMap} from "./module/option_management";
 import {checkPageControlKey} from "./module/page_control";
 import {checkPlaybackControlKey} from "./module/playback_control";
-import {checkVolumeControlKey} from "./module/volume_control";
+import {checkVolumeControlKey, showVolume} from "./module/volume_control";
 
 const listenKeyEvent = (event: KeyboardEvent) => {
     const key = event.key
@@ -20,6 +20,8 @@ const listenKeyEvent = (event: KeyboardEvent) => {
         checkHelpControlKey(key, keyMap)
     })
 }
+
+window.addEventListener('load', () => showVolume())
 
 // https://stackoverflow.com/a/71567874/13220031
 window.addEventListener('keydown', listenKeyEvent)

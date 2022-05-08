@@ -9,11 +9,18 @@ export const checkVolumeControlKey = (key: string, keyMap: KeyMap) => {
         showNotification(muteTitle)
     } else if (isKeyMatched(key, volumeDownKeys, keyMap)) {
         dispatchKeyEventToPlayer("ArrowDown", 40)
-        showNotification(`${volumeDownTitle} (${volumeDataValue()})`)
+        showNotification(`${volumeDownTitle}: ${volumeDataValue()}`)
     } else if (isKeyMatched(key, volumeUpKeys, keyMap)) {
         dispatchKeyEventToPlayer("ArrowUp", 38)
-        showNotification(`${volumeUpTitle} (${volumeDataValue()})`)
+        showNotification(`${volumeUpTitle}: ${volumeDataValue()}`)
     }
+}
+
+export const showVolume = () => {
+    showNotification(
+        `${muteDataValue() ? "🔇 ミュート," : "🔈"} ボリューム: ${volumeDataValue()}`,
+        500,
+        3000)
 }
 
 const clickPlayer = () => {
@@ -33,7 +40,14 @@ const dispatchKeyEventToPlayer = (key: string, keyCode: number) => {
     }))
 }
 
-const volumeDataValue = () => {
+const muteDataValue = (): boolean => {
+    const div = document.querySelector("div[class^='___volume-setting___']")
+    const span = div?.querySelector("button[class^='___mute-button___']")
+    const state = span?.getAttribute("data-toggle-state")
+    return span?.getAttribute("data-toggle-state") === "true"
+}
+
+const volumeDataValue = (): string => {
     const div = document.querySelector("div[class^='___volume-size-control___']")
     const span = div?.querySelector("span[class^='___slider___']")
     return span?.getAttribute("data-value") ?? ""
