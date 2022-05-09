@@ -7,7 +7,7 @@ export const showNotification = (text: string, width: number = 380, duration: nu
         {
             width: `${width}px`,
             position: 'center-center',
-            zindex: 100000,
+            cssAnimationDuration: 300,
             timeout: duration,
             useIcon: false,
             distance: '50px',
