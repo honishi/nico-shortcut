@@ -16,19 +16,22 @@ export const checkVolumeControlKey = (key: string, options: Options) => {
         showNotification(`${isMute() ? "🔇 ミュート" : "🔈 ミュート解除"}`)
     } else if (isKeyMatched(key, volumeDownKeys, options)) {
         dispatchKeyEventToPlayer("ArrowDown", 40)
-        showNotification(`${volumeDownTitle}: ${volumeValue()}`)
+        showVolumeNotification()
     } else if (isKeyMatched(key, volumeUpKeys, options)) {
         dispatchKeyEventToPlayer("ArrowUp", 38)
-        showNotification(`${volumeUpTitle}: ${volumeValue()}`)
+        showVolumeNotification()
     }
 }
 
 export const showVolume = (options: Options) => {
     if (!(options[showVolumeWhenPageLoaded] == true)) return
     showNotification(
-        `${isMute() ? "🔇 ミュート," : "🔈"} ボリューム: ${volumeValue()}`,
-        500,
+        `${isMute() ? "🔇" : "🔈"} ボリューム: ${volumeValue()}`,
         2000)
+}
+
+const showVolumeNotification = () => {
+    showNotification(`🔈 ボリューム: ${volumeValue()}`)
 }
 
 const clickPlayer = () => {
