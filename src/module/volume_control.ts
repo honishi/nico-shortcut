@@ -28,7 +28,7 @@ export const showVolume = (options: Options) => {
     showNotification(
         `${isMute() ? "🔇 ミュート," : "🔈"} ボリューム: ${volumeValue()}`,
         500,
-        3000)
+        2000)
 }
 
 const clickPlayer = () => {
