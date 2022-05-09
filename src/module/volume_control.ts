@@ -1,32 +1,32 @@
-import {clickElement, clickSelector} from "./common_utility";
+import {buttonToggleState, clickElement, clickSelector} from "./common_utility";
 import {showNotification} from "./notification_utility";
 import {
     isKeyMatched,
-    Options,
     muteKeys,
+    Options,
+    showVolumeWhenPageLoaded,
     volumeDownKeys,
-    volumeUpKeys,
-    showVolumeWhenPageLoaded
+    volumeUpKeys
 } from "./option_management";
-import {muteTitle, volumeDownTitle, volumeUpTitle} from "./shortcut_title";
+import {volumeDownTitle, volumeUpTitle} from "./shortcut_title";
 
 export const checkVolumeControlKey = (key: string, options: Options) => {
     if (isKeyMatched(key, muteKeys, options)) {
         clickSelector("button[class^='___mute-button___']")
-        showNotification(muteTitle)
+        showNotification(`${isMute() ? "🔇 ミュート" : "🔈 ミュート解除"}`)
     } else if (isKeyMatched(key, volumeDownKeys, options)) {
         dispatchKeyEventToPlayer("ArrowDown", 40)
-        showNotification(`${volumeDownTitle}: ${volumeDataValue()}`)
+        showNotification(`${volumeDownTitle}: ${volumeValue()}`)
     } else if (isKeyMatched(key, volumeUpKeys, options)) {
         dispatchKeyEventToPlayer("ArrowUp", 38)
-        showNotification(`${volumeUpTitle}: ${volumeDataValue()}`)
+        showNotification(`${volumeUpTitle}: ${volumeValue()}`)
     }
 }
 
 export const showVolume = (options: Options) => {
     if (!(options[showVolumeWhenPageLoaded] == true)) return
     showNotification(
-        `${muteDataValue() ? "🔇 ミュート," : "🔈"} ボリューム: ${volumeDataValue()}`,
+        `${isMute() ? "🔇 ミュート," : "🔈"} ボリューム: ${volumeValue()}`,
         500,
         3000)
 }
@@ -48,14 +48,12 @@ const dispatchKeyEventToPlayer = (key: string, keyCode: number) => {
     }))
 }
 
-const muteDataValue = (): boolean => {
-    const div = document.querySelector("div[class^='___volume-setting___']")
-    const span = div?.querySelector("button[class^='___mute-button___']")
-    const state = span?.getAttribute("data-toggle-state")
-    return span?.getAttribute("data-toggle-state") === "true"
-}
+const isMute = (): boolean =>
+    buttonToggleState(
+        "___volume-setting___",
+        "___mute-button___")
 
-const volumeDataValue = (): string => {
+const volumeValue = (): string => {
     const div = document.querySelector("div[class^='___volume-size-control___']")
     const span = div?.querySelector("span[class^='___slider___']")
     return span?.getAttribute("data-value") ?? ""

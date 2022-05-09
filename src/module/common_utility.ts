@@ -48,3 +48,9 @@ export const clickMenuButton = (divClass: string, sectionClass: string, buttonIn
         }, timeout)
     }, timeout)
 }
+
+export const buttonToggleState = (divClass: string, buttonClass: string): boolean => {
+    const div = document.querySelector(`div[class^='${divClass}']`)
+    const button = div?.querySelector(`button[class^='${buttonClass}']`)
+    return button?.getAttribute("data-toggle-state") === "true"
+}
