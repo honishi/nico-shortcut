@@ -1,6 +1,6 @@
 import Notiflix from "notiflix";
 
-export const showNotification = (text: string, duration: number = 1000, width: number = 420) => {
+export function showNotification(text: string, duration: number = 1000, width: number = 420) {
     // https://github.com/notiflix/Notiflix
     Notiflix.Notify.info(
         text,

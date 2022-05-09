@@ -8,9 +8,8 @@ import {
     volumeDownKeys,
     volumeUpKeys
 } from "./option_management";
-import {volumeDownTitle, volumeUpTitle} from "./shortcut_title";
 
-export const checkVolumeControlKey = (key: string, options: Options) => {
+export function checkVolumeControlKey(key: string, options: Options) {
     if (isKeyMatched(key, muteKeys, options)) {
         clickSelector("button[class^='___mute-button___']")
         showNotification(`${isMute() ? "🔇 ミュート" : "🔈 ミュート解除"}`)
@@ -23,23 +22,23 @@ export const checkVolumeControlKey = (key: string, options: Options) => {
     }
 }
 
-export const showVolume = (options: Options) => {
+export function showVolume(options: Options) {
     if (!(options[showVolumeWhenPageLoaded] == true)) return
     showNotification(
         `${isMute() ? "🔇" : "🔈"} ボリューム: ${volumeValue()}`,
         2000)
 }
 
-const showVolumeNotification = () => {
+function showVolumeNotification() {
     showNotification(`🔈 ボリューム: ${volumeValue()}`)
 }
 
-const clickPlayer = () => {
+function clickPlayer() {
     const div = document.querySelector("div[class^='___player-controller___']")
     clickElement(div)
 }
 
-const dispatchKeyEventToPlayer = (key: string, keyCode: number) => {
+function dispatchKeyEventToPlayer(key: string, keyCode: number) {
     clickPlayer()
 
     // https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode
@@ -51,12 +50,13 @@ const dispatchKeyEventToPlayer = (key: string, keyCode: number) => {
     }))
 }
 
-const isMute = (): boolean =>
-    buttonToggleState(
+function isMute(): boolean {
+    return buttonToggleState(
         "___volume-setting___",
         "___mute-button___")
+}
 
-const volumeValue = (): string => {
+function volumeValue(): string {
     const div = document.querySelector("div[class^='___volume-size-control___']")
     const span = div?.querySelector("span[class^='___slider___']")
     return span?.getAttribute("data-value") ?? ""

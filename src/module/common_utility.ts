@@ -1,18 +1,18 @@
-export const isInputActive = () => {
+export function isInputActive() {
     // console.log(document.activeElement)
     return document.activeElement?.tagName === "INPUT"
 }
 
-export const clickSelector = (selector: any) => {
+export function clickSelector(selector: any) {
     document.querySelector(selector).click()
 }
 
-export const clickElement = (element: Element | null | undefined) => {
+export function clickElement(element: Element | null | undefined) {
     if (!(element instanceof HTMLElement)) return
     element.click()
 }
 
-export const clickMenuButton = (divClass: string, sectionClass: string, buttonIndex: number) => {
+export function clickMenuButton(divClass: string, sectionClass: string, buttonIndex: number) {
     const settingButtonSelector = "button[class*='___setting-button___']"
     const timeout = 300
 
@@ -49,7 +49,7 @@ export const clickMenuButton = (divClass: string, sectionClass: string, buttonIn
     }, timeout)
 }
 
-export const buttonToggleState = (divClass: string, buttonClass: string): boolean => {
+export function buttonToggleState(divClass: string, buttonClass: string): boolean {
     const div = document.querySelector(`div[class^='${divClass}']`)
     const button = div?.querySelector(`button[class^='${buttonClass}']`)
     return button?.getAttribute("data-toggle-state") === "true"

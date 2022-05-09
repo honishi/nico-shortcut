@@ -1,9 +1,9 @@
 import {buttonToggleState, clickSelector} from "./common_utility";
 import {showNotification} from "./notification_utility";
 import {fullscreenKeys, isKeyMatched, Options, reloadKeys, settingKeys} from "./option_management";
-import {fullscreenTitle, reloadTitle, settingTitle} from "./shortcut_title";
+import {reloadTitle, settingTitle} from "./shortcut_title";
 
-export const checkMiscControlKey = (key: string, options: Options) => {
+export function checkMiscControlKey(key: string, options: Options) {
     if (isKeyMatched(key, fullscreenKeys, options)) {
         clickSelector("button[class^='___fullscreen-button___']")
         showNotification(`🖥 フルスクリーン${isFullscreenEnabled() ? "" : "解除"}`)
@@ -16,7 +16,8 @@ export const checkMiscControlKey = (key: string, options: Options) => {
     }
 }
 
-const isFullscreenEnabled = (): boolean =>
-    buttonToggleState(
+function isFullscreenEnabled(): boolean {
+    return buttonToggleState(
         "___addon-controller___",
         "___fullscreen-button___")
+}

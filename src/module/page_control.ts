@@ -4,14 +4,14 @@ import {
     advertiseKeys,
     giftKeys,
     isKeyMatched,
-    Options,
     openCommunityKeys,
     openUserKeys,
+    Options,
     programsKeys
 } from "./option_management";
 import {advertiseTitle, giftTitle, openCommunityTitle, openUserTitle, programsTitle} from "./shortcut_title";
 
-export const checkPageControlKey = (key: string, options: Options) => {
+export function checkPageControlKey(key: string, options: Options) {
     if (isKeyMatched(key, programsKeys, options)) {
         clickPrograms()
         showNotification(programsTitle)
@@ -30,21 +30,21 @@ export const checkPageControlKey = (key: string, options: Options) => {
     }
 }
 
-const clickPrograms = () => {
+function clickPrograms() {
     const div = document.querySelector("div[class^='___popup-control___']")
     const button = div?.querySelector("button")
     clickElement(button)
 }
 
-const toggleAd = () => {
+function toggleAd() {
     toggleMenu('___nicoad-count-item___')
 }
 
-const toggleGift = () => {
+function toggleGift() {
     toggleMenu('___gift-count-item___')
 }
 
-const toggleMenu = (name: string) => {
+function toggleMenu(name: string) {
     console.log(`li[class^='${name}']`)
     const li = document.querySelector(`li[class^='${name}']`)
     const button = ((): Element | null => li == null ?
@@ -54,21 +54,21 @@ const toggleMenu = (name: string) => {
     clickElement(button)
 }
 
-const openUserPage = () => {
+function openUserPage() {
     const url = document
         .querySelector("a[class^='___user-name___']")
         ?.getAttribute("href")
     sendOpenUrlMessage(url)
 }
 
-const openCommunity = () => {
+function openCommunity() {
     const url = document
         .querySelector("a[class^='___name-label___']")
         ?.getAttribute("href")
     sendOpenUrlMessage(url)
 }
 
-const sendOpenUrlMessage = (url: string | null | undefined) => {
+function sendOpenUrlMessage(url: string | null | undefined) {
     if (url == null) return
     chrome.runtime.sendMessage(
         ['open_url', url].join(','),

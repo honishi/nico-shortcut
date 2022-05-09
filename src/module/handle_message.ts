@@ -1,4 +1,4 @@
-export const handleMessage = (message: any) => {
+export function handleMessage(message: any) {
     if (!(typeof message === 'string')) return
 
     let command, parameter
@@ -16,13 +16,13 @@ export const handleMessage = (message: any) => {
     }
 }
 
-const openUrl = (url: string) => {
+function openUrl(url: string) {
     chrome.tabs.create(
         {url: url},
         () => null)
 }
 
-const moveToTab = () => {
+function moveToTab() {
     chrome.system.display.getInfo((results) => {
         console.log(results)
         const info = results[0]

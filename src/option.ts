@@ -29,7 +29,8 @@ import {
     reloadKeys,
     rewindKeys,
     saveOptions,
-    settingKeys, showVolumeWhenPageLoaded,
+    settingKeys,
+    showVolumeWhenPageLoaded,
     volumeDownKeys,
     volumeUpKeys
 } from "./module/option_management";
@@ -133,7 +134,7 @@ const configureLabels = () => {
     setLabelValue(inputShowVolumeWhenPageLoadId, 'ページ表示時にボリュームを表示')
 }
 
-const _saveOptions = () => {
+function _saveOptions() {
     const keyMapOptions = {
         playStopKeys: getInputValue(inputPlayStopKeysId),
         rewindKeys: getInputValue(inputRewindKeysId),
@@ -178,7 +179,7 @@ const _saveOptions = () => {
 }
 
 // https://dev.to/shane/typescript-check-if-an-array-contains-only-unique-values-3b3e
-const hasDuplicateKeyMap = (keyMapOptions: Options): boolean => {
+function hasDuplicateKeyMap(keyMapOptions: Options): boolean {
     const shortcutKeys = Object.values(keyMapOptions)
         .map((value) => [...value])
         .reduce((previous, current) => previous.concat(current), [])
@@ -187,7 +188,7 @@ const hasDuplicateKeyMap = (keyMapOptions: Options): boolean => {
     return shortcutKeys.length != uniqueValues.length
 }
 
-const _loadOptions = () => {
+function _loadOptions() {
     loadOptions((options) => {
         setInputValue(inputPlayStopKeysId, options[playStopKeys])
         setInputValue(inputRewindKeysId, options[rewindKeys])
@@ -222,41 +223,41 @@ const _loadOptions = () => {
     })
 }
 
-const _clearOptions = () => {
+function _clearOptions() {
     clearOptions(() => _loadOptions())
 }
 
-const showMessage = (text: string) => {
+function showMessage(text: string) {
     const messageArea = document.getElementById(optionMessageAreaId) as HTMLSpanElement
     messageArea.textContent = text
 }
 
-const setLabelValue = (forValue: string, value: string) => {
+function setLabelValue(forValue: string, value: string) {
     const label = document.querySelector(`label[for='${forValue}']`) as HTMLLabelElement
     label.textContent = `${value}:`
 }
 
-const setInputValue = (elementId: string, value: string) => {
+function setInputValue(elementId: string, value: string) {
     const input = document.getElementById(elementId) as HTMLInputElement
     input.value = value
 }
 
-const setInputChecked = (elementId: string, value: boolean) => {
+function setInputChecked(elementId: string, value: boolean) {
     const input = document.getElementById(elementId) as HTMLInputElement
     input.checked = value
 }
 
-const getInputValue = (elementId: string): string => {
+function getInputValue(elementId: string): string {
     const input = document.getElementById(elementId) as HTMLInputElement
     return input.value
 }
 
-const getInputChecked = (elementId: string): boolean => {
+function getInputChecked(elementId: string): boolean {
     const input = document.getElementById(elementId) as HTMLInputElement
     return input.checked
 }
 
-const addEventListeners = () => {
+function addEventListeners() {
     document.addEventListener('DOMContentLoaded', () => {
         configureLabels()
         _loadOptions()

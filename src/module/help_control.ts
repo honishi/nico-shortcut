@@ -10,10 +10,10 @@ import {
     giftKeys,
     helpKeys,
     isKeyMatched,
-    Options,
     muteKeys,
     openCommunityKeys,
     openUserKeys,
+    Options,
     playHeadKeys,
     playLiveKeys,
     playRate025Keys,
@@ -64,13 +64,13 @@ import {
     volumeUpTitle
 } from "./shortcut_title";
 
-export const checkHelpControlKey = (key: string, options: Options) => {
+export function checkHelpControlKey(key: string, options: Options) {
     if (isKeyMatched(key, helpKeys, options)) {
         showHelp(options)
     }
 }
 
-const showHelp = (options: Options) => {
+function showHelp(options: Options) {
     const manifest = chrome.runtime.getManifest();
     Swal.fire({
         title: `ニコ生ショートカット (v${manifest.version})`,
@@ -114,7 +114,7 @@ const showHelp = (options: Options) => {
     }).then(r => null)
 }
 
-const makeTable = (shortcuts: [string, string][], isFloat: boolean): string => {
+function makeTable(shortcuts: [string, string][], isFloat: boolean): string {
     return `<table ${isFloat ? 'style = "float: left;"' : ""}>\n` +
         '<tr><th class="left-column">キー</th><th class="right-column">機能</th></tr>\n' +
         (shortcuts.map((shortcut) =>

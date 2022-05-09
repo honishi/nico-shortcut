@@ -29,11 +29,10 @@ import {
     playRate150Title,
     playRate175Title,
     playRate200Title,
-    playStopTitle,
     rewindTitle
 } from "./shortcut_title";
 
-export const checkPlaybackControlKey = (key: string, options: Options) => {
+export function checkPlaybackControlKey(key: string, options: Options) {
     if (isKeyMatched(key, playStopKeys, options)) {
         clickSelector("button[class^='___play-button___']")
         // Seems slight delay is needed to pick up proper play/stop state.
@@ -79,12 +78,13 @@ export const checkPlaybackControlKey = (key: string, options: Options) => {
     }
 }
 
-const isPlaying = (): boolean =>
-    buttonToggleState(
+function isPlaying(): boolean {
+    return buttonToggleState(
         "___control-area___",
         "___play-button___")
+}
 
-const changePlaybackRate = (buttonIndex: number) => {
+function changePlaybackRate(buttonIndex: number) {
     clickMenuButton(
         '___video-playback-rate-menu-button-field___',
         '___video-playback-rate-select-menu___',

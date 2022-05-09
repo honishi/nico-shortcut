@@ -7,13 +7,13 @@ import {checkPageControlKey} from "./module/page_control";
 import {checkPlaybackControlKey} from "./module/playback_control";
 import {checkVolumeControlKey, showVolume} from "./module/volume_control";
 
-const listenLoadAndFocusEvent = (event: Event) => {
+function listenLoadAndFocusEvent(event: Event) {
     loadOptions((options) => {
         showVolume(options)
     })
 }
 
-const listenKeyEvent = (event: KeyboardEvent) => {
+function listenKeyEvent(event: KeyboardEvent) {
     const key = event.key
     console.log(key)
     if (isInputActive()) return
@@ -30,5 +30,4 @@ const listenKeyEvent = (event: KeyboardEvent) => {
 ['load', 'focus'].forEach(
     (type) => window.addEventListener(type, listenLoadAndFocusEvent)
 )
-// https://stackoverflow.com/a/71567874/13220031
 window.addEventListener('keydown', listenKeyEvent)

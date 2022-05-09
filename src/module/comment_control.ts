@@ -14,7 +14,7 @@ import {
     commentTransparencyWeakTitle
 } from "./shortcut_title";
 
-export const checkCommentControlKey = (key: string, options: Options) => {
+export function checkCommentControlKey(key: string, options: Options) {
     if (isKeyMatched(key, commentKeys, options)) {
         clickSelector("button[class^='___comment-button___']")
         showNotification(`💬 コメント${isCommentEnabled() ? "表示" : "非表示"}`)
@@ -30,12 +30,13 @@ export const checkCommentControlKey = (key: string, options: Options) => {
     }
 }
 
-const isCommentEnabled = (): boolean =>
-    buttonToggleState(
+function isCommentEnabled(): boolean {
+    return buttonToggleState(
         "___addon-controller___",
         "___comment-button___")
+}
 
-const changeCommentTransparency = (buttonIndex: number) => {
+function changeCommentTransparency(buttonIndex: number) {
     clickMenuButton(
         '___comment-transparency-menu-button-field___',
         '___comment-transparency-select-menu___',

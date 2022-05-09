@@ -64,7 +64,7 @@ const allOptionKeys = [
 
 export type Options = { [key: string]: any }
 
-export const loadOptions = (callback: (options: Options) => void) => {
+export function loadOptions(callback: (options: Options) => void) {
     chrome.storage.local.get(
         allOptionKeys,
         (items) => {
@@ -104,16 +104,18 @@ export const loadOptions = (callback: (options: Options) => void) => {
         });
 }
 
-export const saveOptions = (options: Options, callback: () => void) => {
+export function saveOptions(options: Options, callback: () => void) {
     chrome.storage.local.set(options, callback)
 }
 
-export const clearOptions = (callback: () => void) => {
+export function clearOptions(callback: () => void) {
     chrome.storage.local.clear(callback)
 }
 
-export const isKeyMatched = (
+export function isKeyMatched(
     inputKey: string,
     mapKey: string,
     options: Options,
-): boolean => [...options[mapKey]].includes(inputKey)
+): boolean {
+    return [...options[mapKey]].includes(inputKey)
+}
