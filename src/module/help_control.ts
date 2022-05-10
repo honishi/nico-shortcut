@@ -29,6 +29,7 @@ import {
     reloadKeys,
     rewindKeys,
     settingKeys,
+    showVolumeKeys,
     volumeDownKeys,
     volumeUpKeys
 } from "./option_management";
@@ -60,6 +61,7 @@ import {
     reloadTitle,
     rewindTitle,
     settingTitle,
+    showVolumeTitle,
     volumeDownTitle,
     volumeUpTitle
 } from "./shortcut_title";
@@ -89,6 +91,7 @@ function showHelp(options: Options) {
                 [options[playRate075Keys], playRate075Title],
                 [options[playRate050Keys], playRate050Title],
                 [options[playRate025Keys], playRate025Title],
+                [options[showVolumeKeys], showVolumeTitle],
                 [options[muteKeys], muteTitle],
                 [options[volumeDownKeys], volumeDownTitle],
                 [options[volumeUpKeys], volumeUpTitle],

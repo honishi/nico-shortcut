@@ -11,6 +11,7 @@ export const playRate100Keys = "playRate100Keys"
 export const playRate075Keys = "playRate075Keys"
 export const playRate050Keys = "playRate050Keys"
 export const playRate025Keys = "playRate025Keys"
+export const showVolumeKeys = "showVolumeKeys"
 export const muteKeys = "muteKeys"
 export const volumeDownKeys = "volumeDownKeys"
 export const volumeUpKeys = "volumeUpKeys"
@@ -43,6 +44,7 @@ const allOptionKeys = [
     playRate075Keys,
     playRate050Keys,
     playRate025Keys,
+    showVolumeKeys,
     muteKeys,
     volumeDownKeys,
     volumeUpKeys,
@@ -82,6 +84,7 @@ export function loadOptions(callback: (options: Options) => void) {
                 playRate075Keys: items[playRate075Keys] ?? 's',
                 playRate050Keys: items[playRate050Keys] ?? 'w',
                 playRate025Keys: items[playRate025Keys] ?? 'a',
+                showVolumeKeys: items[showVolumeKeys] ?? 'o',
                 muteKeys: items[muteKeys] ?? 'm',
                 volumeDownKeys: items[volumeDownKeys] ?? 'u',
                 volumeUpKeys: items[volumeUpKeys] ?? 'i',

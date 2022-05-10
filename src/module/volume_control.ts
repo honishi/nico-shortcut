@@ -4,32 +4,39 @@ import {
     isKeyMatched,
     muteKeys,
     Options,
+    showVolumeKeys,
     showVolumeWhenPageLoaded,
     volumeDownKeys,
     volumeUpKeys
 } from "./option_management";
 
 export function checkVolumeControlKey(key: string, options: Options) {
-    if (isKeyMatched(key, muteKeys, options)) {
+    if (isKeyMatched(key, showVolumeKeys, options)) {
+        showVolumeNotification()
+    } else if (isKeyMatched(key, muteKeys, options)) {
         clickSelector("button[class^='___mute-button___']")
         showNotification(`${isMute() ? "🔇 ミュート" : "🔈 ミュート解除"}`)
     } else if (isKeyMatched(key, volumeDownKeys, options)) {
         dispatchKeyEventToPlayer("ArrowDown", 40)
-        showVolumeNotification()
+        showVolumeUpDownNotification()
     } else if (isKeyMatched(key, volumeUpKeys, options)) {
         dispatchKeyEventToPlayer("ArrowUp", 38)
-        showVolumeNotification()
+        showVolumeUpDownNotification()
     }
 }
 
-export function showVolume(options: Options) {
+export function showVolumeIfEnabled(options: Options) {
     if (!(options[showVolumeWhenPageLoaded] == true)) return
+    showVolumeNotification()
+}
+
+function showVolumeNotification() {
     showNotification(
         `${isMute() ? "🔇" : "🔈"} ボリューム: ${volumeValue()}`,
         2000)
 }
 
-function showVolumeNotification() {
+function showVolumeUpDownNotification() {
     showNotification(`🔈 ボリューム: ${volumeValue()}`)
 }
 

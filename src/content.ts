@@ -5,11 +5,11 @@ import {checkMiscControlKey} from "./module/misc_control";
 import {loadOptions} from "./module/option_management";
 import {checkPageControlKey} from "./module/page_control";
 import {checkPlaybackControlKey} from "./module/playback_control";
-import {checkVolumeControlKey, showVolume} from "./module/volume_control";
+import {checkVolumeControlKey, showVolumeIfEnabled} from "./module/volume_control";
 
 function listenLoadAndFocusEvent(event: Event) {
     loadOptions((options) => {
-        showVolume(options)
+        showVolumeIfEnabled(options)
     })
 }
 

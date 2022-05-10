@@ -30,6 +30,7 @@ import {
     rewindKeys,
     saveOptions,
     settingKeys,
+    showVolumeKeys,
     showVolumeWhenPageLoaded,
     volumeDownKeys,
     volumeUpKeys
@@ -62,6 +63,7 @@ import {
     reloadTitle,
     rewindTitle,
     settingTitle,
+    showVolumeTitle,
     volumeDownTitle,
     volumeUpTitle
 } from "./module/shortcut_title";
@@ -79,6 +81,7 @@ const inputPlayRate100KeysId = "input_play_rate_100_keys"
 const inputPlayRate075KeysId = "input_play_rate_075_keys"
 const inputPlayRate050KeysId = "input_play_rate_050_keys"
 const inputPlayRate025KeysId = "input_play_rate_025_keys"
+const inputShowVolumeKeysId = "input_show_volume_keys"
 const inputMuteKeysId = "input_mute_keys"
 const inputVolumeDownKeysId = "input_volume_down_keys"
 const inputVolumeUpKeysId = "input_volume_up_keys"
@@ -115,6 +118,7 @@ const configureLabels = () => {
     setLabelValue(inputPlayRate075KeysId, playRate075Title)
     setLabelValue(inputPlayRate050KeysId, playRate050Title)
     setLabelValue(inputPlayRate025KeysId, playRate025Title)
+    setLabelValue(inputShowVolumeKeysId, showVolumeTitle)
     setLabelValue(inputMuteKeysId, muteTitle)
     setLabelValue(inputVolumeDownKeysId, volumeDownTitle)
     setLabelValue(inputVolumeUpKeysId, volumeUpTitle)
@@ -149,6 +153,7 @@ function _saveOptions() {
         playRate075Keys: getInputValue(inputPlayRate075KeysId),
         playRate050Keys: getInputValue(inputPlayRate050KeysId),
         playRate025Keys: getInputValue(inputPlayRate025KeysId),
+        showVolumeKeys: getInputValue(inputShowVolumeKeysId),
         muteKeys: getInputValue(inputMuteKeysId),
         volumeDownKeys: getInputValue(inputVolumeDownKeysId),
         volumeUpKeys: getInputValue(inputVolumeUpKeysId),
@@ -203,6 +208,7 @@ function _loadOptions() {
         setInputValue(inputPlayRate075KeysId, options[playRate075Keys])
         setInputValue(inputPlayRate050KeysId, options[playRate050Keys])
         setInputValue(inputPlayRate025KeysId, options[playRate025Keys])
+        setInputValue(inputShowVolumeKeysId, options[showVolumeKeys])
         setInputValue(inputMuteKeysId, options[muteKeys])
         setInputValue(inputVolumeDownKeysId, options[volumeDownKeys])
         setInputValue(inputVolumeUpKeysId, options[volumeUpKeys])
