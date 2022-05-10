@@ -9,7 +9,6 @@
   },
   "permissions": [
     "tabs",
-    "system.display",
     "storage"
   ],
   "host_permissions": [
