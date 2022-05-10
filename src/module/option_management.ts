@@ -11,6 +11,7 @@ export const playRate100Keys = "playRate100Keys"
 export const playRate075Keys = "playRate075Keys"
 export const playRate050Keys = "playRate050Keys"
 export const playRate025Keys = "playRate025Keys"
+export const showVolumeKeys = "showVolumeKeys"
 export const muteKeys = "muteKeys"
 export const volumeDownKeys = "volumeDownKeys"
 export const volumeUpKeys = "volumeUpKeys"
@@ -27,8 +28,9 @@ export const giftKeys = "giftKeys"
 export const openUserKeys = "openUserKeys"
 export const openCommunityKeys = "openCommunityKeys"
 export const helpKeys = "helpKeys"
+export const showVolumeWhenPageLoaded = "showVolumeWhenPageLoaded"
 
-const allKeys = [
+const allOptionKeys = [
     playStopKeys,
     rewindKeys,
     fastForwardKeys,
@@ -42,6 +44,7 @@ const allKeys = [
     playRate075Keys,
     playRate050Keys,
     playRate025Keys,
+    showVolumeKeys,
     muteKeys,
     volumeDownKeys,
     volumeUpKeys,
@@ -57,16 +60,17 @@ const allKeys = [
     giftKeys,
     openUserKeys,
     openCommunityKeys,
-    helpKeys
+    helpKeys,
+    showVolumeWhenPageLoaded
 ]
 
-export type KeyMap = { [key: string]: string }
+export type Options = { [key: string]: any }
 
-export const loadKeyMap = (callback: (keyMap: KeyMap) => void) => {
+export function loadOptions(callback: (options: Options) => void) {
     chrome.storage.local.get(
-        allKeys,
+        allOptionKeys,
         (items) => {
-            const keyMap = {
+            const optionsWithDefaultValue = {
                 playStopKeys: items[playStopKeys] ?? 'k',
                 rewindKeys: items[rewindKeys] ?? 'j',
                 fastForwardKeys: items[fastForwardKeys] ?? 'l',
@@ -80,6 +84,7 @@ export const loadKeyMap = (callback: (keyMap: KeyMap) => void) => {
                 playRate075Keys: items[playRate075Keys] ?? 's',
                 playRate050Keys: items[playRate050Keys] ?? 'w',
                 playRate025Keys: items[playRate025Keys] ?? 'a',
+                showVolumeKeys: items[showVolumeKeys] ?? 'o',
                 muteKeys: items[muteKeys] ?? 'm',
                 volumeDownKeys: items[volumeDownKeys] ?? 'u',
                 volumeUpKeys: items[volumeUpKeys] ?? 'i',
@@ -96,21 +101,24 @@ export const loadKeyMap = (callback: (keyMap: KeyMap) => void) => {
                 openUserKeys: items[openUserKeys] ?? 'U',
                 openCommunityKeys: items[openCommunityKeys] ?? 'C',
                 helpKeys: items[helpKeys] ?? '?',
+                showVolumeWhenPageLoaded: items[showVolumeWhenPageLoaded] ?? false,
             }
-            callback(keyMap)
+            callback(optionsWithDefaultValue)
         });
 }
 
-export const saveKeyMap = (keyMap: KeyMap, callback: () => void) => {
-    chrome.storage.local.set(keyMap, callback)
+export function saveOptions(options: Options, callback: () => void) {
+    chrome.storage.local.set(options, callback)
 }
 
-export const clearKeyMap = (callback: () => void) => {
+export function clearOptions(callback: () => void) {
     chrome.storage.local.clear(callback)
 }
 
-export const isKeyMatched = (
+export function isKeyMatched(
     inputKey: string,
     mapKey: string,
-    keyMap: KeyMap,
-): boolean => [...keyMap[mapKey]].includes(inputKey)
+    options: Options,
+): boolean {
+    return [...options[mapKey]].includes(inputKey)
+}

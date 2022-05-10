@@ -1,4 +1,4 @@
-import {clickMenuButton, clickSelector} from "./common_utility";
+import {buttonToggleState, clickMenuButton, clickSelector} from "./common_utility";
 import {showNotification} from "./notification_utility";
 import {
     commentKeys,
@@ -6,32 +6,37 @@ import {
     commentTransparencyStrongKeys,
     commentTransparencyWeakKeys,
     isKeyMatched,
-    KeyMap
+    Options
 } from "./option_management";
 import {
-    commentTitle,
     commentTransparencyNoneTitle,
     commentTransparencyStrongTitle,
     commentTransparencyWeakTitle
 } from "./shortcut_title";
 
-export const checkCommentControlKey = (key: string, keyMap: KeyMap) => {
-    if (isKeyMatched(key, commentKeys, keyMap)) {
+export function checkCommentControlKey(key: string, options: Options) {
+    if (isKeyMatched(key, commentKeys, options)) {
         clickSelector("button[class^='___comment-button___']")
-        showNotification(commentTitle)
-    } else if (isKeyMatched(key, commentTransparencyNoneKeys, keyMap)) {
+        showNotification(`💬 コメント${isCommentEnabled() ? "表示" : "非表示"}`)
+    } else if (isKeyMatched(key, commentTransparencyNoneKeys, options)) {
         changeCommentTransparency(1)
         showNotification(commentTransparencyNoneTitle)
-    } else if (isKeyMatched(key, commentTransparencyWeakKeys, keyMap)) {
+    } else if (isKeyMatched(key, commentTransparencyWeakKeys, options)) {
         changeCommentTransparency(2)
         showNotification(commentTransparencyWeakTitle)
-    } else if (isKeyMatched(key, commentTransparencyStrongKeys, keyMap)) {
+    } else if (isKeyMatched(key, commentTransparencyStrongKeys, options)) {
         changeCommentTransparency(3)
         showNotification(commentTransparencyStrongTitle)
     }
 }
 
-const changeCommentTransparency = (buttonIndex: number) => {
+function isCommentEnabled(): boolean {
+    return buttonToggleState(
+        "___addon-controller___",
+        "___comment-button___")
+}
+
+function changeCommentTransparency(buttonIndex: number) {
     clickMenuButton(
         '___comment-transparency-menu-button-field___',
         '___comment-transparency-select-menu___',

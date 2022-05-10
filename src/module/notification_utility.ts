@@ -1,14 +1,14 @@
 import Notiflix from "notiflix";
 
-export const showNotification = (text: string) => {
+export function showNotification(text: string, duration: number = 1000, width: number = 420) {
     // https://github.com/notiflix/Notiflix
     Notiflix.Notify.info(
         text,
         {
-            width: '380px',
+            width: `${width}px`,
             position: 'center-center',
-            zindex: 100000,
-            timeout: 500,
+            cssAnimationDuration: 300,
+            timeout: duration,
             useIcon: false,
             distance: '50px',
             fontSize: '36px',
