@@ -5,7 +5,8 @@ module.exports = {
     node: true
   },
   extends: [
-    'standard'
+    'standard',
+    'prettier'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -15,6 +16,5 @@ module.exports = {
   plugins: [
     '@typescript-eslint'
   ],
-  rules: {
-  }
+  rules: {}
 }
