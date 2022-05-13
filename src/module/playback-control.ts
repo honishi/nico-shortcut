@@ -1,8 +1,4 @@
-import {
-  buttonToggleState,
-  clickMenuButton,
-  clickSelector,
-} from "./common-utility";
+import { buttonToggleState, clickMenuButton, clickSelector } from "./common-utility";
 import { showNotification } from "./notification-utility";
 import {
   fastForwardKeys,
@@ -40,10 +36,7 @@ export function checkPlaybackControlKey(key: string, options: Options) {
   if (isKeyMatched(key, playStopKeys, options)) {
     clickSelector("button[class^='___play-button___']");
     // Seems slight delay is needed to pick up proper play/stop state.
-    setTimeout(
-      () => showNotification(`${isPlaying() ? "▶ 再生" : "⏸ 停止"}`),
-      300
-    );
+    setTimeout(() => showNotification(`${isPlaying() ? "▶ 再生" : "⏸ 停止"}`), 300);
   } else if (isKeyMatched(key, rewindKeys, options)) {
     clickSelector("button[class^='___back-button___']");
     showNotification(rewindTitle);

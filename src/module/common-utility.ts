@@ -12,11 +12,7 @@ export function clickElement(element: Element | null | undefined) {
   element.click();
 }
 
-export function clickMenuButton(
-  divClass: string,
-  sectionClass: string,
-  buttonIndex: number
-) {
+export function clickMenuButton(divClass: string, sectionClass: string, buttonIndex: number) {
   const settingButtonSelector = "button[class*='___setting-button___']";
   const timeout = 300;
 
@@ -53,10 +49,7 @@ export function clickMenuButton(
   }, timeout);
 }
 
-export function buttonToggleState(
-  divClass: string,
-  buttonClass: string
-): boolean {
+export function buttonToggleState(divClass: string, buttonClass: string): boolean {
   const div = document.querySelector(`div[class^='${divClass}']`);
   const button = div?.querySelector(`button[class^='${buttonClass}']`);
   return button?.getAttribute("data-toggle-state") === "true";
