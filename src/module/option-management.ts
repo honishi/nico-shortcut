@@ -89,8 +89,7 @@ export function loadOptions(callback: (options: Options) => void) {
       commentKeys: items[commentKeys] ?? "c",
       commentTransparencyNoneKeys: items[commentTransparencyNoneKeys] ?? "z",
       commentTransparencyWeakKeys: items[commentTransparencyWeakKeys] ?? "x",
-      commentTransparencyStrongKeys:
-        items[commentTransparencyStrongKeys] ?? "v",
+      commentTransparencyStrongKeys: items[commentTransparencyStrongKeys] ?? "v",
       fullscreenKeys: items[fullscreenKeys] ?? "F",
       reloadKeys: items[reloadKeys] ?? "R",
       settingKeys: items[settingKeys] ?? ",",
@@ -114,10 +113,6 @@ export function clearOptions(callback: () => void) {
   chrome.storage.local.clear(callback);
 }
 
-export function isKeyMatched(
-  inputKey: string,
-  mapKey: string,
-  options: Options
-): boolean {
+export function isKeyMatched(inputKey: string, mapKey: string, options: Options): boolean {
   return [...options[mapKey]].includes(inputKey);
 }

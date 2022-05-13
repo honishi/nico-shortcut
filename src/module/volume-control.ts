@@ -1,8 +1,4 @@
-import {
-  buttonToggleState,
-  clickElement,
-  clickSelector,
-} from "./common-utility";
+import { buttonToggleState, clickElement, clickSelector } from "./common-utility";
 import { showNotification } from "./notification-utility";
 import {
   isKeyMatched,
@@ -35,10 +31,7 @@ export function showVolumeIfEnabled(options: Options) {
 }
 
 function showVolumeNotification() {
-  showNotification(
-    `${isMute() ? "🔇" : "🔈"} ボリューム: ${volumeValue()}`,
-    2000
-  );
+  showNotification(`${isMute() ? "🔇" : "🔈"} ボリューム: ${volumeValue()}`, 2000);
 }
 
 function showVolumeUpDownNotification() {

@@ -6,7 +6,8 @@
   "scripts": {
     "build-dev": "rimraf dist && webpack --config webpack/webpack.dev.js --watch",
     "build-prod": "rimraf dist && webpack --config webpack/webpack.prod.js",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "lint-fix": "eslint --fix './src/**/*.{js,ts}' && prettier --write './src/**/*.{js,ts}'"
   },
   "author": "",
   "license": "MIT",

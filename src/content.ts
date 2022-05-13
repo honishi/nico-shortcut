@@ -5,10 +5,7 @@ import { checkMiscControlKey } from "./module/misc-control";
 import { loadOptions } from "./module/option-management";
 import { checkPageControlKey } from "./module/page-control";
 import { checkPlaybackControlKey } from "./module/playback-control";
-import {
-  checkVolumeControlKey,
-  showVolumeIfEnabled,
-} from "./module/volume-control";
+import { checkVolumeControlKey, showVolumeIfEnabled } from "./module/volume-control";
 
 function listenLoadAndFocusEvent() {
   loadOptions((options) => {
@@ -30,7 +27,5 @@ function listenKeyEvent(event: KeyboardEvent) {
   });
 }
 
-["load", "focus"].forEach((type) =>
-  window.addEventListener(type, listenLoadAndFocusEvent)
-);
+["load", "focus"].forEach((type) => window.addEventListener(type, listenLoadAndFocusEvent));
 window.addEventListener("keydown", listenKeyEvent);

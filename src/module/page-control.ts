@@ -61,22 +61,16 @@ function toggleMenu(name: string) {
 }
 
 function openUserPage() {
-  const url = document
-    .querySelector("a[class^='___user-name___']")
-    ?.getAttribute("href");
+  const url = document.querySelector("a[class^='___user-name___']")?.getAttribute("href");
   sendOpenUrlMessage(url);
 }
 
 function openCommunity() {
-  const url = document
-    .querySelector("a[class^='___name-label___']")
-    ?.getAttribute("href");
+  const url = document.querySelector("a[class^='___name-label___']")?.getAttribute("href");
   sendOpenUrlMessage(url);
 }
 
 function sendOpenUrlMessage(url: string | null | undefined) {
   if (url == null) return;
-  chrome.runtime.sendMessage(["open_url", url].join(","), (response) =>
-    console.log(response)
-  );
+  chrome.runtime.sendMessage(["open_url", url].join(","), (response) => console.log(response));
 }

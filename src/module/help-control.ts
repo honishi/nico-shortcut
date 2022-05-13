@@ -105,10 +105,7 @@ function showHelp(options: Options) {
           [options[commentKeys], commentTitle],
           [options[commentTransparencyNoneKeys], commentTransparencyNoneTitle],
           [options[commentTransparencyWeakKeys], commentTransparencyWeakTitle],
-          [
-            options[commentTransparencyStrongKeys],
-            commentTransparencyStrongTitle,
-          ],
+          [options[commentTransparencyStrongKeys], commentTransparencyStrongTitle],
           [options[fullscreenKeys], fullscreenTitle],
           [options[reloadKeys], reloadTitle],
           [options[settingKeys], settingTitle],

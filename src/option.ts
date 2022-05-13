@@ -86,12 +86,9 @@ const inputMuteKeysId = "input_mute_keys";
 const inputVolumeDownKeysId = "input_volume_down_keys";
 const inputVolumeUpKeysId = "input_volume_up_keys";
 const inputCommentKeysId = "input_comment_keys";
-const inputCommentTransparencyNoneKeysId =
-  "input_comment_transparency_none_keys";
-const inputCommentTransparencyWeakKeysId =
-  "input_comment_transparency_weak_keys";
-const inputCommentTransparencyStrongKeysId =
-  "input_comment_transparency_strong_keys";
+const inputCommentTransparencyNoneKeysId = "input_comment_transparency_none_keys";
+const inputCommentTransparencyWeakKeysId = "input_comment_transparency_weak_keys";
+const inputCommentTransparencyStrongKeysId = "input_comment_transparency_strong_keys";
 const inputFullscreenKeysId = "input_fullscreen_keys";
 const inputReloadKeysId = "input_reload_keys";
 const inputSettingKeysId = "input_setting_keys";
@@ -126,18 +123,9 @@ const configureLabels = () => {
   setLabelValue(inputVolumeDownKeysId, volumeDownTitle);
   setLabelValue(inputVolumeUpKeysId, volumeUpTitle);
   setLabelValue(inputCommentKeysId, commentTitle);
-  setLabelValue(
-    inputCommentTransparencyNoneKeysId,
-    commentTransparencyNoneTitle
-  );
-  setLabelValue(
-    inputCommentTransparencyWeakKeysId,
-    commentTransparencyWeakTitle
-  );
-  setLabelValue(
-    inputCommentTransparencyStrongKeysId,
-    commentTransparencyStrongTitle
-  );
+  setLabelValue(inputCommentTransparencyNoneKeysId, commentTransparencyNoneTitle);
+  setLabelValue(inputCommentTransparencyWeakKeysId, commentTransparencyWeakTitle);
+  setLabelValue(inputCommentTransparencyStrongKeysId, commentTransparencyStrongTitle);
   setLabelValue(inputFullscreenKeysId, fullscreenTitle);
   setLabelValue(inputReloadKeysId, reloadTitle);
   setLabelValue(inputSettingKeysId, settingTitle);
@@ -147,10 +135,7 @@ const configureLabels = () => {
   setLabelValue(inputOpenUserKeysId, openUserTitle);
   setLabelValue(inputOpenCommunityKeysId, openCommunityTitle);
   setLabelValue(inputHelpKeysId, helpTitle);
-  setLabelValue(
-    inputShowVolumeWhenPageLoadId,
-    "ページ表示時にボリュームを表示"
-  );
+  setLabelValue(inputShowVolumeWhenPageLoadId, "ページ表示時にボリュームを表示");
 };
 
 function _saveOptions() {
@@ -173,15 +158,9 @@ function _saveOptions() {
     volumeDownKeys: getInputValue(inputVolumeDownKeysId),
     volumeUpKeys: getInputValue(inputVolumeUpKeysId),
     commentKeys: getInputValue(inputCommentKeysId),
-    commentTransparencyNoneKeys: getInputValue(
-      inputCommentTransparencyNoneKeysId
-    ),
-    commentTransparencyWeakKeys: getInputValue(
-      inputCommentTransparencyWeakKeysId
-    ),
-    commentTransparencyStrongKeys: getInputValue(
-      inputCommentTransparencyStrongKeysId
-    ),
+    commentTransparencyNoneKeys: getInputValue(inputCommentTransparencyNoneKeysId),
+    commentTransparencyWeakKeys: getInputValue(inputCommentTransparencyWeakKeysId),
+    commentTransparencyStrongKeys: getInputValue(inputCommentTransparencyStrongKeysId),
     fullscreenKeys: getInputValue(inputFullscreenKeysId),
     reloadKeys: getInputValue(inputReloadKeysId),
     settingKeys: getInputValue(inputSettingKeysId),
@@ -234,18 +213,9 @@ function _loadOptions() {
     setInputValue(inputVolumeDownKeysId, options[volumeDownKeys]);
     setInputValue(inputVolumeUpKeysId, options[volumeUpKeys]);
     setInputValue(inputCommentKeysId, options[commentKeys]);
-    setInputValue(
-      inputCommentTransparencyNoneKeysId,
-      options[commentTransparencyNoneKeys]
-    );
-    setInputValue(
-      inputCommentTransparencyWeakKeysId,
-      options[commentTransparencyWeakKeys]
-    );
-    setInputValue(
-      inputCommentTransparencyStrongKeysId,
-      options[commentTransparencyStrongKeys]
-    );
+    setInputValue(inputCommentTransparencyNoneKeysId, options[commentTransparencyNoneKeys]);
+    setInputValue(inputCommentTransparencyWeakKeysId, options[commentTransparencyWeakKeys]);
+    setInputValue(inputCommentTransparencyStrongKeysId, options[commentTransparencyStrongKeys]);
     setInputValue(inputFullscreenKeysId, options[fullscreenKeys]);
     setInputValue(inputReloadKeysId, options[reloadKeys]);
     setInputValue(inputSettingKeysId, options[settingKeys]);
@@ -255,10 +225,7 @@ function _loadOptions() {
     setInputValue(inputOpenUserKeysId, options[openUserKeys]);
     setInputValue(inputOpenCommunityKeysId, options[openCommunityKeys]);
     setInputValue(inputHelpKeysId, options[helpKeys]);
-    setInputChecked(
-      inputShowVolumeWhenPageLoadId,
-      options[showVolumeWhenPageLoaded]
-    );
+    setInputChecked(inputShowVolumeWhenPageLoadId, options[showVolumeWhenPageLoaded]);
   });
 }
 
@@ -267,16 +234,12 @@ function _clearOptions() {
 }
 
 function showMessage(text: string) {
-  const messageArea = document.getElementById(
-    optionMessageAreaId
-  ) as HTMLSpanElement;
+  const messageArea = document.getElementById(optionMessageAreaId) as HTMLSpanElement;
   messageArea.textContent = text;
 }
 
 function setLabelValue(forValue: string, value: string) {
-  const label = document.querySelector(
-    `label[for='${forValue}']`
-  ) as HTMLLabelElement;
+  const label = document.querySelector(`label[for='${forValue}']`) as HTMLLabelElement;
   label.textContent = `${value}:`;
 }
 
@@ -304,12 +267,8 @@ function addEventListeners() {
   document.addEventListener("DOMContentLoaded", () => {
     configureLabels();
     _loadOptions();
-    document
-      .getElementById(restoreDefaultButtonId)
-      ?.addEventListener("click", _clearOptions);
-    document
-      .getElementById(saveButtonId)
-      ?.addEventListener("click", _saveOptions);
+    document.getElementById(restoreDefaultButtonId)?.addEventListener("click", _clearOptions);
+    document.getElementById(saveButtonId)?.addEventListener("click", _saveOptions);
   });
 }
 
