@@ -34,7 +34,7 @@ import {
   showVolumeWhenPageLoaded,
   volumeDownKeys,
   volumeUpKeys,
-} from "./module/option_management";
+} from "./module/option-management";
 import {
   advertiseTitle,
   commentTitle,
@@ -66,7 +66,7 @@ import {
   showVolumeTitle,
   volumeDownTitle,
   volumeUpTitle,
-} from "./module/shortcut_title";
+} from "./module/shortcut-title";
 
 const inputPlayStopKeysId = "input_play_stop_keys";
 const inputRewindKeysId = "input_rewind_keys";

@@ -2,8 +2,8 @@ import {
   buttonToggleState,
   clickElement,
   clickSelector,
-} from "./common_utility";
-import { showNotification } from "./notification_utility";
+} from "./common-utility";
+import { showNotification } from "./notification-utility";
 import {
   isKeyMatched,
   muteKeys,
@@ -12,7 +12,7 @@ import {
   showVolumeWhenPageLoaded,
   volumeDownKeys,
   volumeUpKeys,
-} from "./option_management";
+} from "./option-management";
 
 export function checkVolumeControlKey(key: string, options: Options) {
   if (isKeyMatched(key, showVolumeKeys, options)) {

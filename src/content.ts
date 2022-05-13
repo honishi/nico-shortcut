@@ -1,14 +1,14 @@
-import { checkCommentControlKey } from "./module/comment_control";
-import { isInputActive } from "./module/common_utility";
-import { checkHelpControlKey } from "./module/help_control";
-import { checkMiscControlKey } from "./module/misc_control";
-import { loadOptions } from "./module/option_management";
-import { checkPageControlKey } from "./module/page_control";
-import { checkPlaybackControlKey } from "./module/playback_control";
+import { checkCommentControlKey } from "./module/comment-control";
+import { isInputActive } from "./module/common-utility";
+import { checkHelpControlKey } from "./module/help-control";
+import { checkMiscControlKey } from "./module/misc-control";
+import { loadOptions } from "./module/option-management";
+import { checkPageControlKey } from "./module/page-control";
+import { checkPlaybackControlKey } from "./module/playback-control";
 import {
   checkVolumeControlKey,
   showVolumeIfEnabled,
-} from "./module/volume_control";
+} from "./module/volume-control";
 
 function listenLoadAndFocusEvent() {
   loadOptions((options) => {

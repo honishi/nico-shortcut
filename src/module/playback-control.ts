@@ -2,8 +2,8 @@ import {
   buttonToggleState,
   clickMenuButton,
   clickSelector,
-} from "./common_utility";
-import { showNotification } from "./notification_utility";
+} from "./common-utility";
+import { showNotification } from "./notification-utility";
 import {
   fastForwardKeys,
   isKeyMatched,
@@ -20,7 +20,7 @@ import {
   playRate200Keys,
   playStopKeys,
   rewindKeys,
-} from "./option_management";
+} from "./option-management";
 import {
   fastForwardTitle,
   playHeadTitle,
@@ -34,7 +34,7 @@ import {
   playRate175Title,
   playRate200Title,
   rewindTitle,
-} from "./shortcut_title";
+} from "./shortcut-title";
 
 export function checkPlaybackControlKey(key: string, options: Options) {
   if (isKeyMatched(key, playStopKeys, options)) {

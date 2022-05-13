@@ -32,7 +32,7 @@ import {
   showVolumeKeys,
   volumeDownKeys,
   volumeUpKeys,
-} from "./option_management";
+} from "./option-management";
 import {
   advertiseTitle,
   commentTitle,
@@ -64,7 +64,7 @@ import {
   showVolumeTitle,
   volumeDownTitle,
   volumeUpTitle,
-} from "./shortcut_title";
+} from "./shortcut-title";
 
 export function checkHelpControlKey(key: string, options: Options) {
   if (isKeyMatched(key, helpKeys, options)) {

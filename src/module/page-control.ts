@@ -1,5 +1,5 @@
-import { clickElement } from "./common_utility";
-import { showNotification } from "./notification_utility";
+import { clickElement } from "./common-utility";
+import { showNotification } from "./notification-utility";
 import {
   advertiseKeys,
   giftKeys,
@@ -8,14 +8,14 @@ import {
   openUserKeys,
   Options,
   programsKeys,
-} from "./option_management";
+} from "./option-management";
 import {
   advertiseTitle,
   giftTitle,
   openCommunityTitle,
   openUserTitle,
   programsTitle,
-} from "./shortcut_title";
+} from "./shortcut-title";
 
 export function checkPageControlKey(key: string, options: Options) {
   if (isKeyMatched(key, programsKeys, options)) {

@@ -1,4 +1,4 @@
-import { handleMessage } from "./module/handle_message";
+import { handleMessage } from "./module/handle-message";
 
 function listenMessage(message: any, sender: any, sendResponse: any) {
   console.log(message);

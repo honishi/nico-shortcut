@@ -1,13 +1,13 @@
-import { buttonToggleState, clickSelector } from "./common_utility";
-import { showNotification } from "./notification_utility";
+import { buttonToggleState, clickSelector } from "./common-utility";
+import { showNotification } from "./notification-utility";
 import {
   fullscreenKeys,
   isKeyMatched,
   Options,
   reloadKeys,
   settingKeys,
-} from "./option_management";
-import { reloadTitle, settingTitle } from "./shortcut_title";
+} from "./option-management";
+import { reloadTitle, settingTitle } from "./shortcut-title";
 
 export function checkMiscControlKey(key: string, options: Options) {
   if (isKeyMatched(key, fullscreenKeys, options)) {

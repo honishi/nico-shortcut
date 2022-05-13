@@ -2,8 +2,8 @@ import {
   buttonToggleState,
   clickMenuButton,
   clickSelector,
-} from "./common_utility";
-import { showNotification } from "./notification_utility";
+} from "./common-utility";
+import { showNotification } from "./notification-utility";
 import {
   commentKeys,
   commentTransparencyNoneKeys,
@@ -11,12 +11,12 @@ import {
   commentTransparencyWeakKeys,
   isKeyMatched,
   Options,
-} from "./option_management";
+} from "./option-management";
 import {
   commentTransparencyNoneTitle,
   commentTransparencyStrongTitle,
   commentTransparencyWeakTitle,
-} from "./shortcut_title";
+} from "./shortcut-title";
 
 export function checkCommentControlKey(key: string, options: Options) {
   if (isKeyMatched(key, commentKeys, options)) {
