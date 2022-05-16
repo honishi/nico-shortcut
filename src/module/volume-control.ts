@@ -1,4 +1,4 @@
-import { buttonToggleState, clickElement, clickSelector } from "./common-utility";
+import { buttonToggleState, clickElement, clickSelector } from "./page-controller";
 import { showNotification } from "./notification-utility";
 import {
   isKeyMatched,

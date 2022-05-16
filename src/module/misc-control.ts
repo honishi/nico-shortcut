@@ -1,4 +1,4 @@
-import { buttonToggleState, clickSelector } from "./common-utility";
+import { buttonToggleState, clickSelector } from "./page-controller";
 import { showNotification } from "./notification-utility";
 import {
   fullscreenKeys,

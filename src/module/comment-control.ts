@@ -1,4 +1,4 @@
-import { buttonToggleState, clickMenuButton, clickSelector } from "./common-utility";
+import { buttonToggleState, clickMenuButton, clickSelector } from "./page-controller";
 import { showNotification } from "./notification-utility";
 import {
   commentKeys,

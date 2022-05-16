@@ -1,5 +1,5 @@
 import { checkCommentControlKey } from "./module/comment-control";
-import { isInputActive } from "./module/common-utility";
+import { isInputActive } from "./module/page-controller";
 import { checkHelpControlKey } from "./module/help-control";
 import { checkMiscControlKey } from "./module/misc-control";
 import { loadOptions } from "./module/option-management";

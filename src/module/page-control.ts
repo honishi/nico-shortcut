@@ -1,4 +1,4 @@
-import { clickElement } from "./common-utility";
+import { clickElement } from "./page-controller";
 import { showNotification } from "./notification-utility";
 import {
   advertiseKeys,
