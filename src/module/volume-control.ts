@@ -10,6 +10,8 @@ import {
 } from "./option-management";
 import { getMuteButton, getPlayer, isMute, volumeValue } from "./page-controller";
 
+const arrowUpDownButtonMultiClickCount = 4;
+
 export function checkVolumeControlKey(key: string, options: Options) {
   if (isKeyMatched(key, showVolumeKeys, options)) {
     showVolumeNotification();
@@ -17,11 +19,17 @@ export function checkVolumeControlKey(key: string, options: Options) {
     getMuteButton()?.click();
     showNotification(`${isMute() ? "🔇 ミュート" : "🔈 ミュート解除"}`);
   } else if (isKeyMatched(key, volumeDownKeys, options)) {
-    dispatchKeyEventToPlayer("ArrowDown", 40);
+    clickArrowDown();
     showVolumeUpDownNotification();
   } else if (isKeyMatched(key, volumeUpKeys, options)) {
-    dispatchKeyEventToPlayer("ArrowUp", 38);
+    clickArrowUp();
     showVolumeUpDownNotification();
+  } else if (key === "U") {
+    // TODO: Correct key assign.
+    clickArrowDownMultipleTimes(arrowUpDownButtonMultiClickCount, showVolumeUpDownNotification);
+  } else if (key === "I") {
+    // TODO: Correct key assign.
+    clickArrowUpMultipleTimes(arrowUpDownButtonMultiClickCount, showVolumeUpDownNotification);
   }
 }
 
@@ -38,6 +46,14 @@ function showVolumeUpDownNotification() {
   showNotification(`🔈 ボリューム: ${volumeValue()}`);
 }
 
+function clickArrowDown() {
+  dispatchKeyEventToPlayer("ArrowDown", 40);
+}
+
+function clickArrowUp() {
+  dispatchKeyEventToPlayer("ArrowUp", 38);
+}
+
 function dispatchKeyEventToPlayer(key: string, keyCode: number) {
   getPlayer()?.click();
 
@@ -50,4 +66,21 @@ function dispatchKeyEventToPlayer(key: string, keyCode: number) {
       which: keyCode,
     })
   );
+}
+
+function clickArrowDownMultipleTimes(count: number, callback: () => void) {
+  clickArrowMultipleTimes(clickArrowDown, count, callback);
+}
+
+function clickArrowUpMultipleTimes(count: number, callback: () => void) {
+  clickArrowMultipleTimes(clickArrowUp, count, callback);
+}
+
+function clickArrowMultipleTimes(clickMethod: () => void, count: number, callback: () => void) {
+  clickMethod();
+  if (count <= 1) {
+    callback();
+    return;
+  }
+  setTimeout(() => clickArrowMultipleTimes(clickMethod, count - 1, callback), 30);
 }

@@ -41,7 +41,7 @@ import {
   rewindTitle,
 } from "./shortcut-title";
 
-const backForwardButtonMultiClickCount = 5;
+const backForwardButtonMultiClickCount = 6;
 
 export function checkPlaybackControlKey(key: string, options: Options) {
   if (isKeyMatched(key, playStopKeys, options)) {

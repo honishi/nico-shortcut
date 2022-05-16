@@ -96,7 +96,7 @@ export function loadOptions(callback: (options: Options) => void) {
       programsKeys: items[programsKeys] ?? "p",
       advertiseKeys: items[advertiseKeys] ?? "A",
       giftKeys: items[giftKeys] ?? "G",
-      openUserKeys: items[openUserKeys] ?? "U",
+      openUserKeys: items[openUserKeys] ?? "S",
       openCommunityKeys: items[openCommunityKeys] ?? "C",
       helpKeys: items[helpKeys] ?? "?",
       showVolumeWhenPageLoaded: items[showVolumeWhenPageLoaded] ?? false,

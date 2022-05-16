@@ -51,7 +51,7 @@ export function clickButtonMultipleTimes(
   callback: () => void
 ) {
   button?.click();
-  if (count === 0) {
+  if (count <= 1) {
     callback();
     return;
   }
