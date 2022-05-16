@@ -1,10 +1,6 @@
-export function isInputActive() {
+export function isInputFieldActive() {
   // console.log(document.activeElement)
   return document.activeElement?.tagName === "INPUT";
-}
-
-export function clickSelector(selector: any) {
-  document.querySelector(selector).click();
 }
 
 export function clickElement(element: Element | null | undefined) {
@@ -12,10 +8,11 @@ export function clickElement(element: Element | null | undefined) {
   element.click();
 }
 
-export function buttonToggleState(divClass: string, buttonClass: string): boolean {
-  const div = document.querySelector(`div[class^='${divClass}']`);
-  const button = div?.querySelector(`button[class^='${buttonClass}']`);
-  return button?.getAttribute("data-toggle-state") === "true";
+//
+// Player Control
+//
+export function getPlayer(): HTMLElement | null {
+  return document.querySelector("div[class^='___player-controller___']") as HTMLElement;
 }
 
 //
@@ -59,6 +56,23 @@ export function clickButtonMultipleTimes(
     return;
   }
   setTimeout(() => clickButtonMultipleTimes(button, count - 1, callback), 30);
+}
+
+//
+// Volume Control
+//
+export function getMuteButton(): HTMLButtonElement | null {
+  return queryButton("button[class^='___mute-button___']");
+}
+
+export function isMute(): boolean {
+  return getMuteButton()?.isDataToggleStateTrue() ?? false;
+}
+
+export function volumeValue(): string {
+  const div = document.querySelector("div[class^='___volume-size-control___']");
+  const span = div?.querySelector("span[class^='___slider___']");
+  return span?.getAttribute("data-value") ?? "";
 }
 
 //

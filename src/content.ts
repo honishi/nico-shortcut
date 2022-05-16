@@ -1,5 +1,5 @@
 import { checkCommentControlKey } from "./module/comment-control";
-import { isInputActive } from "./module/page-controller";
+import { isInputFieldActive } from "./module/page-controller";
 import { checkHelpControlKey } from "./module/help-control";
 import { checkMiscControlKey } from "./module/misc-control";
 import { loadOptions } from "./module/option-management";
@@ -16,7 +16,7 @@ function listenLoadAndFocusEvent() {
 function listenKeyEvent(event: KeyboardEvent) {
   const key = event.key;
   console.log(key);
-  if (isInputActive()) return;
+  if (isInputFieldActive()) return;
   loadOptions((options) => {
     checkPlaybackControlKey(key, options);
     checkCommentControlKey(key, options);

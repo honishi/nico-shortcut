@@ -1,4 +1,3 @@
-import { buttonToggleState, clickElement, clickSelector } from "./page-controller";
 import { showNotification } from "./notification-utility";
 import {
   isKeyMatched,
@@ -9,12 +8,13 @@ import {
   volumeDownKeys,
   volumeUpKeys,
 } from "./option-management";
+import { getMuteButton, getPlayer, isMute, volumeValue } from "./page-controller";
 
 export function checkVolumeControlKey(key: string, options: Options) {
   if (isKeyMatched(key, showVolumeKeys, options)) {
     showVolumeNotification();
   } else if (isKeyMatched(key, muteKeys, options)) {
-    clickSelector("button[class^='___mute-button___']");
+    getMuteButton()?.click();
     showNotification(`${isMute() ? "🔇 ミュート" : "🔈 ミュート解除"}`);
   } else if (isKeyMatched(key, volumeDownKeys, options)) {
     dispatchKeyEventToPlayer("ArrowDown", 40);
@@ -38,13 +38,8 @@ function showVolumeUpDownNotification() {
   showNotification(`🔈 ボリューム: ${volumeValue()}`);
 }
 
-function clickPlayer() {
-  const div = document.querySelector("div[class^='___player-controller___']");
-  clickElement(div);
-}
-
 function dispatchKeyEventToPlayer(key: string, keyCode: number) {
-  clickPlayer();
+  getPlayer()?.click();
 
   // https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode
   window.dispatchEvent(
@@ -55,14 +50,4 @@ function dispatchKeyEventToPlayer(key: string, keyCode: number) {
       which: keyCode,
     })
   );
-}
-
-function isMute(): boolean {
-  return buttonToggleState("___volume-setting___", "___mute-button___");
-}
-
-function volumeValue(): string {
-  const div = document.querySelector("div[class^='___volume-size-control___']");
-  const span = div?.querySelector("span[class^='___slider___']");
-  return span?.getAttribute("data-value") ?? "";
 }
