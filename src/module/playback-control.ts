@@ -18,6 +18,7 @@ import {
 } from "./option-management";
 import {
   changePlaybackRate,
+  clickButtonMultipleTimes,
   getBackButton,
   getForwardButton,
   getHeadButton,
@@ -39,6 +40,8 @@ import {
   playRate200Title,
   rewindTitle,
 } from "./shortcut-title";
+
+const backForwardButtonMultiClickCount = 5;
 
 export function checkPlaybackControlKey(key: string, options: Options) {
   if (isKeyMatched(key, playStopKeys, options)) {
@@ -81,5 +84,15 @@ export function checkPlaybackControlKey(key: string, options: Options) {
   } else if (isKeyMatched(key, playRate025Keys, options)) {
     changePlaybackRate(8);
     showNotification(playRate025Title);
+  } else if (key === "J") {
+    // TODO: Correct key assign
+    clickButtonMultipleTimes(getBackButton(), backForwardButtonMultiClickCount, () =>
+      showNotification("Back 60s")
+    );
+  } else if (key === "L") {
+    // TODO: Correct key assign
+    clickButtonMultipleTimes(getForwardButton(), backForwardButtonMultiClickCount, () =>
+      showNotification("Forward 60s")
+    );
   }
 }

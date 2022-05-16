@@ -46,6 +46,22 @@ export function isPlaying(): boolean {
 }
 
 //
+// Multi-Click Back/Forward Button
+//
+export function clickButtonMultipleTimes(
+  button: HTMLButtonElement | null,
+  count: number,
+  callback: () => void
+) {
+  button?.click();
+  if (count === 0) {
+    callback();
+    return;
+  }
+  setTimeout(() => clickButtonMultipleTimes(button, count - 1, callback), 30);
+}
+
+//
 // Comment Control
 //
 export function getCommentButton(): HTMLButtonElement | null {
