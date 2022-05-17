@@ -1,10 +1,13 @@
 import { SemVer } from "semver";
 import { handleMessage } from "./module/handle-message";
+import { clearOptions } from "./module/option-management";
 /* eslint-disable no-undef */
 import InstalledDetails = chrome.runtime.InstalledDetails;
 import OnInstalledReason = chrome.runtime.OnInstalledReason;
 
 /* eslint-enable no-undef */
+
+const releaseNoteUrl = "https://example.com";
 
 function listenOnInstalled(details: InstalledDetails) {
   console.log(`Got onInstalled event. (${new Date()})`);
@@ -33,22 +36,23 @@ function handleUpdateInstall(details: InstalledDetails) {
   console.log(`Updated from [${previous}] to [${current}]!`);
 
   const isMajorOrMinorUpdate = current.major > previous.major || current.minor > previous.minor;
+  /* eslint-disable camelcase */
+  const v0_3_0 = new SemVer("0.3.0");
   const needsClearOptions =
-    // Any kinds of version up.
-    current.compare(previous) === 1 &&
-    // Any Updates from v0.2.x & v0.1.x.
-    previous < new SemVer("0.3.0");
+    // Any Updates from [v0.2.x or earlier] to [v0.3.0 or later].
+    previous < v0_3_0 && current >= v0_3_0;
+  /* eslint-enable camelcase */
 
   if (needsClearOptions) {
-    // TODO: Clear Options.
-    console.log("// TODO: Clear Options.");
+    console.log("Need to clear options...");
+    clearOptions(() => console.log("Completed to clear options."));
   } else {
     console.log("No need to clear options.");
   }
   if (isMajorOrMinorUpdate) {
     // TODO: Open Release Notes.
     console.log("// TODO: Open Release Notes.");
-    chrome.tabs.create({ url: "https://example.com" }, () => null);
+    chrome.tabs.create({ url: releaseNoteUrl }, () => null);
   } else {
     console.log("No need to open release notes.");
   }
