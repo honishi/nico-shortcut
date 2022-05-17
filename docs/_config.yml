@@ -1,8 +1,8 @@
 # Site settings
-title: Good Clean Read
-tag_text: Good Clean Read
-description: A responsive template for publishing single-page websites, articles that are easy on the eyes
-url: "http://127.0.0.1:4000"
+title: ニコ生ショートカット
+tag_text: ニコ生ショートカット
+description: ニコニコ生放送の PC 用放送視聴ページで、キーボードショートカットが利用可能になります。
+url: "https://honishi.github.io/nico-shortcut/"
 baseurl: ""
 
 font-awesome-include: true # make this false if you don't need font-awesome
