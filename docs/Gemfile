@@ -1,0 +1,7 @@
+source "https://rubygems.org"
+
+gem "jekyll"
+
+# webrick is needed for ruby 3.x env.
+# https://github.com/jekyll/jekyll/issues/8523
+gem "webrick"
