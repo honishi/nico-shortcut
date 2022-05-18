@@ -39,7 +39,7 @@ function handleUpdateInstall(details: InstalledDetails) {
   const v0_3_0 = new SemVer("0.3.0");
   const needsClearOptions =
     // Any Updates from [v0.2.x or earlier] to [v0.3.0 or later].
-    previous < v0_3_0 && current >= v0_3_0;
+    previous < v0_3_0 && v0_3_0 <= current;
   /* eslint-enable camelcase */
 
   if (needsClearOptions) {
@@ -49,8 +49,6 @@ function handleUpdateInstall(details: InstalledDetails) {
     console.log("No need to clear options.");
   }
   if (isMajorOrMinorUpdate) {
-    // TODO: Open Release Notes.
-    console.log("// TODO: Open Release Notes.");
     chrome.tabs.create({ url: releaseNoteUrl }, () => null);
   } else {
     console.log("No need to open release notes.");
