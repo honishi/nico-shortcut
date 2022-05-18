@@ -1,5 +1,5 @@
 import { checkCommentControlKey } from "./module/comment-control";
-import { isInputFieldActive } from "./module/page-controller";
+import { isInputFieldActive } from "./module/dom-utility";
 import { checkHelpControlKey } from "./module/help-control";
 import { checkMiscControlKey } from "./module/misc-control";
 import { loadOptions } from "./module/option-management";

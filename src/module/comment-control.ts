@@ -7,7 +7,7 @@ import {
   isKeyMatched,
   Options,
 } from "./option-management";
-import { changeCommentTransparency, getCommentButton, isCommentEnabled } from "./page-controller";
+import { changeCommentTransparency, getCommentButton, isCommentEnabled } from "./dom-utility";
 import {
   commentTransparencyNoneTitle,
   commentTransparencyStrongTitle,

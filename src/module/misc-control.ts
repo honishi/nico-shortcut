@@ -11,7 +11,7 @@ import {
   getReloadButton,
   getSettingButton,
   isFullscreenEnabled,
-} from "./page-controller";
+} from "./dom-utility";
 import { reloadTitle, settingTitle } from "./shortcut-title";
 
 export function checkMiscControlKey(key: string, options: Options) {

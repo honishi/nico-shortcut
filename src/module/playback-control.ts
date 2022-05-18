@@ -27,7 +27,7 @@ import {
   getLiveButton,
   getPlayButton,
   isPlaying,
-} from "./page-controller";
+} from "./dom-utility";
 import {
   extraFastForwardTitle,
   extraRewindTitle,

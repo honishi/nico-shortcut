@@ -14,7 +14,7 @@ import {
   getGiftButton,
   getProgramsButton,
   getUserPageUrl,
-} from "./page-controller";
+} from "./dom-utility";
 import {
   advertiseTitle,
   giftTitle,

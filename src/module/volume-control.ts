@@ -11,7 +11,7 @@ import {
   volumeDownKeys,
   volumeUpKeys,
 } from "./option-management";
-import { getMuteButton, getPlayer, isMute, volumeValue } from "./page-controller";
+import { getMuteButton, getPlayer, isMute, volumeValue } from "./dom-utility";
 
 const arrowUpButtonMaximizeClickCount = 20; // 20 * 5% = 100%
 const arrowUpDownButtonMultiClickCount = 4;
