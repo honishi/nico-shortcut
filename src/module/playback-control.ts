@@ -1,6 +1,7 @@
-import { buttonToggleState, clickMenuButton, clickSelector } from "./common-utility";
 import { showNotification } from "./notification-utility";
 import {
+  extraFastForwardKeys,
+  extraRewindKeys,
   fastForwardKeys,
   isKeyMatched,
   Options,
@@ -18,6 +19,18 @@ import {
   rewindKeys,
 } from "./option-management";
 import {
+  changePlaybackRate,
+  clickButtonMultipleTimes,
+  getBackButton,
+  getForwardButton,
+  getHeadButton,
+  getLiveButton,
+  getPlayButton,
+  isPlaying,
+} from "./dom-utility";
+import {
+  extraFastForwardTitle,
+  extraRewindTitle,
   fastForwardTitle,
   playHeadTitle,
   playLiveTitle,
@@ -32,22 +45,32 @@ import {
   rewindTitle,
 } from "./shortcut-title";
 
+const backForwardButtonMultiClickCount = 6;
+
 export function checkPlaybackControlKey(key: string, options: Options) {
   if (isKeyMatched(key, playStopKeys, options)) {
-    clickSelector("button[class^='___play-button___']");
+    getPlayButton()?.click();
     // Seems slight delay is needed to pick up proper play/stop state.
     setTimeout(() => showNotification(`${isPlaying() ? "▶ 再生" : "⏸ 停止"}`), 300);
   } else if (isKeyMatched(key, rewindKeys, options)) {
-    clickSelector("button[class^='___back-button___']");
+    getBackButton()?.click();
     showNotification(rewindTitle);
   } else if (isKeyMatched(key, fastForwardKeys, options)) {
-    clickSelector("button[class^='___forward-button___']");
+    getForwardButton()?.click();
     showNotification(fastForwardTitle);
+  } else if (isKeyMatched(key, extraRewindKeys, options)) {
+    clickButtonMultipleTimes(getBackButton(), backForwardButtonMultiClickCount, () =>
+      showNotification(extraRewindTitle)
+    );
+  } else if (isKeyMatched(key, extraFastForwardKeys, options)) {
+    clickButtonMultipleTimes(getForwardButton(), backForwardButtonMultiClickCount, () =>
+      showNotification(extraFastForwardTitle)
+    );
   } else if (isKeyMatched(key, playHeadKeys, options)) {
-    clickSelector("button[class^='___head-button___']");
+    getHeadButton()?.click();
     showNotification(playHeadTitle);
   } else if (isKeyMatched(key, playLiveKeys, options)) {
-    clickSelector("button[class^='___live-button___']");
+    getLiveButton()?.click();
     showNotification(playLiveTitle);
   } else if (isKeyMatched(key, playRate200Keys, options)) {
     changePlaybackRate(1);
@@ -74,16 +97,4 @@ export function checkPlaybackControlKey(key: string, options: Options) {
     changePlaybackRate(8);
     showNotification(playRate025Title);
   }
-}
-
-function isPlaying(): boolean {
-  return buttonToggleState("___control-area___", "___play-button___");
-}
-
-function changePlaybackRate(buttonIndex: number) {
-  clickMenuButton(
-    "___video-playback-rate-menu-button-field___",
-    "___video-playback-rate-select-menu___",
-    buttonIndex
-  );
 }

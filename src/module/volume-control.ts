@@ -1,7 +1,9 @@
-import { buttonToggleState, clickElement, clickSelector } from "./common-utility";
 import { showNotification } from "./notification-utility";
 import {
+  extraVolumeDownKeys,
+  extraVolumeUpKeys,
   isKeyMatched,
+  maximizeVolumeWhenPageLoaded,
   muteKeys,
   Options,
   showVolumeKeys,
@@ -9,19 +11,35 @@ import {
   volumeDownKeys,
   volumeUpKeys,
 } from "./option-management";
+import { getMuteButton, getPlayer, isMute, volumeValue } from "./dom-utility";
+
+const arrowUpButtonMaximizeClickCount = 20; // 20 * 5% = 100%
+const arrowUpDownButtonMultiClickCount = 4;
 
 export function checkVolumeControlKey(key: string, options: Options) {
   if (isKeyMatched(key, showVolumeKeys, options)) {
     showVolumeNotification();
   } else if (isKeyMatched(key, muteKeys, options)) {
-    clickSelector("button[class^='___mute-button___']");
+    getMuteButton()?.click();
     showNotification(`${isMute() ? "🔇 ミュート" : "🔈 ミュート解除"}`);
   } else if (isKeyMatched(key, volumeDownKeys, options)) {
-    dispatchKeyEventToPlayer("ArrowDown", 40);
+    clickArrowDown();
     showVolumeUpDownNotification();
   } else if (isKeyMatched(key, volumeUpKeys, options)) {
-    dispatchKeyEventToPlayer("ArrowUp", 38);
+    clickArrowUp();
     showVolumeUpDownNotification();
+  } else if (isKeyMatched(key, extraVolumeDownKeys, options)) {
+    clickArrowDownMultipleTimes(arrowUpDownButtonMultiClickCount, showVolumeUpDownNotification);
+  } else if (isKeyMatched(key, extraVolumeUpKeys, options)) {
+    clickArrowUpMultipleTimes(arrowUpDownButtonMultiClickCount, showVolumeUpDownNotification);
+  }
+}
+
+export function maximizeVolumeIfEnabled(options: Options, callback: () => void) {
+  if (options[maximizeVolumeWhenPageLoaded] === true) {
+    clickArrowUpMultipleTimes(arrowUpButtonMaximizeClickCount, callback);
+  } else {
+    callback();
   }
 }
 
@@ -38,13 +56,16 @@ function showVolumeUpDownNotification() {
   showNotification(`🔈 ボリューム: ${volumeValue()}`);
 }
 
-function clickPlayer() {
-  const div = document.querySelector("div[class^='___player-controller___']");
-  clickElement(div);
+function clickArrowDown() {
+  dispatchKeyEventToPlayer("ArrowDown", 40);
+}
+
+function clickArrowUp() {
+  dispatchKeyEventToPlayer("ArrowUp", 38);
 }
 
 function dispatchKeyEventToPlayer(key: string, keyCode: number) {
-  clickPlayer();
+  getPlayer()?.click();
 
   // https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode
   window.dispatchEvent(
@@ -57,12 +78,19 @@ function dispatchKeyEventToPlayer(key: string, keyCode: number) {
   );
 }
 
-function isMute(): boolean {
-  return buttonToggleState("___volume-setting___", "___mute-button___");
+function clickArrowDownMultipleTimes(count: number, callback: () => void) {
+  clickArrowMultipleTimes(clickArrowDown, count, callback);
 }
 
-function volumeValue(): string {
-  const div = document.querySelector("div[class^='___volume-size-control___']");
-  const span = div?.querySelector("span[class^='___slider___']");
-  return span?.getAttribute("data-value") ?? "";
+function clickArrowUpMultipleTimes(count: number, callback: () => void) {
+  clickArrowMultipleTimes(clickArrowUp, count, callback);
+}
+
+function clickArrowMultipleTimes(clickMethod: () => void, count: number, callback: () => void) {
+  clickMethod();
+  if (count <= 1) {
+    callback();
+    return;
+  }
+  setTimeout(() => clickArrowMultipleTimes(clickMethod, count - 1, callback), 20);
 }

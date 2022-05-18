@@ -5,11 +5,16 @@ import {
   commentTransparencyNoneKeys,
   commentTransparencyStrongKeys,
   commentTransparencyWeakKeys,
+  extraFastForwardKeys,
+  extraRewindKeys,
+  extraVolumeDownKeys,
+  extraVolumeUpKeys,
   fastForwardKeys,
   fullscreenKeys,
   giftKeys,
   helpKeys,
   loadOptions,
+  maximizeVolumeWhenPageLoaded,
   muteKeys,
   openCommunityKeys,
   openUserKeys,
@@ -41,6 +46,10 @@ import {
   commentTransparencyNoneTitle,
   commentTransparencyStrongTitle,
   commentTransparencyWeakTitle,
+  extraFastForwardTitle,
+  extraRewindTitle,
+  extraVolumeDownTitle,
+  extraVolumeUpTitle,
   fastForwardTitle,
   fullscreenTitle,
   giftTitle,
@@ -71,6 +80,8 @@ import {
 const inputPlayStopKeysId = "input_play_stop_keys";
 const inputRewindKeysId = "input_rewind_keys";
 const inputFastForwardKeysId = "input_fast_forward_keys";
+const inputExtraRewindKeysId = "input_extra_rewind_keys";
+const inputExtraFastForwardKeysId = "input_extra_fast_forward_keys";
 const inputPlayHeadKeysId = "input_play_head_keys";
 const inputPlayLiveKeysId = "input_play_live_keys";
 const inputPlayRate200KeysId = "input_play_rate_200_keys";
@@ -85,6 +96,8 @@ const inputShowVolumeKeysId = "input_show_volume_keys";
 const inputMuteKeysId = "input_mute_keys";
 const inputVolumeDownKeysId = "input_volume_down_keys";
 const inputVolumeUpKeysId = "input_volume_up_keys";
+const inputExtraVolumeDownKeysId = "input_extra_volume_down_keys";
+const inputExtraVolumeUpKeysId = "input_extra_volume_up_keys";
 const inputCommentKeysId = "input_comment_keys";
 const inputCommentTransparencyNoneKeysId = "input_comment_transparency_none_keys";
 const inputCommentTransparencyWeakKeysId = "input_comment_transparency_weak_keys";
@@ -99,6 +112,7 @@ const inputOpenUserKeysId = "input_open_user_keys";
 const inputOpenCommunityKeysId = "input_open_community_keys";
 const inputHelpKeysId = "input_help_keys";
 const inputShowVolumeWhenPageLoadId = "input_show_volume_when_page_load";
+const inputMaximizeVolumeWhenPageLoadId = "input_maximize_volume_when_page_load";
 
 const restoreDefaultButtonId = "button_restore_default";
 const saveButtonId = "button_save";
@@ -108,6 +122,8 @@ const configureLabels = () => {
   setLabelValue(inputPlayStopKeysId, playStopTitle);
   setLabelValue(inputRewindKeysId, rewindTitle);
   setLabelValue(inputFastForwardKeysId, fastForwardTitle);
+  setLabelValue(inputExtraRewindKeysId, extraRewindTitle);
+  setLabelValue(inputExtraFastForwardKeysId, extraFastForwardTitle);
   setLabelValue(inputPlayHeadKeysId, playHeadTitle);
   setLabelValue(inputPlayLiveKeysId, playLiveTitle);
   setLabelValue(inputPlayRate200KeysId, playRate200Title);
@@ -122,6 +138,8 @@ const configureLabels = () => {
   setLabelValue(inputMuteKeysId, muteTitle);
   setLabelValue(inputVolumeDownKeysId, volumeDownTitle);
   setLabelValue(inputVolumeUpKeysId, volumeUpTitle);
+  setLabelValue(inputExtraVolumeDownKeysId, extraVolumeDownTitle);
+  setLabelValue(inputExtraVolumeUpKeysId, extraVolumeUpTitle);
   setLabelValue(inputCommentKeysId, commentTitle);
   setLabelValue(inputCommentTransparencyNoneKeysId, commentTransparencyNoneTitle);
   setLabelValue(inputCommentTransparencyWeakKeysId, commentTransparencyWeakTitle);
@@ -135,7 +153,11 @@ const configureLabels = () => {
   setLabelValue(inputOpenUserKeysId, openUserTitle);
   setLabelValue(inputOpenCommunityKeysId, openCommunityTitle);
   setLabelValue(inputHelpKeysId, helpTitle);
-  setLabelValue(inputShowVolumeWhenPageLoadId, "ページ表示時にボリュームを表示");
+  setLabelValue(inputShowVolumeWhenPageLoadId, "ページ表示時にボリュームを表示する");
+  setLabelValue(
+    inputMaximizeVolumeWhenPageLoadId,
+    "ページ読み込み時にミュート解除 + ボリューム100%にする"
+  );
 };
 
 function _saveOptions() {
@@ -143,6 +165,8 @@ function _saveOptions() {
     playStopKeys: getInputValue(inputPlayStopKeysId),
     rewindKeys: getInputValue(inputRewindKeysId),
     fastForwardKeys: getInputValue(inputFastForwardKeysId),
+    extraRewindKeys: getInputValue(inputExtraRewindKeysId),
+    extraFastForwardKeys: getInputValue(inputExtraFastForwardKeysId),
     playHeadKeys: getInputValue(inputPlayHeadKeysId),
     playLiveKeys: getInputValue(inputPlayLiveKeysId),
     playRate200Keys: getInputValue(inputPlayRate200KeysId),
@@ -157,6 +181,8 @@ function _saveOptions() {
     muteKeys: getInputValue(inputMuteKeysId),
     volumeDownKeys: getInputValue(inputVolumeDownKeysId),
     volumeUpKeys: getInputValue(inputVolumeUpKeysId),
+    extraVolumeDownKeys: getInputValue(inputExtraVolumeDownKeysId),
+    extraVolumeUpKeys: getInputValue(inputExtraVolumeUpKeysId),
     commentKeys: getInputValue(inputCommentKeysId),
     commentTransparencyNoneKeys: getInputValue(inputCommentTransparencyNoneKeysId),
     commentTransparencyWeakKeys: getInputValue(inputCommentTransparencyWeakKeysId),
@@ -178,6 +204,7 @@ function _saveOptions() {
   const allOptions = {
     ...keyMapOptions,
     showVolumeWhenPageLoaded: getInputChecked(inputShowVolumeWhenPageLoadId),
+    maximizeVolumeWhenPageLoaded: getInputChecked(inputMaximizeVolumeWhenPageLoadId),
   };
   console.log(allOptions);
   saveOptions(allOptions, () => window.close());
@@ -198,6 +225,8 @@ function _loadOptions() {
     setInputValue(inputPlayStopKeysId, options[playStopKeys]);
     setInputValue(inputRewindKeysId, options[rewindKeys]);
     setInputValue(inputFastForwardKeysId, options[fastForwardKeys]);
+    setInputValue(inputExtraRewindKeysId, options[extraRewindKeys]);
+    setInputValue(inputExtraFastForwardKeysId, options[extraFastForwardKeys]);
     setInputValue(inputPlayHeadKeysId, options[playHeadKeys]);
     setInputValue(inputPlayLiveKeysId, options[playLiveKeys]);
     setInputValue(inputPlayRate200KeysId, options[playRate200Keys]);
@@ -212,6 +241,8 @@ function _loadOptions() {
     setInputValue(inputMuteKeysId, options[muteKeys]);
     setInputValue(inputVolumeDownKeysId, options[volumeDownKeys]);
     setInputValue(inputVolumeUpKeysId, options[volumeUpKeys]);
+    setInputValue(inputExtraVolumeDownKeysId, options[extraVolumeDownKeys]);
+    setInputValue(inputExtraVolumeUpKeysId, options[extraVolumeUpKeys]);
     setInputValue(inputCommentKeysId, options[commentKeys]);
     setInputValue(inputCommentTransparencyNoneKeysId, options[commentTransparencyNoneKeys]);
     setInputValue(inputCommentTransparencyWeakKeysId, options[commentTransparencyWeakKeys]);
@@ -226,6 +257,7 @@ function _loadOptions() {
     setInputValue(inputOpenCommunityKeysId, options[openCommunityKeys]);
     setInputValue(inputHelpKeysId, options[helpKeys]);
     setInputChecked(inputShowVolumeWhenPageLoadId, options[showVolumeWhenPageLoaded]);
+    setInputChecked(inputMaximizeVolumeWhenPageLoadId, options[maximizeVolumeWhenPageLoaded]);
   });
 }
 

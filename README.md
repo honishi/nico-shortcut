@@ -1,6 +1,6 @@
 # nico-shortcut
 
-<img src="./doc/readme-icon.png">
+<img src="./docs/images/app-icon.png">
 
 An interim keyboard shortcut implementation for Niconama until it's officially provided.
 

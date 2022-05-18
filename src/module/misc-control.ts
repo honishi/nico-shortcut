@@ -1,4 +1,3 @@
-import { buttonToggleState, clickSelector } from "./common-utility";
 import { showNotification } from "./notification-utility";
 import {
   fullscreenKeys,
@@ -7,21 +6,23 @@ import {
   reloadKeys,
   settingKeys,
 } from "./option-management";
+import {
+  getFullscreenButton,
+  getReloadButton,
+  getSettingButton,
+  isFullscreenEnabled,
+} from "./dom-utility";
 import { reloadTitle, settingTitle } from "./shortcut-title";
 
 export function checkMiscControlKey(key: string, options: Options) {
   if (isKeyMatched(key, fullscreenKeys, options)) {
-    clickSelector("button[class^='___fullscreen-button___']");
+    getFullscreenButton()?.click();
     showNotification(`🖥 フルスクリーン${isFullscreenEnabled() ? "" : "解除"}`);
   } else if (isKeyMatched(key, reloadKeys, options)) {
-    clickSelector("button[class^='___reload-button___']");
+    getReloadButton()?.click();
     showNotification(reloadTitle);
   } else if (isKeyMatched(key, settingKeys, options)) {
-    clickSelector("button[class*='___setting-button___']");
+    getSettingButton()?.click();
     showNotification(settingTitle);
   }
-}
-
-function isFullscreenEnabled(): boolean {
-  return buttonToggleState("___addon-controller___", "___fullscreen-button___");
 }

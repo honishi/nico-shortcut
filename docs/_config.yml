@@ -1,0 +1,13 @@
+# Site settings
+title: ニコ生ショートカット
+tag_text: ニコ生ショートカット
+description: ニコニコ生放送の PC 用放送視聴ページで、キーボードショートカットが利用可能になります。
+url: "https://honishi.github.io/nico-shortcut/"
+baseurl: ""
+
+font-awesome-include: true # make this false if you don't need font-awesome
+
+# Build settings
+markdown: kramdown
+
+exclude: ["README.md"]

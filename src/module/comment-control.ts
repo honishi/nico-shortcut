@@ -1,4 +1,3 @@
-import { buttonToggleState, clickMenuButton, clickSelector } from "./common-utility";
 import { showNotification } from "./notification-utility";
 import {
   commentKeys,
@@ -8,6 +7,7 @@ import {
   isKeyMatched,
   Options,
 } from "./option-management";
+import { changeCommentTransparency, getCommentButton, isCommentEnabled } from "./dom-utility";
 import {
   commentTransparencyNoneTitle,
   commentTransparencyStrongTitle,
@@ -16,7 +16,7 @@ import {
 
 export function checkCommentControlKey(key: string, options: Options) {
   if (isKeyMatched(key, commentKeys, options)) {
-    clickSelector("button[class^='___comment-button___']");
+    getCommentButton()?.click();
     showNotification(`💬 コメント${isCommentEnabled() ? "表示" : "非表示"}`);
   } else if (isKeyMatched(key, commentTransparencyNoneKeys, options)) {
     changeCommentTransparency(1);
@@ -28,16 +28,4 @@ export function checkCommentControlKey(key: string, options: Options) {
     changeCommentTransparency(3);
     showNotification(commentTransparencyStrongTitle);
   }
-}
-
-function isCommentEnabled(): boolean {
-  return buttonToggleState("___addon-controller___", "___comment-button___");
-}
-
-function changeCommentTransparency(buttonIndex: number) {
-  clickMenuButton(
-    "___comment-transparency-menu-button-field___",
-    "___comment-transparency-select-menu___",
-    buttonIndex
-  );
 }
