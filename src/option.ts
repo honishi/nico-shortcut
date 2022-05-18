@@ -14,6 +14,7 @@ import {
   giftKeys,
   helpKeys,
   loadOptions,
+  maximizeVolumeWhenPageLoaded,
   muteKeys,
   openCommunityKeys,
   openUserKeys,
@@ -111,6 +112,7 @@ const inputOpenUserKeysId = "input_open_user_keys";
 const inputOpenCommunityKeysId = "input_open_community_keys";
 const inputHelpKeysId = "input_help_keys";
 const inputShowVolumeWhenPageLoadId = "input_show_volume_when_page_load";
+const inputMaximizeVolumeWhenPageLoadId = "input_maximize_volume_when_page_load";
 
 const restoreDefaultButtonId = "button_restore_default";
 const saveButtonId = "button_save";
@@ -151,7 +153,11 @@ const configureLabels = () => {
   setLabelValue(inputOpenUserKeysId, openUserTitle);
   setLabelValue(inputOpenCommunityKeysId, openCommunityTitle);
   setLabelValue(inputHelpKeysId, helpTitle);
-  setLabelValue(inputShowVolumeWhenPageLoadId, "ページ表示時にボリュームを表示");
+  setLabelValue(inputShowVolumeWhenPageLoadId, "ページ表示時にボリュームを表示する");
+  setLabelValue(
+    inputMaximizeVolumeWhenPageLoadId,
+    "ページ表示時にミュート解除 + ボリューム100%にする"
+  );
 };
 
 function _saveOptions() {
@@ -198,6 +204,7 @@ function _saveOptions() {
   const allOptions = {
     ...keyMapOptions,
     showVolumeWhenPageLoaded: getInputChecked(inputShowVolumeWhenPageLoadId),
+    maximizeVolumeWhenPageLoaded: getInputChecked(inputMaximizeVolumeWhenPageLoadId),
   };
   console.log(allOptions);
   saveOptions(allOptions, () => window.close());
@@ -250,6 +257,7 @@ function _loadOptions() {
     setInputValue(inputOpenCommunityKeysId, options[openCommunityKeys]);
     setInputValue(inputHelpKeysId, options[helpKeys]);
     setInputChecked(inputShowVolumeWhenPageLoadId, options[showVolumeWhenPageLoaded]);
+    setInputChecked(inputMaximizeVolumeWhenPageLoadId, options[maximizeVolumeWhenPageLoaded]);
   });
 }
 

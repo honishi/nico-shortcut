@@ -5,9 +5,21 @@ import { checkMiscControlKey } from "./module/misc-control";
 import { loadOptions } from "./module/option-management";
 import { checkPageControlKey } from "./module/page-control";
 import { checkPlaybackControlKey } from "./module/playback-control";
-import { checkVolumeControlKey, showVolumeIfEnabled } from "./module/volume-control";
+import {
+  checkVolumeControlKey,
+  maximizeVolumeIfEnabled,
+  showVolumeIfEnabled,
+} from "./module/volume-control";
 
-function listenLoadAndFocusEvent() {
+function listenLoadEvent() {
+  loadOptions((options) => {
+    maximizeVolumeIfEnabled(options, () => {
+      showVolumeIfEnabled(options);
+    });
+  });
+}
+
+function listenFocusEvent() {
   loadOptions((options) => {
     showVolumeIfEnabled(options);
   });
@@ -27,5 +39,6 @@ function listenKeyEvent(event: KeyboardEvent) {
   });
 }
 
-["load", "focus"].forEach((type) => window.addEventListener(type, listenLoadAndFocusEvent));
+window.addEventListener("load", listenLoadEvent);
+window.addEventListener("focus", listenFocusEvent);
 window.addEventListener("keydown", listenKeyEvent);

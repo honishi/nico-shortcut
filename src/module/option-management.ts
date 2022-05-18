@@ -33,6 +33,7 @@ export const openUserKeys = "openUserKeys";
 export const openCommunityKeys = "openCommunityKeys";
 export const helpKeys = "helpKeys";
 export const showVolumeWhenPageLoaded = "showVolumeWhenPageLoaded";
+export const maximizeVolumeWhenPageLoaded = "maximizeVolumeWhenPageLoaded";
 
 const allOptionKeys = [
   playStopKeys,
@@ -70,6 +71,7 @@ const allOptionKeys = [
   openCommunityKeys,
   helpKeys,
   showVolumeWhenPageLoaded,
+  maximizeVolumeWhenPageLoaded,
 ];
 
 export type Options = { [key: string]: any };
@@ -112,6 +114,7 @@ export function loadOptions(callback: (options: Options) => void) {
       openCommunityKeys: items[openCommunityKeys] ?? "C",
       helpKeys: items[helpKeys] ?? "?",
       showVolumeWhenPageLoaded: items[showVolumeWhenPageLoaded] ?? false,
+      maximizeVolumeWhenPageLoaded: items[maximizeVolumeWhenPageLoaded] ?? false,
     };
     callback(optionsWithDefaultValue);
   });

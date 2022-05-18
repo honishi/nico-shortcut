@@ -3,6 +3,7 @@ import {
   extraVolumeDownKeys,
   extraVolumeUpKeys,
   isKeyMatched,
+  maximizeVolumeWhenPageLoaded,
   muteKeys,
   Options,
   showVolumeKeys,
@@ -12,6 +13,7 @@ import {
 } from "./option-management";
 import { getMuteButton, getPlayer, isMute, volumeValue } from "./page-controller";
 
+const arrowUpButtonMaximizeClickCount = 20; // 20 * 5% = 100%
 const arrowUpDownButtonMultiClickCount = 4;
 
 export function checkVolumeControlKey(key: string, options: Options) {
@@ -30,6 +32,14 @@ export function checkVolumeControlKey(key: string, options: Options) {
     clickArrowDownMultipleTimes(arrowUpDownButtonMultiClickCount, showVolumeUpDownNotification);
   } else if (isKeyMatched(key, extraVolumeUpKeys, options)) {
     clickArrowUpMultipleTimes(arrowUpDownButtonMultiClickCount, showVolumeUpDownNotification);
+  }
+}
+
+export function maximizeVolumeIfEnabled(options: Options, callback: () => void) {
+  if (options[maximizeVolumeWhenPageLoaded] === true) {
+    clickArrowUpMultipleTimes(arrowUpButtonMaximizeClickCount, callback);
+  } else {
+    callback();
   }
 }
 
@@ -82,5 +92,5 @@ function clickArrowMultipleTimes(clickMethod: () => void, count: number, callbac
     callback();
     return;
   }
-  setTimeout(() => clickArrowMultipleTimes(clickMethod, count - 1, callback), 30);
+  setTimeout(() => clickArrowMultipleTimes(clickMethod, count - 1, callback), 20);
 }
