@@ -1,4 +1,5 @@
 import { SemVer } from "semver";
+import { releaseNoteUrl } from "./module/constant";
 import { handleMessage } from "./module/handle-message";
 import { clearOptions } from "./module/option-management";
 /* eslint-disable no-undef */
@@ -6,8 +7,6 @@ import InstalledDetails = chrome.runtime.InstalledDetails;
 import OnInstalledReason = chrome.runtime.OnInstalledReason;
 
 /* eslint-enable no-undef */
-
-const releaseNoteUrl = "https://example.com";
 
 function listenOnInstalled(details: InstalledDetails) {
   console.log(`Got onInstalled event. (${new Date()})`);
