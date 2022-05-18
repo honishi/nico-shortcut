@@ -156,7 +156,7 @@ const configureLabels = () => {
   setLabelValue(inputShowVolumeWhenPageLoadId, "ページ表示時にボリュームを表示する");
   setLabelValue(
     inputMaximizeVolumeWhenPageLoadId,
-    "ページ表示時にミュート解除 + ボリューム100%にする"
+    "ページ読み込み時にミュート解除 + ボリューム100%にする"
   );
 };
 
