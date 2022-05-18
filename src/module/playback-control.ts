@@ -1,5 +1,7 @@
 import { showNotification } from "./notification-utility";
 import {
+  extraFastForwardKeys,
+  extraRewindKeys,
   fastForwardKeys,
   isKeyMatched,
   Options,
@@ -27,6 +29,8 @@ import {
   isPlaying,
 } from "./page-controller";
 import {
+  extraFastForwardTitle,
+  extraRewindTitle,
   fastForwardTitle,
   playHeadTitle,
   playLiveTitle,
@@ -54,6 +58,14 @@ export function checkPlaybackControlKey(key: string, options: Options) {
   } else if (isKeyMatched(key, fastForwardKeys, options)) {
     getForwardButton()?.click();
     showNotification(fastForwardTitle);
+  } else if (isKeyMatched(key, extraRewindKeys, options)) {
+    clickButtonMultipleTimes(getBackButton(), backForwardButtonMultiClickCount, () =>
+      showNotification(extraRewindTitle)
+    );
+  } else if (isKeyMatched(key, extraFastForwardKeys, options)) {
+    clickButtonMultipleTimes(getForwardButton(), backForwardButtonMultiClickCount, () =>
+      showNotification(extraFastForwardTitle)
+    );
   } else if (isKeyMatched(key, playHeadKeys, options)) {
     getHeadButton()?.click();
     showNotification(playHeadTitle);
@@ -84,15 +96,5 @@ export function checkPlaybackControlKey(key: string, options: Options) {
   } else if (isKeyMatched(key, playRate025Keys, options)) {
     changePlaybackRate(8);
     showNotification(playRate025Title);
-  } else if (key === "J") {
-    // TODO: Correct key assign
-    clickButtonMultipleTimes(getBackButton(), backForwardButtonMultiClickCount, () =>
-      showNotification("Back 60s")
-    );
-  } else if (key === "L") {
-    // TODO: Correct key assign
-    clickButtonMultipleTimes(getForwardButton(), backForwardButtonMultiClickCount, () =>
-      showNotification("Forward 60s")
-    );
   }
 }

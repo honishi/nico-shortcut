@@ -1,6 +1,8 @@
 export const playStopKeys = "playStopKeys";
 export const rewindKeys = "rewindKeys";
 export const fastForwardKeys = "fastForwardKeys";
+export const extraRewindKeys = "extraRewindKeys";
+export const extraFastForwardKeys = "extraFastForwardKeys";
 export const playHeadKeys = "playHeadKeys";
 export const playLiveKeys = "playLiveKeys";
 export const playRate200Keys = "playRate200Keys";
@@ -15,6 +17,8 @@ export const showVolumeKeys = "showVolumeKeys";
 export const muteKeys = "muteKeys";
 export const volumeDownKeys = "volumeDownKeys";
 export const volumeUpKeys = "volumeUpKeys";
+export const extraVolumeDownKeys = "extraVolumeDownKeys";
+export const extraVolumeUpKeys = "extraVolumeUpKeys";
 export const commentKeys = "commentKeys";
 export const commentTransparencyNoneKeys = "commentTransparencyNoneKeys";
 export const commentTransparencyWeakKeys = "commentTransparencyWeakKeys";
@@ -34,6 +38,8 @@ const allOptionKeys = [
   playStopKeys,
   rewindKeys,
   fastForwardKeys,
+  extraRewindKeys,
+  extraFastForwardKeys,
   playHeadKeys,
   playLiveKeys,
   playRate200Keys,
@@ -48,6 +54,8 @@ const allOptionKeys = [
   muteKeys,
   volumeDownKeys,
   volumeUpKeys,
+  extraVolumeDownKeys,
+  extraVolumeUpKeys,
   commentKeys,
   commentTransparencyNoneKeys,
   commentTransparencyWeakKeys,
@@ -72,6 +80,8 @@ export function loadOptions(callback: (options: Options) => void) {
       playStopKeys: items[playStopKeys] ?? "k",
       rewindKeys: items[rewindKeys] ?? "j",
       fastForwardKeys: items[fastForwardKeys] ?? "l",
+      extraRewindKeys: items[extraRewindKeys] ?? "J",
+      extraFastForwardKeys: items[extraFastForwardKeys] ?? "L",
       playHeadKeys: items[playHeadKeys] ?? "h",
       playLiveKeys: items[playLiveKeys] ?? ";",
       playRate200Keys: items[playRate200Keys] ?? "g",
@@ -86,6 +96,8 @@ export function loadOptions(callback: (options: Options) => void) {
       muteKeys: items[muteKeys] ?? "m",
       volumeDownKeys: items[volumeDownKeys] ?? "u",
       volumeUpKeys: items[volumeUpKeys] ?? "i",
+      extraVolumeDownKeys: items[extraVolumeDownKeys] ?? "U",
+      extraVolumeUpKeys: items[extraVolumeUpKeys] ?? "I",
       commentKeys: items[commentKeys] ?? "c",
       commentTransparencyNoneKeys: items[commentTransparencyNoneKeys] ?? "z",
       commentTransparencyWeakKeys: items[commentTransparencyWeakKeys] ?? "x",

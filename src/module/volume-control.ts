@@ -1,5 +1,7 @@
 import { showNotification } from "./notification-utility";
 import {
+  extraVolumeDownKeys,
+  extraVolumeUpKeys,
   isKeyMatched,
   muteKeys,
   Options,
@@ -24,11 +26,9 @@ export function checkVolumeControlKey(key: string, options: Options) {
   } else if (isKeyMatched(key, volumeUpKeys, options)) {
     clickArrowUp();
     showVolumeUpDownNotification();
-  } else if (key === "U") {
-    // TODO: Correct key assign.
+  } else if (isKeyMatched(key, extraVolumeDownKeys, options)) {
     clickArrowDownMultipleTimes(arrowUpDownButtonMultiClickCount, showVolumeUpDownNotification);
-  } else if (key === "I") {
-    // TODO: Correct key assign.
+  } else if (isKeyMatched(key, extraVolumeUpKeys, options)) {
     clickArrowUpMultipleTimes(arrowUpDownButtonMultiClickCount, showVolumeUpDownNotification);
   }
 }
