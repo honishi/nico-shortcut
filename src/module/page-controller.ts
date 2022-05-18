@@ -1,11 +1,9 @@
+//
+// Page Control
+//
 export function isInputFieldActive() {
   // console.log(document.activeElement)
   return document.activeElement?.tagName === "INPUT";
-}
-
-export function clickElement(element: Element | null | undefined) {
-  if (!(element instanceof HTMLElement)) return;
-  element.click();
 }
 
 //
@@ -125,6 +123,44 @@ export function changeCommentTransparency(buttonIndex: number) {
 }
 
 //
+// Other Page Components
+//
+export function getProgramsButton(): HTMLButtonElement | null {
+  const div = document.querySelector("div[class^='___popup-control___']");
+  const button = div?.querySelector("button");
+  return button as HTMLButtonElement;
+}
+
+export function getAdButton(): HTMLButtonElement | null {
+  return getToggleButton("___nicoad-count-item___");
+}
+
+export function getGiftButton(): HTMLButtonElement | null {
+  return getToggleButton("___gift-count-item___");
+}
+
+function getToggleButton(name: string): HTMLButtonElement | null {
+  console.log(`li[class^='${name}']`);
+  const li = document.querySelector(`li[class^='${name}']`);
+  const button = ((): Element | null =>
+    li == null
+      ? document.querySelector("button[class^='___close-button___']")
+      : li.querySelector("button"))();
+  return button as HTMLButtonElement;
+}
+
+//
+// URL Pick Methods
+//
+export function getUserPageUrl(): string | null | undefined {
+  return document.querySelector("a[class^='___user-name___']")?.getAttribute("href");
+}
+
+export function getCommunityPageUrl(): string | null | undefined {
+  return document.querySelector("a[class^='___name-label___']")?.getAttribute("href");
+}
+
+//
 // Internal Methods
 //
 function queryButton(selector: string): HTMLButtonElement | null {
@@ -132,7 +168,7 @@ function queryButton(selector: string): HTMLButtonElement | null {
 }
 
 function clickMenuButton(divClass: string, sectionClass: string, buttonIndex: number) {
-  const timeout = 300;
+  const timeout = 350;
 
   // 1. Click setting button.
   getSettingButton()?.click();
@@ -140,8 +176,8 @@ function clickMenuButton(divClass: string, sectionClass: string, buttonIndex: nu
   setTimeout(() => {
     // 2. Click menu button.
     const div = document.querySelector(`div[class^=${divClass}]`);
-    const button = div?.querySelector("button");
-    clickElement(button);
+    const button = div?.querySelector("button") as HTMLButtonElement;
+    button.click();
 
     // Close setting if menu button not found.
     if (button == null) {
@@ -154,7 +190,8 @@ function clickMenuButton(divClass: string, sectionClass: string, buttonIndex: nu
       const section = document.querySelector(`section[class^=${sectionClass}]`);
       const buttons = section?.querySelectorAll("button");
       if (buttons == null) return;
-      clickElement(buttons[buttonIndex]);
+      const button = buttons[buttonIndex] as HTMLButtonElement;
+      button.click();
 
       setTimeout(() => {
         // 4. Click setting button to close.

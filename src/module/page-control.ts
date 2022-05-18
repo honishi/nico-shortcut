@@ -1,4 +1,3 @@
-import { clickElement } from "./page-controller";
 import { showNotification } from "./notification-utility";
 import {
   advertiseKeys,
@@ -10,6 +9,13 @@ import {
   programsKeys,
 } from "./option-management";
 import {
+  getAdButton,
+  getCommunityPageUrl,
+  getGiftButton,
+  getProgramsButton,
+  getUserPageUrl,
+} from "./page-controller";
+import {
   advertiseTitle,
   giftTitle,
   openCommunityTitle,
@@ -19,55 +25,21 @@ import {
 
 export function checkPageControlKey(key: string, options: Options) {
   if (isKeyMatched(key, programsKeys, options)) {
-    clickPrograms();
+    getProgramsButton()?.click();
     showNotification(programsTitle);
   } else if (isKeyMatched(key, advertiseKeys, options)) {
-    toggleAd();
+    getAdButton()?.click();
     showNotification(advertiseTitle);
   } else if (isKeyMatched(key, giftKeys, options)) {
-    toggleGift();
+    getGiftButton()?.click();
     showNotification(giftTitle);
   } else if (isKeyMatched(key, openUserKeys, options)) {
-    openUserPage();
+    sendOpenUrlMessage(getUserPageUrl());
     showNotification(openUserTitle);
   } else if (isKeyMatched(key, openCommunityKeys, options)) {
-    openCommunity();
+    sendOpenUrlMessage(getCommunityPageUrl());
     showNotification(openCommunityTitle);
   }
-}
-
-function clickPrograms() {
-  const div = document.querySelector("div[class^='___popup-control___']");
-  const button = div?.querySelector("button");
-  clickElement(button);
-}
-
-function toggleAd() {
-  toggleMenu("___nicoad-count-item___");
-}
-
-function toggleGift() {
-  toggleMenu("___gift-count-item___");
-}
-
-function toggleMenu(name: string) {
-  console.log(`li[class^='${name}']`);
-  const li = document.querySelector(`li[class^='${name}']`);
-  const button = ((): Element | null =>
-    li == null
-      ? document.querySelector("button[class^='___close-button___']")
-      : li.querySelector("button"))();
-  clickElement(button);
-}
-
-function openUserPage() {
-  const url = document.querySelector("a[class^='___user-name___']")?.getAttribute("href");
-  sendOpenUrlMessage(url);
-}
-
-function openCommunity() {
-  const url = document.querySelector("a[class^='___name-label___']")?.getAttribute("href");
-  sendOpenUrlMessage(url);
 }
 
 function sendOpenUrlMessage(url: string | null | undefined) {
