@@ -13,9 +13,8 @@ import {
 
 function listenLoadEvent() {
   loadOptions((options) => {
-    // TODO: timeout?
     // TODO: use option.
-    setTimeout(adjustPlayerPositionIfEnabled, 2000);
+    adjustPlayerPositionIfEnabled();
     maximizeVolumeIfEnabled(options, () => {
       showVolumeIfEnabled(options);
     });

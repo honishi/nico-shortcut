@@ -51,7 +51,9 @@ export function adjustPlayerPositionIfEnabled() {
   const nicosapoHeight = getNicosapoGadgets()?.getBoundingClientRect().height ?? 0;
   const playerRect = getPlayerDisplay()?.getBoundingClientRect();
   if (headerRect == null || playerRect == null) return;
-  setWindowOffset(playerRect.x, playerRect.y - headerRect.height - nicosapoHeight);
+  const x = playerRect.x + window.scrollX;
+  const y = playerRect.top - headerRect.height - nicosapoHeight + window.scrollY;
+  setWindowOffset(x, y);
 }
 
 function sendOpenUrlMessage(url: string | null | undefined) {
