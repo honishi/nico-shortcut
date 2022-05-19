@@ -1,15 +1,31 @@
 //
-// Page Control
+// Document Control
 //
 export function isInputFieldActive() {
   // console.log(document.activeElement)
   return document.activeElement?.tagName === "INPUT";
 }
 
+export function setWindowOffset(x: number, y: number) {
+  window.scrollTo(x, y);
+}
+
+export function getCommonHeader(): HTMLElement | null {
+  return document.querySelector("div[class^='___common-header___']") as HTMLElement;
+}
+
+export function getNicosapoGadgets(): HTMLElement | null {
+  return document.getElementById("nicosapo_gadgets");
+}
+
 //
 // Player Control
 //
-export function getPlayer(): HTMLElement | null {
+export function getPlayerDisplay(): HTMLElement | null {
+  return document.querySelector("div[class^='___player-display___']") as HTMLElement;
+}
+
+export function getPlayerController(): HTMLElement | null {
   return document.querySelector("div[class^='___player-controller___']") as HTMLElement;
 }
 

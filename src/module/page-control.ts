@@ -1,3 +1,14 @@
+import {
+  getAdButton,
+  getCommonHeader,
+  getCommunityPageUrl,
+  getGiftButton,
+  getNicosapoGadgets,
+  getPlayerDisplay,
+  getProgramsButton,
+  getUserPageUrl,
+  setWindowOffset,
+} from "./dom-utility";
 import { showNotification } from "./notification-utility";
 import {
   advertiseKeys,
@@ -8,13 +19,6 @@ import {
   Options,
   programsKeys,
 } from "./option-management";
-import {
-  getAdButton,
-  getCommunityPageUrl,
-  getGiftButton,
-  getProgramsButton,
-  getUserPageUrl,
-} from "./dom-utility";
 import {
   advertiseTitle,
   giftTitle,
@@ -40,6 +44,14 @@ export function checkPageControlKey(key: string, options: Options) {
     sendOpenUrlMessage(getCommunityPageUrl());
     showNotification(openCommunityTitle);
   }
+}
+
+export function adjustPlayerPositionIfEnabled() {
+  const headerRect = getCommonHeader()?.getBoundingClientRect();
+  const nicosapoHeight = getNicosapoGadgets()?.getBoundingClientRect().height ?? 0;
+  const playerRect = getPlayerDisplay()?.getBoundingClientRect();
+  if (headerRect == null || playerRect == null) return;
+  setWindowOffset(playerRect.x, playerRect.y - headerRect.height - nicosapoHeight);
 }
 
 function sendOpenUrlMessage(url: string | null | undefined) {
