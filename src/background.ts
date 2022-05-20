@@ -36,10 +36,10 @@ function handleUpdateInstall(details: InstalledDetails) {
 
   const isMajorOrMinorUpdate = current.major > previous.major || current.minor > previous.minor;
   /* eslint-disable camelcase */
-  const v0_3_0 = new SemVer("0.3.0");
+  const v0_4_0 = new SemVer("0.4.0");
   const needsClearOptions =
-    // Any Updates from [v0.2.x or earlier] to [v0.3.0 or later].
-    previous < v0_3_0 && v0_3_0 <= current;
+    // Any Updates from [v0.3.x or earlier] to [v0.4.0 or later].
+    previous < v0_4_0 && v0_4_0 <= current;
   /* eslint-enable camelcase */
 
   if (needsClearOptions) {
