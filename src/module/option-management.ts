@@ -26,6 +26,7 @@ export const commentTransparencyStrongKeys = "commentTransparencyStrongKeys";
 export const fullscreenKeys = "fullscreenKeys";
 export const reloadKeys = "reloadKeys";
 export const settingKeys = "settingKeys";
+export const adjustPlayerPositionKeys = "adjustPlayerPositionKeys";
 export const programsKeys = "programsKeys";
 export const advertiseKeys = "advertiseKeys";
 export const giftKeys = "giftKeys";
@@ -64,6 +65,7 @@ const allOptionKeys = [
   fullscreenKeys,
   reloadKeys,
   settingKeys,
+  adjustPlayerPositionKeys,
   programsKeys,
   advertiseKeys,
   giftKeys,
@@ -107,7 +109,8 @@ export function loadOptions(callback: (options: Options) => void) {
       fullscreenKeys: items[fullscreenKeys] ?? "F",
       reloadKeys: items[reloadKeys] ?? "R",
       settingKeys: items[settingKeys] ?? ",",
-      programsKeys: items[programsKeys] ?? "p",
+      adjustPlayerPositionKeys: items[adjustPlayerPositionKeys] ?? "p",
+      programsKeys: items[programsKeys] ?? "P",
       advertiseKeys: items[advertiseKeys] ?? "A",
       giftKeys: items[giftKeys] ?? "G",
       openUserKeys: items[openUserKeys] ?? "S",

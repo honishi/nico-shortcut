@@ -11,7 +11,7 @@ import {
   volumeDownKeys,
   volumeUpKeys,
 } from "./option-management";
-import { getMuteButton, getPlayer, isMute, volumeValue } from "./dom-utility";
+import { getMuteButton, getPlayerController, isMute, volumeValue } from "./dom-utility";
 
 const arrowUpButtonMaximizeClickCount = 20; // 20 * 5% = 100%
 const arrowUpDownButtonMultiClickCount = 4;
@@ -65,7 +65,7 @@ function clickArrowUp() {
 }
 
 function dispatchKeyEventToPlayer(key: string, keyCode: number) {
-  getPlayer()?.click();
+  getPlayerController()?.click();
 
   // https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode
   window.dispatchEvent(
