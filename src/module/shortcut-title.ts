@@ -26,6 +26,7 @@ export const commentTransparencyStrongTitle = "💬 コメント透過: 強";
 export const fullscreenTitle = "🖥 フルスクリーン";
 export const reloadTitle = "🔁 更新";
 export const settingTitle = "⚙️ 設定";
+export const adjustPlayerPositionTitle = "🪄 プレイヤー位置調整";
 export const programsTitle = "👨‍👩‍👦 フォロー中の番組";
 export const advertiseTitle = "📣 広告";
 export const giftTitle = "🎁 ギフト Open/Close";

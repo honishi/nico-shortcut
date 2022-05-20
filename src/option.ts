@@ -1,4 +1,5 @@
 import {
+  adjustPlayerPositionKeys,
   advertiseKeys,
   clearOptions,
   commentKeys,
@@ -41,6 +42,7 @@ import {
   volumeUpKeys,
 } from "./module/option-management";
 import {
+  adjustPlayerPositionTitle,
   advertiseTitle,
   commentTitle,
   commentTransparencyNoneTitle,
@@ -105,6 +107,7 @@ const inputCommentTransparencyStrongKeysId = "input_comment_transparency_strong_
 const inputFullscreenKeysId = "input_fullscreen_keys";
 const inputReloadKeysId = "input_reload_keys";
 const inputSettingKeysId = "input_setting_keys";
+const inputAdjustPlayerPositionKeysId = "input_adjust_player_position_keys";
 const inputProgramsKeysId = "input_programs_keys";
 const inputAdvertiseKeysId = "input_advertise_keys";
 const inputGiftKeysId = "input_gift_keys";
@@ -147,6 +150,7 @@ const configureLabels = () => {
   setLabelValue(inputFullscreenKeysId, fullscreenTitle);
   setLabelValue(inputReloadKeysId, reloadTitle);
   setLabelValue(inputSettingKeysId, settingTitle);
+  setLabelValue(inputAdjustPlayerPositionKeysId, adjustPlayerPositionTitle);
   setLabelValue(inputProgramsKeysId, programsTitle);
   setLabelValue(inputAdvertiseKeysId, advertiseTitle);
   setLabelValue(inputGiftKeysId, giftTitle);
@@ -190,6 +194,7 @@ function _saveOptions() {
     fullscreenKeys: getInputValue(inputFullscreenKeysId),
     reloadKeys: getInputValue(inputReloadKeysId),
     settingKeys: getInputValue(inputSettingKeysId),
+    adjustPlayerPositionKeys: getInputValue(inputAdjustPlayerPositionKeysId),
     programsKeys: getInputValue(inputProgramsKeysId),
     advertiseKeys: getInputValue(inputAdvertiseKeysId),
     giftKeys: getInputValue(inputGiftKeysId),
@@ -250,6 +255,7 @@ function _loadOptions() {
     setInputValue(inputFullscreenKeysId, options[fullscreenKeys]);
     setInputValue(inputReloadKeysId, options[reloadKeys]);
     setInputValue(inputSettingKeysId, options[settingKeys]);
+    setInputValue(inputAdjustPlayerPositionKeysId, options[adjustPlayerPositionKeys]);
     setInputValue(inputProgramsKeysId, options[programsKeys]);
     setInputValue(inputAdvertiseKeysId, options[advertiseKeys]);
     setInputValue(inputGiftKeysId, options[giftKeys]);

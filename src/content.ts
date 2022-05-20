@@ -3,7 +3,7 @@ import { isInputFieldActive } from "./module/dom-utility";
 import { checkHelpControlKey } from "./module/help-control";
 import { checkMiscControlKey } from "./module/misc-control";
 import { loadOptions } from "./module/option-management";
-import { adjustPlayerPositionIfEnabled, checkPageControlKey } from "./module/page-control";
+import { adjustPlayerPosition, checkPageControlKey } from "./module/page-control";
 import { checkPlaybackControlKey } from "./module/playback-control";
 import {
   checkVolumeControlKey,
@@ -13,8 +13,6 @@ import {
 
 function listenLoadEvent() {
   loadOptions((options) => {
-    // TODO: use option.
-    adjustPlayerPositionIfEnabled();
     maximizeVolumeIfEnabled(options, () => {
       showVolumeIfEnabled(options);
     });

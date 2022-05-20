@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import {
+  adjustPlayerPositionKeys,
   advertiseKeys,
   commentKeys,
   commentTransparencyNoneKeys,
@@ -38,6 +39,7 @@ import {
   volumeUpKeys,
 } from "./option-management";
 import {
+  adjustPlayerPositionTitle,
   advertiseTitle,
   commentTitle,
   commentTransparencyNoneTitle,
@@ -121,6 +123,7 @@ function showHelp(options: Options) {
           [options[fullscreenKeys], fullscreenTitle],
           [options[reloadKeys], reloadTitle],
           [options[settingKeys], settingTitle],
+          [options[adjustPlayerPositionKeys], adjustPlayerPositionTitle],
           [options[programsKeys], programsTitle],
           [options[advertiseKeys], advertiseTitle],
           [options[giftKeys], giftTitle],
