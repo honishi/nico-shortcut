@@ -35,12 +35,9 @@ function handleUpdateInstall(details: InstalledDetails) {
   console.log(`Updated from [${previous}] to [${current}]!`);
 
   const isMajorOrMinorUpdate = current.major > previous.major || current.minor > previous.minor;
-  /* eslint-disable camelcase */
-  const v0_4_0 = new SemVer("0.4.0");
-  const needsClearOptions =
-    // Any Updates from [v0.3.x or earlier] to [v0.4.0 or later].
-    previous < v0_4_0 && v0_4_0 <= current;
-  /* eslint-enable camelcase */
+  const dataDestructiveVersion = new SemVer("0.4.0");
+  // Any Updates from "the version - 0.0.1" to "the version".
+  const needsClearOptions = previous < dataDestructiveVersion && dataDestructiveVersion <= current;
 
   if (needsClearOptions) {
     console.log("Need to clear options...");
