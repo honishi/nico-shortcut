@@ -4,8 +4,8 @@
   "manifest_version": 3,
   "description": "ニコニコ生放送の PC 用放送視聴ページで、キーボードショートカットが利用可能になります。",
   "icons": {
-    "48": "./icons/icon48.png",
-    "128": "./icons/icon128.png"
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "permissions": [
     "storage"
