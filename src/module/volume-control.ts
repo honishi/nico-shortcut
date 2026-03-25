@@ -20,8 +20,12 @@ export function checkVolumeControlKey(key: string, options: Options) {
   if (isKeyMatched(key, showVolumeKeys, options)) {
     showVolumeNotification();
   } else if (isKeyMatched(key, muteKeys, options)) {
-    getMuteButton()?.click();
-    showNotification(`${isMute() ? "🔇 ミュート" : "🔈 ミュート解除"}`);
+    const muteButton = getMuteButton();
+    if (muteButton == null) return;
+    const wasMuted = isMute();
+    const expectedIsMute = !wasMuted;
+    muteButton.click();
+    showNotification(`${expectedIsMute ? "🔇 ミュート" : "🔈 ミュート解除"}`);
   } else if (isKeyMatched(key, volumeDownKeys, options)) {
     clickArrowDown();
     showVolumeUpDownNotification();
