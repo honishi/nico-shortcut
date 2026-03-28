@@ -16,8 +16,12 @@ import {
 
 export function checkCommentControlKey(key: string, options: Options) {
   if (isKeyMatched(key, commentKeys, options)) {
-    getCommentButton()?.click();
-    showNotification(`💬 コメント${isCommentEnabled() ? "表示" : "非表示"}`);
+    const commentButton = getCommentButton();
+    if (commentButton == null) return;
+    const wasCommentEnabled = isCommentEnabled();
+    const expectedIsCommentEnabled = !wasCommentEnabled;
+    commentButton.click();
+    showNotification(`💬 コメント${expectedIsCommentEnabled ? "表示" : "非表示"}`);
   } else if (isKeyMatched(key, commentTransparencyNoneKeys, options)) {
     changeCommentTransparency(1);
     showNotification(commentTransparencyNoneTitle);
