@@ -16,8 +16,12 @@ import { reloadTitle, settingTitle } from "./shortcut-title";
 
 export function checkMiscControlKey(key: string, options: Options) {
   if (isKeyMatched(key, fullscreenKeys, options)) {
-    getFullscreenButton()?.click();
-    showNotification(`🖥 フルスクリーン${isFullscreenEnabled() ? "" : "解除"}`);
+    const fullscreenButton = getFullscreenButton();
+    if (fullscreenButton == null) return;
+    const wasFullscreenEnabled = isFullscreenEnabled();
+    const expectedIsFullscreenEnabled = !wasFullscreenEnabled;
+    fullscreenButton.click();
+    showNotification(`🖥 フルスクリーン${expectedIsFullscreenEnabled ? "" : "解除"}`);
   } else if (isKeyMatched(key, reloadKeys, options)) {
     getReloadButton()?.click();
     showNotification(reloadTitle);
