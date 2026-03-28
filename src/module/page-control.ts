@@ -1,7 +1,6 @@
 import {
   getAdButton,
   getCommonHeader,
-  getCommunityPageUrl,
   getGiftButton,
   getNicosapoGadgets,
   getPlayerDisplay,
@@ -15,7 +14,6 @@ import {
   advertiseKeys,
   giftKeys,
   isKeyMatched,
-  openCommunityKeys,
   openUserKeys,
   Options,
   programsKeys,
@@ -24,7 +22,6 @@ import {
   adjustPlayerPositionTitle,
   advertiseTitle,
   giftTitle,
-  openCommunityTitle,
   openUserTitle,
   programsTitle,
 } from "./shortcut-title";
@@ -42,9 +39,6 @@ export function checkPageControlKey(key: string, options: Options) {
   } else if (isKeyMatched(key, openUserKeys, options)) {
     sendOpenUrlMessage(getUserPageUrl());
     showNotification(openUserTitle);
-  } else if (isKeyMatched(key, openCommunityKeys, options)) {
-    sendOpenUrlMessage(getCommunityPageUrl());
-    showNotification(openCommunityTitle);
   } else if (isKeyMatched(key, adjustPlayerPositionKeys, options)) {
     adjustPlayerPosition();
     showNotification(adjustPlayerPositionTitle);

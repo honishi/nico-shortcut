@@ -31,5 +31,4 @@ export const programsTitle = "👨‍👩‍👦 フォロー中の番組";
 export const advertiseTitle = "📣 広告";
 export const giftTitle = "🎁 ギフト Open/Close";
 export const openUserTitle = "🙆‍♂️ ユーザーを開く";
-export const openCommunityTitle = "🏠 コミュニティを開く";
 export const helpTitle = "❓ ヘルプ";

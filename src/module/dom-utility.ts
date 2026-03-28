@@ -172,10 +172,6 @@ export function getUserPageUrl(): string | null | undefined {
   return document.querySelector("a[class^='___user-name___']")?.getAttribute("href");
 }
 
-export function getCommunityPageUrl(): string | null | undefined {
-  return document.querySelector("a[class^='___name-label___']")?.getAttribute("href");
-}
-
 //
 // Internal Methods
 //
