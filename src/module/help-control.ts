@@ -16,7 +16,6 @@ import {
   helpKeys,
   isKeyMatched,
   muteKeys,
-  openCommunityKeys,
   openUserKeys,
   Options,
   playHeadKeys,
@@ -54,7 +53,6 @@ import {
   giftTitle,
   helpTitle,
   muteTitle,
-  openCommunityTitle,
   openUserTitle,
   playHeadTitle,
   playLiveTitle,
@@ -128,7 +126,6 @@ function showHelp(options: Options) {
           [options[advertiseKeys], advertiseTitle],
           [options[giftKeys], giftTitle],
           [options[openUserKeys], openUserTitle],
-          [options[openCommunityKeys], openCommunityTitle],
           [options[helpKeys], `${helpTitle} (この画面)`],
         ],
         false

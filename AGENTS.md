@@ -71,4 +71,6 @@
 ## Git / ドキュメント
 - ユーザーに明示的に求められない限り、勝手に commit しない。
 - commit message は Conventional Commits 形式で書く。
+- バージョンを上げる場合は `public/manifest.json` のみ更新し、`package.json` / `package-lock.json` のバージョンは変更しない。
 - リリースノートや公開説明を変える場合は `README.md` と `docs/` の整合も確認する。
+- `docs/releases.md` には、ユーザーが認知できる変更や不具合修正のみを書く。内部実装の調整、CI、リファクタリングなどユーザー影響が見えない内容は原則書かない。

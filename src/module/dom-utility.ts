@@ -142,9 +142,22 @@ export function changeCommentTransparency(buttonIndex: number) {
 // Other Page Components
 //
 export function getProgramsButton(): HTMLButtonElement | null {
-  const div = document.querySelector("div[class^='___popup-control___']");
-  const button = div?.querySelector("button");
-  return button as HTMLButtonElement;
+  const selectors = [
+    "button[aria-controls='program-navigation-tool-followed-program-notification-reader-target']",
+    "div[class*='followed-program-notification-menu-popup-control'] button",
+  ];
+
+  for (const selector of selectors) {
+    const button = document.querySelector(selector);
+    if (button instanceof HTMLButtonElement) return button;
+  }
+
+  const buttons = document.querySelectorAll("button");
+  for (const button of buttons) {
+    if (button.textContent?.trim() === "フォロー中の番組") return button;
+  }
+
+  return null;
 }
 
 export function getAdButton(): HTMLButtonElement | null {
@@ -169,11 +182,19 @@ function getToggleButton(name: string): HTMLButtonElement | null {
 // URL Pick Methods
 //
 export function getUserPageUrl(): string | null | undefined {
-  return document.querySelector("a[class^='___user-name___']")?.getAttribute("href");
-}
+  const selectors = [
+    "a[href*='/live_programs?ref=watch_user_information']",
+    "a.user-thumbnail",
+    "a.label",
+    "a[class^='___user-name___']",
+  ];
 
-export function getCommunityPageUrl(): string | null | undefined {
-  return document.querySelector("a[class^='___name-label___']")?.getAttribute("href");
+  for (const selector of selectors) {
+    const href = document.querySelector(selector)?.getAttribute("href");
+    if (href != null) return href;
+  }
+
+  return undefined;
 }
 
 //

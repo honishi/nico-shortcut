@@ -17,7 +17,6 @@ import {
   loadOptions,
   maximizeVolumeWhenPageLoaded,
   muteKeys,
-  openCommunityKeys,
   openUserKeys,
   Options,
   playHeadKeys,
@@ -57,7 +56,6 @@ import {
   giftTitle,
   helpTitle,
   muteTitle,
-  openCommunityTitle,
   openUserTitle,
   playHeadTitle,
   playLiveTitle,
@@ -112,7 +110,6 @@ const inputProgramsKeysId = "input_programs_keys";
 const inputAdvertiseKeysId = "input_advertise_keys";
 const inputGiftKeysId = "input_gift_keys";
 const inputOpenUserKeysId = "input_open_user_keys";
-const inputOpenCommunityKeysId = "input_open_community_keys";
 const inputHelpKeysId = "input_help_keys";
 const inputShowVolumeWhenPageLoadId = "input_show_volume_when_page_load";
 const inputMaximizeVolumeWhenPageLoadId = "input_maximize_volume_when_page_load";
@@ -155,7 +152,6 @@ const configureLabels = () => {
   setLabelValue(inputAdvertiseKeysId, advertiseTitle);
   setLabelValue(inputGiftKeysId, giftTitle);
   setLabelValue(inputOpenUserKeysId, openUserTitle);
-  setLabelValue(inputOpenCommunityKeysId, openCommunityTitle);
   setLabelValue(inputHelpKeysId, helpTitle);
   setLabelValue(inputShowVolumeWhenPageLoadId, "ページ表示時にボリュームを表示する");
   setLabelValue(
@@ -199,7 +195,6 @@ function _saveOptions() {
     advertiseKeys: getInputValue(inputAdvertiseKeysId),
     giftKeys: getInputValue(inputGiftKeysId),
     openUserKeys: getInputValue(inputOpenUserKeysId),
-    openCommunityKeys: getInputValue(inputOpenCommunityKeysId),
     helpKeys: getInputValue(inputHelpKeysId),
   };
   if (hasDuplicateKeyMap(keyMapOptions)) {
@@ -260,7 +255,6 @@ function _loadOptions() {
     setInputValue(inputAdvertiseKeysId, options[advertiseKeys]);
     setInputValue(inputGiftKeysId, options[giftKeys]);
     setInputValue(inputOpenUserKeysId, options[openUserKeys]);
-    setInputValue(inputOpenCommunityKeysId, options[openCommunityKeys]);
     setInputValue(inputHelpKeysId, options[helpKeys]);
     setInputChecked(inputShowVolumeWhenPageLoadId, options[showVolumeWhenPageLoaded]);
     setInputChecked(inputMaximizeVolumeWhenPageLoadId, options[maximizeVolumeWhenPageLoaded]);
