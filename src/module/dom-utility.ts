@@ -182,7 +182,19 @@ function getToggleButton(name: string): HTMLButtonElement | null {
 // URL Pick Methods
 //
 export function getUserPageUrl(): string | null | undefined {
-  return document.querySelector("a[class^='___user-name___']")?.getAttribute("href");
+  const selectors = [
+    "a[href*='/live_programs?ref=watch_user_information']",
+    "a.user-thumbnail",
+    "a.label",
+    "a[class^='___user-name___']",
+  ];
+
+  for (const selector of selectors) {
+    const href = document.querySelector(selector)?.getAttribute("href");
+    if (href != null) return href;
+  }
+
+  return undefined;
 }
 
 //
